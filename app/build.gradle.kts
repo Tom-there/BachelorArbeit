@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id 'java'
 }
 
 repositories {
@@ -20,6 +21,7 @@ dependencies {
     testImplementation(libs.junit.jupiter)
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
 
     // This dependency is used by the application.
     implementation(libs.guava)
@@ -40,4 +42,7 @@ application {
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+    testLogging {
+      events "passed" , "skipped", "failed"
+    }
 }
