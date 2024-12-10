@@ -4,8 +4,10 @@ import de.hhu.cs.stups.algvis.data.structures.Code;
 import de.hhu.cs.stups.algvis.data.structures.Content;
 import de.hhu.cs.stups.algvis.data.structures.Graph;
 import de.hhu.cs.stups.algvis.gui.Locator;
+import de.hhu.cs.stups.algvis.gui.ToolBarButtons;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class CFGtoTAC implements Plugin {
     private Code tac;
@@ -28,6 +30,11 @@ public class CFGtoTAC implements Plugin {
         ret.put(Locator.left, tac);
         ret.put(Locator.center, cfg);
         return ret;
+    }
+
+    @Override
+    public List<ToolBarButtons> getEnabledToolBarButtons() {
+        return List.of(ToolBarButtons.load, ToolBarButtons.reset, ToolBarButtons.step);
     }
 
     @Override

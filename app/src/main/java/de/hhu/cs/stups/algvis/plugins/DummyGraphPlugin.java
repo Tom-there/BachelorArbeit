@@ -3,6 +3,7 @@ package de.hhu.cs.stups.algvis.plugins;
 import de.hhu.cs.stups.algvis.data.structures.Content;
 import de.hhu.cs.stups.algvis.data.structures.Graph;
 import de.hhu.cs.stups.algvis.gui.Locator;
+import de.hhu.cs.stups.algvis.gui.ToolBarButtons;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,11 @@ public class DummyGraphPlugin implements Plugin {
         HashMap<Locator, Content> ret = new HashMap<>();
         ret.put(Locator.center, graph);
         return ret;
+    }
+
+    @Override
+    public List<ToolBarButtons> getEnabledToolBarButtons() {
+        return List.of();
     }
 
     @Override

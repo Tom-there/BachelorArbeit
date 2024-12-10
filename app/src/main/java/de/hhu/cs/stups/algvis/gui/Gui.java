@@ -1,14 +1,13 @@
 package de.hhu.cs.stups.algvis.gui;
 
-import de.hhu.cs.stups.algvis.gui.actions.PluginReset;
-import de.hhu.cs.stups.algvis.gui.actions.PluginStep;
-import de.hhu.cs.stups.algvis.gui.actions.showPlugin;
+import de.hhu.cs.stups.PluginManager;
+import de.hhu.cs.stups.algvis.gui.actions.PluginShowAction;
 import de.hhu.cs.stups.algvis.plugins.Plugin;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Set;
 
 public class Gui{
   private static final String WINDOW_TITLE = "AlgVis";
@@ -18,19 +17,16 @@ public class Gui{
   private final JMenu pluginMenu;
   private final HashMap<JMenuItem, Plugin> pluginMap;
   private final JToolBar toolBar;
-  private final JButton nextButton, resetButton;
-  private final ContentPanel contentPanel;
 
   private JMenuItem test;
-  public Gui(List<Plugin> installedPlugins){
+  public Gui(PluginManager pluginManager) {
     // INIT Frame
     // CONTENTS: MenuBar - ContentPanel
     frame = new JFrame(WINDOW_TITLE);
     initJFrame();
 
     // ADD ContentPanel
-    contentPanel = new ContentPanel();
-    frame.add(contentPanel, BorderLayout.CENTER);
+    frame.add(pluginManager.getContentPanel(), BorderLayout.CENTER);
 
     // INIT MenuBar
     // CONTENTS: Plugins dropdown
@@ -42,27 +38,17 @@ public class Gui{
     pluginMenu = new JMenu("Plugins");
     menuBar.add(pluginMenu);
     pluginMap = new HashMap<>();
-    for (Plugin plugin : installedPlugins) {
+    for (Plugin plugin : pluginManager.getInstalledPlugins()) {
       JMenuItem menuItem = new JMenuItem(plugin.getName());
-      menuItem.addActionListener(new showPlugin(plugin, contentPanel, frame));
+      menuItem.addActionListener(new PluginShowAction(plugin, pluginManager, frame));
       pluginMenu.add(menuItem);
       pluginMap.put(menuItem, plugin);
     }
 
     // INIT toolbar
     // CONTENTS: next
-    toolBar = new JToolBar();
-    {
-      nextButton = new JButton("step");
-      nextButton.addActionListener(new PluginStep(contentPanel));
-      toolBar.add(nextButton);
-
-      resetButton = new JButton("reset");
-      resetButton.addActionListener(new PluginReset(contentPanel));
-      toolBar.add(resetButton);
-    }
+    toolBar = pluginManager.getToolbar();
     frame.add(toolBar, BorderLayout.SOUTH);
-
     frame.setVisible(true);
   }
 
