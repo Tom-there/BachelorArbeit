@@ -8,7 +8,6 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
-    id 'java'
 }
 
 repositories {
@@ -21,6 +20,10 @@ dependencies {
     testImplementation(libs.junit.jupiter)
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+
+    implementation("org.graphstream:gs-core:2.0")
+    implementation("org.graphstream:gs-ui-swing:2.0")
 
 
     // This dependency is used by the application.
@@ -37,12 +40,4 @@ java {
 application {
     // Define the main class for the application.
     mainClass = "de.hhu.cs.stups.AlgVis"
-}
-
-tasks.named<Test>("test") {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
-    testLogging {
-      events "passed" , "skipped", "failed"
-    }
 }
