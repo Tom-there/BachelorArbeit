@@ -1,13 +1,12 @@
 package de.hhu.cs.stups.algvis.gui;
 
 import de.hhu.cs.stups.PluginManager;
-import de.hhu.cs.stups.algvis.gui.actions.PluginShowAction;
+import de.hhu.cs.stups.algvis.gui.actions.ShowPluginAction;
 import de.hhu.cs.stups.algvis.plugins.Plugin;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-import java.util.Set;
 
 public class Gui{
   private static final String WINDOW_TITLE = "AlgVis";
@@ -40,7 +39,7 @@ public class Gui{
     pluginMap = new HashMap<>();
     for (Plugin plugin : pluginManager.getInstalledPlugins()) {
       JMenuItem menuItem = new JMenuItem(plugin.getName());
-      menuItem.addActionListener(new PluginShowAction(plugin, pluginManager, frame));
+      menuItem.addActionListener(new ShowPluginAction(plugin, pluginManager, frame));
       pluginMenu.add(menuItem);
       pluginMap.put(menuItem, plugin);
     }
