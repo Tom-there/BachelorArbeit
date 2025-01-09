@@ -1,6 +1,6 @@
 package de.hhu.cs.stups.algvis.gui.actions;
 
-import de.hhu.cs.stups.PluginManager;
+import de.hhu.cs.stups.algvis.PluginManager;
 import de.hhu.cs.stups.algvis.plugins.Plugin;
 
 import javax.swing.*;

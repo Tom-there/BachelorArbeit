@@ -1,9 +1,8 @@
-package de.hhu.cs.stups.algvis.plugins;
+package de.hhu.cs.stups.algvis.plugins.specs;
 
 import de.hhu.cs.stups.algvis.gui.ToolBarButton;
 
 import java.util.List;
-import java.util.SortedMap;
 
 public interface SimpleSteps {
     public void reset();

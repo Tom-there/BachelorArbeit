@@ -9,35 +9,27 @@ import java.util.Map;
 
 public class ContentPanel extends JPanel {
 
-    private Plugin currentPlugin;
     public ContentPanel(){
-        currentPlugin = null;
+        super();
+        setMinimumSize(new Dimension(720, 480));
+        setPreferredSize(new Dimension(1600, 900));
+        setMaximumSize(new Dimension(1920, 1080));
         setLayout(new BorderLayout());
         setBackground(Color.DARK_GRAY);
         add(genSplashScreen(), BorderLayout.CENTER);
+
     }
 
     public void switchToPlugin(Plugin plugin){
         removeAll();
-        for (Map.Entry<Locator, Content> entry : plugin.getGuiElements().entrySet()) {
-            switch (entry.getKey()){
-                case left -> {
-                    add(entry.getValue().getSwingComponent(), BorderLayout.WEST);
-                }
-                case right -> {
-                    add(entry.getValue().getSwingComponent(), BorderLayout.EAST);
-                }
-                case center -> {
-                    add(entry.getValue().getSwingComponent(), BorderLayout.CENTER);
-                }
+        for (Content content : plugin.getGuiElements()) {
+            switch (content.getLocation()){
+                case left -> add(content.getSwingComponent(), BorderLayout.WEST);
+                case right -> add(content.getSwingComponent(), BorderLayout.EAST);
+                case center -> add(content.getSwingComponent(), BorderLayout.CENTER);
             }
         }
         setVisible(true);
-        currentPlugin = plugin;
-    }
-
-    public Plugin getCurrentPlugin() {
-        return currentPlugin;
     }
 
     //// PRIVATE FUNCTIONS \\\\

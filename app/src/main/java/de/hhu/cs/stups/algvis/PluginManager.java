@@ -1,8 +1,8 @@
-package de.hhu.cs.stups;
+package de.hhu.cs.stups.algvis;
 
 import de.hhu.cs.stups.algvis.gui.ContentPanel;
 import de.hhu.cs.stups.algvis.gui.ToolBar;
-import de.hhu.cs.stups.algvis.plugins.CFGtoTAC.CFGtoTAC;
+import de.hhu.cs.stups.algvis.plugins.TACtoCFG.TACtoCFG;
 import de.hhu.cs.stups.algvis.plugins.Plugin;
 
 import javax.swing.*;
@@ -13,7 +13,7 @@ public class PluginManager {
     public static Set<Plugin> plugins(){
         Set<Plugin> installedPlugins = new HashSet<>();
 
-        installedPlugins.add(new CFGtoTAC());
+        installedPlugins.add(new TACtoCFG());
 
         return installedPlugins;
     }
@@ -22,7 +22,7 @@ public class PluginManager {
     private final ContentPanel contentPanel;
     private final ToolBar toolBar;
     private final Set<Plugin> installedPlugins;
-    private Plugin currentPlugin;
+
     public PluginManager(){
         contentPanel = new ContentPanel();
         toolBar = new ToolBar(this);
@@ -38,9 +38,9 @@ public class PluginManager {
     }
 
     public void switchToPlugin(Plugin plugin) {
-        currentPlugin = plugin;
+        plugin.onPluginLoad();
         contentPanel.switchToPlugin(plugin);
-        toolBar.setEnabledButtons(plugin.getEnabledToolBarButtons());
+        toolBar.setEnabledButtons(plugin.getToolBarButtons());
     }
 
     public JToolBar getToolbar() {

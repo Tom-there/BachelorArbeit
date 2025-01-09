@@ -1,11 +1,10 @@
 package de.hhu.cs.stups.algvis.gui;
 
-import de.hhu.cs.stups.PluginManager;
+import de.hhu.cs.stups.algvis.PluginManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import java.util.List;
 
 public class ToolBar extends JToolBar {
