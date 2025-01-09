@@ -5,7 +5,7 @@ import de.hhu.cs.stups.algvis.PluginManager;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.util.Collection;
 
 public class ToolBar extends JToolBar {
 
@@ -13,7 +13,7 @@ public class ToolBar extends JToolBar {
         super();
     }
 
-    public void setEnabledButtons(List<ToolBarButton> enabledButtons){
+    public void setEnabledButtons(Collection<ToolBarButton> enabledButtons){
         this.removeAll();
         for (ToolBarButton button: enabledButtons){
             JButton jButton = new JButton(button.getText());
