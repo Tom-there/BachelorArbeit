@@ -2,6 +2,7 @@ package de.hhu.cs.stups.algvis;
 
 import de.hhu.cs.stups.algvis.gui.ContentPanel;
 import de.hhu.cs.stups.algvis.gui.ToolBar;
+import de.hhu.cs.stups.algvis.plugins.TACtoBB.TACtoBB;
 import de.hhu.cs.stups.algvis.plugins.TACtoCFG.TACtoCFG;
 import de.hhu.cs.stups.algvis.plugins.Plugin;
 
@@ -14,6 +15,7 @@ public class PluginManager {
         Set<Plugin> installedPlugins = new HashSet<>();
 
         installedPlugins.add(new TACtoCFG());
+        installedPlugins.add(new TACtoBB());
 
         return installedPlugins;
     }
