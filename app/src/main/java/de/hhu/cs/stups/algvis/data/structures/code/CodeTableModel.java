@@ -1,15 +1,13 @@
 package de.hhu.cs.stups.algvis.data.structures.code;
 
 
+import de.hhu.cs.stups.algvis.data.ThreeAddressCode;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-
-import static java.util.stream.Collectors.maxBy;
 
 public class CodeTableModel implements TableModel {
 
@@ -22,16 +20,18 @@ public class CodeTableModel implements TableModel {
     }
     public void setCodeList(List<ThreeAddressCode> param){
         listeners.forEach(l -> l.tableChanged(new TableModelEvent(this)));
-        code = new String[param.size()][ThreeAddressCode.TACRepresentation.size()+1];
+        int lines = param.size();
+        int columns = ThreeAddressCode.TACRepresentation.size();
+        code = new String[lines][columns];
         for (int i = 0; i < code.length; i++) {
-            code[i][0] = Integer.toString(i);
-            for (int j = 0; j < code[i].length-1; j++){
-                String rep = param.get(i).getRepresentation().get(j);
-                if(rep == null){
-                    rep = "";
+            ThreeAddressCode.TACRepresentation lineRepresentation = param.get(i).getRepresentation();
+            for (int j = 0; j < code[i].length; j++){
+                String cellRep = lineRepresentation.get(j);
+                if(cellRep == null){
+                    cellRep = "";
                     System.err.println("WRN - got a representation String that is null, replaced with empty String");
                 }
-                code[i][j+1] = rep;
+                code[i][j] = cellRep;
             }
         }
     }

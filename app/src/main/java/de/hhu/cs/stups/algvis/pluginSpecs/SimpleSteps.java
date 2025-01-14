@@ -1,14 +1,13 @@
-package de.hhu.cs.stups.algvis.plugins.specs;
-
-import de.hhu.cs.stups.algvis.gui.ToolBarButton;
+package de.hhu.cs.stups.algvis.pluginSpecs;
 
 import java.util.List;
 
 public interface SimpleSteps {
-    public void reset();
-    public void step();
+    void reset();
+    void step();
+    void run();
 
-    public static List<ToolBarButton> getButtons(SimpleSteps impl){
+    static List<ToolBarButton> getButtons(SimpleSteps impl){
         return List.of(new ToolBarButton() {
             @Override
             public String getText() {
@@ -28,6 +27,16 @@ public interface SimpleSteps {
             @Override
             public void action() {
                 impl.reset();
+            }
+        }, new ToolBarButton() {
+            @Override
+            public String getText() {
+                return "run";
+            }
+
+            @Override
+            public void action() {
+                impl.run();
             }
         });
     }

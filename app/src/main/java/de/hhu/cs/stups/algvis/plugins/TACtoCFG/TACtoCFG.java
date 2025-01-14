@@ -1,14 +1,12 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoCFG;
 
 import de.hhu.cs.stups.algvis.data.structures.code.Code;
-import de.hhu.cs.stups.algvis.data.structures.Content;
+import de.hhu.cs.stups.algvis.data.DataRepresentation;
 import de.hhu.cs.stups.algvis.data.structures.graph.Graph;
-import de.hhu.cs.stups.algvis.data.structures.graph.GraphMode;
-import de.hhu.cs.stups.algvis.gui.Locator;
-import de.hhu.cs.stups.algvis.gui.ToolBarButton;
-import de.hhu.cs.stups.algvis.plugins.specs.LoadCodeFromFile;
-import de.hhu.cs.stups.algvis.plugins.Plugin;
-import de.hhu.cs.stups.algvis.plugins.specs.SimpleSteps;
+import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
+import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
+import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
+import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
 
 import java.util.*;
 
@@ -16,26 +14,24 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     private final Code tac;
     private final Graph cfg;
     private TACtoCFGAlgo currentPluginInstance;
-
-
     private String currentlyLoadedCode;
     public TACtoCFG() {
-        this.tac = new Code(Locator.left);
-        this.cfg = new Graph(GraphMode.CodeInNode, Locator.center);
+        this.tac = new Code(DataRepresentation.Location.left);
+        this.cfg = new Graph(DataRepresentation.Location.center);
         currentlyLoadedCode = "empty";
     }
 
     //implementing Plugin
     @Override
     public String getName() {
-        return "CFG to TAC";
+        return "TAC to CFG";
     }
     @Override
     public void onPluginLoad() {
         reset();
     }
     @Override
-    public Set<Content> getGuiElements() {
+    public Set<DataRepresentation> getGuiElements() {
         return Set.of(tac, cfg);
     }
     @Override
@@ -45,26 +41,34 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
         buttons.addAll(SimpleSteps.getButtons(this));
         return buttons;
     }
-
     @Override
     public void refreshGuiElements() {
         tac.setCode(currentPluginInstance.getCode());
-        tac.highlightLine(currentPluginInstance.getCurrentLineNumber());
+        tac.highlightLine(currentPluginInstance.getCurrentInstructionAddress());
 
         currentPluginInstance.getNodes().forEach(cfg::addNode);
         currentPluginInstance.getEdges().forEach(cfg::addEdge);
+
     }
 
     //implementing SimpleSteps
     @Override
     public void reset() {
         currentPluginInstance = new TACtoCFGAlgo(currentlyLoadedCode);
+        cfg.purge();//todo
         refreshGuiElements();
     }
     @Override
     public void step() {
         currentPluginInstance.step();
         refreshGuiElements();
+    }
+
+    @Override
+    public void run(){
+        while(currentPluginInstance.hasNextStep()){
+            step();
+        }
     }
 
     //implementing LoadCodeFromFile

@@ -29,6 +29,10 @@ public class ThreeAddressCode{
         return comment;
     }
 
+    public int getAddress() {
+        return address;
+    }
+
     public String toString(){
         return getRepresentation().toString();
     }
@@ -85,7 +89,7 @@ public class ThreeAddressCode{
         }
         public static int size(){return 7;}
         public String toString(){
-            return a.concat(b).concat(c).concat(d).concat(e).concat(f).concat(g);
+            return a + ": " + b + " " + c + " " + d + " " + e + " " + f + " " + g;
         }
     }
     public enum Operation{

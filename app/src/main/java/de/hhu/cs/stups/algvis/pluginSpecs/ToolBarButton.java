@@ -1,6 +1,4 @@
-package de.hhu.cs.stups.algvis.gui;
-
-import de.hhu.cs.stups.algvis.plugins.Plugin;
+package de.hhu.cs.stups.algvis.pluginSpecs;
 
 public interface ToolBarButton {
     public String getText();

@@ -1,14 +1,11 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoBB;
 
-import de.hhu.cs.stups.algvis.data.structures.Content;
+import de.hhu.cs.stups.algvis.data.DataRepresentation;
 import de.hhu.cs.stups.algvis.data.structures.code.Code;
-import de.hhu.cs.stups.algvis.data.structures.graph.Graph;
-import de.hhu.cs.stups.algvis.data.structures.graph.GraphMode;
-import de.hhu.cs.stups.algvis.gui.Locator;
-import de.hhu.cs.stups.algvis.gui.ToolBarButton;
-import de.hhu.cs.stups.algvis.plugins.Plugin;
-import de.hhu.cs.stups.algvis.plugins.specs.LoadCodeFromFile;
-import de.hhu.cs.stups.algvis.plugins.specs.SimpleSteps;
+import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
+import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
+import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
+import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,8 +14,6 @@ import java.util.Set;
 public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
     private final Code tac;
     private TACtoBBAlgo currentPluginInstance;
-
-
     private String currentlyLoadedCode;
     public TACtoBB() {
         this.tac = new Code();
@@ -28,14 +23,14 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
     //implementing Plugin
     @Override
     public String getName() {
-        return "CFG to BB";
+        return "TAC to BB";
     }
     @Override
     public void onPluginLoad() {
         reset();
     }
     @Override
-    public Set<Content> getGuiElements() {
+    public Set<DataRepresentation> getGuiElements() {
         return Set.of(tac);
     }
     @Override
@@ -49,7 +44,7 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
     @Override
     public void refreshGuiElements() {
         tac.setCode(currentPluginInstance.getCode());
-        tac.highlightLine(currentPluginInstance.getCurrentLineNumber());
+        tac.highlightLine(currentPluginInstance.getCurrentInstructionAddress());
     }
 
     //implementing SimpleSteps
@@ -62,6 +57,13 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
     public void step() {
         currentPluginInstance.step();
         refreshGuiElements();
+    }
+
+    @Override
+    public void run() {
+        while(currentPluginInstance.hasNextStep()){
+            step();
+        }
     }
 
     //implementing LoadCodeFromFile

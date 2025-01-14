@@ -1,7 +1,8 @@
-package de.hhu.cs.stups.algvis.gui;
+package de.hhu.cs.stups.algvis;
 
-import de.hhu.cs.stups.algvis.data.structures.Content;
-import de.hhu.cs.stups.algvis.plugins.Plugin;
+import de.hhu.cs.stups.algvis.data.DataRepresentation;
+import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
+import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,11 +61,11 @@ public class Gui{
   }
   private void switchToPlugin(Plugin plugin){
     contentPanel.removeAll();
-    for (Content content : plugin.getGuiElements()) {
+    for (DataRepresentation content : plugin.getGuiElements()) {
       switch (content.getLocation()){
-        case Content.Location.left -> contentPanel.add(content.getSwingComponent(), BorderLayout.WEST);
-        case Content.Location.right -> contentPanel.add(content.getSwingComponent(), BorderLayout.EAST);
-        case Content.Location.center -> contentPanel.add(content.getSwingComponent(), BorderLayout.CENTER);
+        case DataRepresentation.Location.left -> contentPanel.add(content.getSwingComponent(), BorderLayout.WEST);
+        case DataRepresentation.Location.right -> contentPanel.add(content.getSwingComponent(), BorderLayout.EAST);
+        case DataRepresentation.Location.center -> contentPanel.add(content.getSwingComponent(), BorderLayout.CENTER);
       }
     }
     contentPanel.setVisible(true);

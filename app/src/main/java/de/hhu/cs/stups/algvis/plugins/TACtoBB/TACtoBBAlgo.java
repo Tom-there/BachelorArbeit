@@ -1,22 +1,30 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoBB;
 
-import de.hhu.cs.stups.algvis.data.structures.code.ThreeAddressCode;
-import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
-import de.hhu.cs.stups.algvis.data.structures.graph.Node;
+import de.hhu.cs.stups.algvis.data.ThreeAddressCode;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TACtoBBAlgo {
     private final List<ThreeAddressCode> code;
-    private int currentLineNumber;
+    private final List<ThreeAddressCode> leaders;
+    private int currentInstructionAddress;
+    private ThreeAddressCode lastLeader;
+    private Mode mode;
+    private enum Mode{findLeaders, mapLeaders, done}
     public TACtoBBAlgo(String input){
+        leaders = new ArrayList<>(1);
         code = ThreeAddressCode.listFromString(input);
-        currentLineNumber = 1;
+
+        currentInstructionAddress = 0;
+        mode = Mode.findLeaders;
     }
-    public void step() {
+
+    public boolean hasNextStep(){
+        return mode != Mode.done;
+    }
+   public void step() {
         /* Nach Drachenbuch Algorithmus 8.5
          * IN: List of TAC
          * OUT: List of Basic Blocks and a mapping of every TAC instruction to a block
@@ -27,37 +35,86 @@ public class TACtoBBAlgo {
          *   1.3. every instruction that is follows a jump is a leader
          *   2. map every instruction to previous leader
          */
-        final int currentLineIndex = currentLineNumber - 1;
-        if (currentLineIndex < 0) {
-            System.err.println("ERROR - current line number cannot be zero or negative");
+        if (currentInstructionAddress < 0) {
+            System.err.println("ERROR - Instruction Addresses cannot be negative");
             return;
         }
-        if(currentLineNumber == 1) {
-            //First Instruction is always a leader
-            makeIndexLeader(currentLineIndex);
-        }
-        else if(code.get(currentLineIndex).canJump()){
-            code.get(currentLineIndex).setComment("|");
-            //next line is a leader
-            makeIndexLeader(currentLineIndex+1);
-            //destination of jump is a leader
-            makeDestinationOfJumpLeader(currentLineIndex);
-        }
-        else{
-            code.get(currentLineIndex).setComment("|");
-        }
+        switch (mode){
+            case findLeaders -> {
+                //check if currentInstructionAddress is valid
+                if ((currentInstructionAddress == code.size())) {
+                    mode = Mode.mapLeaders;
+                    currentInstructionAddress = 0;
+                    return;
+                }else if(currentInstructionAddress > code.size()){
+                    System.err.println("ERR - tried to get a line number that does not exist(should be unreachable)");
+                }
+                if(currentInstructionAddress == 0) {
+                    //First Instruction is always a leader
+                    makeIndexLeader(currentInstructionAddress);
+                }else if(leaders.contains(code.get(currentInstructionAddress))){
+                    System.out.println("current line is already a leader");
+                }else if(code.get(currentInstructionAddress).canJump()){
+                    code.get(currentInstructionAddress).setComment("end");
+                    //next line is a leader
+                    makeIndexLeader(currentInstructionAddress+1);
+                    //destination of jump is a leader
+                    makeDestinationOfJumpLeader(currentInstructionAddress);
+                }
+                else{
+                    code.get(currentInstructionAddress).setComment("|");
+                }
 
-        if(currentLineNumber > code.size())
-            System.err.println("WRN - done with algorithm. You can stop stepping.");
+                currentInstructionAddress++;
+            }
+            case mapLeaders -> {
+                //exit if done
+                if (!(currentInstructionAddress < code.size())) {
+                    mode = Mode.done;
+                    return;
+                }
+                ThreeAddressCode currentInstruction = code.get(currentInstructionAddress);
+                if(leaders.contains(code.get(currentInstructionAddress))){
+                    //set current leader
+                    lastLeader = currentInstruction;
+                    //marks instruction as leader
+                    currentInstruction.setComment(currentInstructionAddress + " Leader");
+                }
+                else{
+                    //maps instruction to leader
+                    currentInstruction.setComment(String.valueOf(lastLeader.getAddress()));
+                }
+                //if block ends here, tell to which Leaders it jumps
+                List<ThreeAddressCode> destinations = new LinkedList<>();
+                if(currentInstruction.canJump())
+                    destinations.add(code.get(Integer.parseInt(currentInstruction.getDestination())));
+                if(currentInstructionAddress+1<code.size())
+                    if(leaders.contains(code.get(currentInstructionAddress+1)))
+                        destinations.add(code.get(currentInstructionAddress+1));
+                makeInstructionJumpTo(currentInstruction, destinations);
+                currentInstructionAddress++;
 
-        currentLineNumber++;
+            }
+            case null, default -> currentInstructionAddress = 1;
+        }
+    }
+
+    private void makeInstructionJumpTo(ThreeAddressCode instruction, List<ThreeAddressCode> destinations){
+        StringBuilder comment = new StringBuilder(instruction.getComment());
+        if(!destinations.isEmpty())
+            comment.append(" jumps to: ");
+        for (int i = 0; i < destinations.size(); i++) {
+            comment.append(destinations.get(i).getAddress());
+            if(i+1 < destinations.size())
+                comment.append(" and ");
+        }
+        instruction.setComment(comment.toString());
     }
 
     //adding leaders
     private void makeDestinationOfJumpLeader(int line){
         try {
-            int destinationIndex = 1 - Integer.parseInt(code.get(line).getDestination());
-            code.get(line).setComment("| jumps to " + (1 + destinationIndex));
+            int destinationIndex = Integer.parseInt(code.get(line).getDestination());
             makeIndexLeader(destinationIndex);
         } catch (NumberFormatException e) {
             System.err.println("ERR - could not parse String '" + code.get(line).getDestination() + "' to a line number");
@@ -65,9 +122,12 @@ public class TACtoBBAlgo {
     }
     private void makeIndexLeader(int index){
         try{
-            code.get(index).setComment("Leader " + (index + 1));
-        }catch (IndexOutOfBoundsException e){
-            System.err.println("ERR - tried to set line " + (index+1) + " as leader. But it does not exist.");
+            ThreeAddressCode lastLeader = code.get(index);
+            code.get(index).setComment(index + " Leader");
+            if(!leaders.contains(lastLeader))
+                leaders.add(code.get(index));
+         }catch (IndexOutOfBoundsException e){
+            System.err.println("ERR - tried to set line " + (index) + " as leader. But it does not exist.");
         }
     }
 
@@ -75,7 +135,7 @@ public class TACtoBBAlgo {
     public List<ThreeAddressCode> getCode(){
         return code;
     }
-    public int getCurrentLineNumber() {
-        return currentLineNumber;
+    public int getCurrentInstructionAddress() {
+        return currentInstructionAddress;
     }
 }

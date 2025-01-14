@@ -1,23 +1,19 @@
 package de.hhu.cs.stups.algvis.data.structures.code;
 
-import de.hhu.cs.stups.algvis.data.structures.Content;
-import de.hhu.cs.stups.algvis.gui.Locator;
+import de.hhu.cs.stups.algvis.data.ThreeAddressCode;
+import de.hhu.cs.stups.algvis.data.DataRepresentation;
 
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 
-public class Code implements Content {
-
-    private static final int TMP_CHAR_WIDTH_MULTIPLIER = 20;
+public class Code implements DataRepresentation {
     private final JTable table;
     private final CodeTableModel tableModel;
-    private final Locator location;
-    public Code(Locator location){
+    private final DataRepresentation.Location location;
+    public Code(DataRepresentation.Location location){
         this.location = location;
         tableModel = new CodeTableModel();
         table = new JTable(tableModel);
@@ -41,14 +37,14 @@ public class Code implements Content {
 
 
     public Code(){
-        this(Locator.center);
+        this(DataRepresentation.Location.center);
     }
     @Override
     public Component getSwingComponent() {
         return table;
     }
     @Override
-    public Locator getLocation() {
+    public DataRepresentation.Location getLocation() {
         return location;
     }
 

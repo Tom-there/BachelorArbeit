@@ -1,7 +1,7 @@
 package de.hhu.cs.stups.algvis.data.structures.graph;
 
-import de.hhu.cs.stups.algvis.data.structures.Content;
-import de.hhu.cs.stups.algvis.gui.Locator;
+import de.hhu.cs.stups.algvis.data.DataRepresentation;
+import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.ui.swing_viewer.SwingViewer;
 import org.graphstream.ui.view.View;
@@ -13,33 +13,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Graph implements Content {
+public class Graph implements DataRepresentation {
     private final JPanel exportedPanel;
-    private final org.graphstream.graph.Graph graph;
-    private final View view;
-    private final Locator location;
+    private org.graphstream.graph.Graph graph;
+    private View view;
+    private final DataRepresentation.Location location;
     private Set<Node> nodes;
     private Set<Edge> edges;
-    public Graph(){this(GraphMode.normal, Locator.center);}
-    public Graph(GraphMode mode, Locator location){
+    public Graph(){this(DataRepresentation.Location.center);}
+    public Graph(DataRepresentation.Location location){
         this.location = location;
         exportedPanel = new JPanel(new BorderLayout());
-        graph = new SingleGraph("test");
+        graph = new MultiGraph("Graph");
         nodes = new HashSet<>();
         edges = new HashSet<>();
-        switch (mode){
-            case CodeInNode -> {
-                graph.setAttribute("ui.stylesheet", "node { size-mode: fit; shape: rounded-box; fill-color: white; stroke-mode: plain; padding: 3px, 2px; }");
-            }
-            case normal -> {
-
-            }
-            case null, default -> {
-                System.err.println("ERR");
-            }
-
-        }
-
+        graph.setAttribute("ui.stylesheet", "node { size-mode: fit; shape: rounded-box; fill-color: white; stroke-mode: plain; padding: 3px, 2px; }");
 
         switch (location){
             case left, right -> {
@@ -70,13 +58,14 @@ public class Graph implements Content {
     }
 
     @Override
-    public Locator getLocation() {
+    public DataRepresentation.Location getLocation() {
         return location;
     }
 
     public void addNode(Node newNode){
-        boolean refreshGraph = nodes.add(newNode);
+        boolean refreshGraph = !nodes.contains(newNode);//todo;
         if(refreshGraph){
+            nodes.add(newNode);
             graph.addNode(newNode.getID());
             graph.getNode(newNode.getID()).setAttribute("ui.label", newNode.getText());
         }
@@ -88,8 +77,10 @@ public class Graph implements Content {
         }
     }
     public void addEdge(Edge edge){
-        edges.add(edge);
-        graph.addEdge(edge.getID(), edge.getSourceNode().getID(), edge.getTargetNode().getID());
+        if(!edges.contains(edge)) {
+            edges.add(edge);
+            graph.addEdge(edge.getID(), edge.getSourceNode().getID(), edge.getTargetNode().getID(), true);
+        }
     }
     public void addEdgeFromNodes(Node sourceNode, Node targetNode){
         addEdge(new Edge(sourceNode, targetNode));
@@ -98,16 +89,16 @@ public class Graph implements Content {
         nodes.forEach(n -> {graph.getNode(n.getID()).setAttribute("ui.label", n.getText());});
     }
     public void purge() {
-        System.out.println("edges");
-        graph.edges().forEach(System.out::println);
-        graph.edges().forEach(graph::removeEdge);
-        System.out.println("kept edges");
-        graph.edges().forEach(System.out::println);
-        System.out.println("Nodes");
-        graph.nodes().forEach(System.out::println);
-        graph.nodes().forEach(graph::removeNode);
-        System.out.println("Kept nodes");
-        graph.nodes().forEach(System.out::println);
+        graph = new MultiGraph("Graph");
+        nodes = new HashSet<>();
+        edges = new HashSet<>();
+        graph.setAttribute("ui.stylesheet", "node { size-mode: fit; shape: rounded-box; fill-color: white; stroke-mode: plain; padding: 3px, 2px; }");
+        SwingViewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+        view = viewer.addDefaultView(false);
+
+        viewer.enableAutoLayout();
+        exportedPanel.removeAll();
+        exportedPanel.add((Component) view, BorderLayout.CENTER);
     }
 
     public Set<Edge> getEdges(){
@@ -116,4 +107,8 @@ public class Graph implements Content {
     public Set<Node> getNodes(){
         return nodes;
     }
+    public enum GraphMode {
+        CodeInNode, normal
+    }
+
 }

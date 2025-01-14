@@ -1,7 +1,7 @@
 package de.hhu.cs.stups;
 
-import de.hhu.cs.stups.algvis.gui.Gui;
-import de.hhu.cs.stups.algvis.plugins.Plugin;
+import de.hhu.cs.stups.algvis.Gui;
+import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
 import de.hhu.cs.stups.algvis.plugins.ReachingDefinitions.ReachingDefinitions;
 import de.hhu.cs.stups.algvis.plugins.TACtoBB.TACtoBB;
 import de.hhu.cs.stups.algvis.plugins.TACtoCFG.TACtoCFG;

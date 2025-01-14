@@ -1,14 +1,12 @@
-package de.hhu.cs.stups.algvis.plugins.specs;
-
-import de.hhu.cs.stups.algvis.gui.ToolBarButton;
+package de.hhu.cs.stups.algvis.pluginSpecs;
 
 import javax.swing.*;
 import java.io.*;
 import java.util.stream.Collectors;
 
 public interface LoadCodeFromFile {
-    public void loadCode(String s);
-    public static ToolBarButton getButton(LoadCodeFromFile impl){
+    void loadCode(String s);
+    static ToolBarButton getButton(LoadCodeFromFile impl){
         return new ToolBarButton() {
             @Override
             public String getText() {
