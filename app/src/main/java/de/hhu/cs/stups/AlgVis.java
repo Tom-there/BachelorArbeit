@@ -1,11 +1,25 @@
 package de.hhu.cs.stups;
 
-import de.hhu.cs.stups.algvis.PluginManager;
 import de.hhu.cs.stups.algvis.gui.Gui;
+import de.hhu.cs.stups.algvis.plugins.Plugin;
+import de.hhu.cs.stups.algvis.plugins.ReachingDefinitions.ReachingDefinitions;
+import de.hhu.cs.stups.algvis.plugins.TACtoBB.TACtoBB;
+import de.hhu.cs.stups.algvis.plugins.TACtoCFG.TACtoCFG;
 
-class AlgVis{
-  public static void main(String[] args) {
-    PluginManager pluginManager = new PluginManager();
-    new Gui(pluginManager);
-  }
+import java.util.Collection;
+import java.util.HashSet;
+
+class AlgVis {
+    private static Collection<Plugin> plugins() {
+        Collection<Plugin> installedPlugins = new HashSet<>();
+
+        installedPlugins.add(new TACtoCFG());
+        installedPlugins.add(new TACtoBB());
+        installedPlugins.add(new ReachingDefinitions());
+
+        return installedPlugins;
+    }
+    public static void main(String[] args) {
+        new Gui(plugins());
+    }
 }
