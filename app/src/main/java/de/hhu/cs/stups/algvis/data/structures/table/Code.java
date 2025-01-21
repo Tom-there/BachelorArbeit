@@ -1,4 +1,4 @@
-package de.hhu.cs.stups.algvis.data.structures.code;
+package de.hhu.cs.stups.algvis.data.structures.table;
 
 import de.hhu.cs.stups.algvis.data.ThreeAddressCode;
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
@@ -6,7 +6,6 @@ import de.hhu.cs.stups.algvis.data.DataRepresentation;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
-import java.util.List;
 
 
 public class Code implements DataRepresentation {
@@ -48,11 +47,11 @@ public class Code implements DataRepresentation {
         return location;
     }
 
-    public void setCode(List<ThreeAddressCode> code){
+    public void setCode(ThreeAddressCode code){
         if(code == null){
             System.err.println("ERROR - Code.setCode(null) ???"); //todo
         }else {
-            tableModel.setCodeList(code);
+            tableModel.setCodeList(code.getInstructions());
             resizeColumns();
         }
     }

@@ -1,32 +1,32 @@
-package de.hhu.cs.stups.algvis.data.structures.graph;
+package de.hhu.cs.stups.algvis.data.structures;
 
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
+import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
+import de.hhu.cs.stups.algvis.data.structures.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
-import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.ui.swing_viewer.SwingViewer;
 import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 public class Graph implements DataRepresentation {
     private final JPanel exportedPanel;
     private org.graphstream.graph.Graph graph;
     private View view;
     private final DataRepresentation.Location location;
-    private Set<Node> nodes;
-    private Set<Edge> edges;
+    private HashMap<String, Node> nodes;
+    private HashMap<String, Edge> edges;
     public Graph(){this(DataRepresentation.Location.center);}
     public Graph(DataRepresentation.Location location){
         this.location = location;
         exportedPanel = new JPanel(new BorderLayout());
         graph = new MultiGraph("Graph");
-        nodes = new HashSet<>();
-        edges = new HashSet<>();
+        nodes = new HashMap<>();
+        edges = new HashMap<>();
         graph.setAttribute("ui.stylesheet", "node { size-mode: fit; shape: rounded-box; fill-color: white; stroke-mode: plain; padding: 3px, 2px; }");
 
         switch (location){
@@ -63,11 +63,10 @@ public class Graph implements DataRepresentation {
     }
 
     public void addNode(Node newNode){
-        boolean refreshGraph = !nodes.contains(newNode);//todo;
-        if(refreshGraph){
-            nodes.add(newNode);
+        if(!nodes.containsKey(newNode.getID())){
+            nodes.put(newNode.getID(), newNode);
             graph.addNode(newNode.getID());
-            graph.getNode(newNode.getID()).setAttribute("ui.label", newNode.getText());
+            graph.getNode(newNode.getID()).setAttribute("ui.label", newNode.getLabel());
         }
     }
     public void addNodeWithEdges(Node newNode, List<Node> targets){
@@ -76,22 +75,19 @@ public class Graph implements DataRepresentation {
             addEdgeFromNodes(newNode, target);
         }
     }
-    public void addEdge(Edge edge){
-        if(!edges.contains(edge)) {
-            edges.add(edge);
-            graph.addEdge(edge.getID(), edge.getSourceNode().getID(), edge.getTargetNode().getID(), true);
+    public void addEdge(Edge newEdge){
+        if(!edges.containsKey(newEdge.getID())) {
+            edges.put(newEdge.getID(), newEdge);
+            graph.addEdge(newEdge.getID(), newEdge.getSourceNode().getID(), newEdge.getTargetNode().getID(), true);
         }
     }
     public void addEdgeFromNodes(Node sourceNode, Node targetNode){
         addEdge(new Edge(sourceNode, targetNode));
     }
-    public void refresh(){
-        nodes.forEach(n -> {graph.getNode(n.getID()).setAttribute("ui.label", n.getText());});
-    }
     public void purge() {
         graph = new MultiGraph("Graph");
-        nodes = new HashSet<>();
-        edges = new HashSet<>();
+        nodes = new HashMap<>();
+        edges = new HashMap<>();
         graph.setAttribute("ui.stylesheet", "node { size-mode: fit; shape: rounded-box; fill-color: white; stroke-mode: plain; padding: 3px, 2px; }");
         SwingViewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
         view = viewer.addDefaultView(false);
@@ -101,11 +97,11 @@ public class Graph implements DataRepresentation {
         exportedPanel.add((Component) view, BorderLayout.CENTER);
     }
 
-    public Set<Edge> getEdges(){
-        return edges;
+    public Collection<Edge> getEdges(){
+        return edges.values();
     }
-    public Set<Node> getNodes(){
-        return nodes;
+    public Collection<Node> getNodes(){
+        return nodes.values();
     }
     public enum GraphMode {
         CodeInNode, normal

@@ -1,25 +1,26 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoCFG;
 
 import de.hhu.cs.stups.algvis.data.ThreeAddressCode;
+import de.hhu.cs.stups.algvis.data.ThreeAddressCodeInstruction;
 import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
 import de.hhu.cs.stups.algvis.data.structures.graph.Node;
 
 import java.util.*;
 
 public class TACtoCFGAlgo {
-    private final List<ThreeAddressCode> code;
-    private final HashMap<ThreeAddressCode, Node> nodes;
+    private final ThreeAddressCode code;
+    private final HashMap<ThreeAddressCodeInstruction, Node> nodes;
     private final HashSet<Edge> edges;
-    private final List<ThreeAddressCode> leaders;
+    private final List<ThreeAddressCodeInstruction> leaders;
     private int currentInstructionAddress;
-    private ThreeAddressCode lastLeader;
+    private ThreeAddressCodeInstruction lastLeader;
     private Mode mode;
     private enum Mode{findLeaders, mapLeaders, done}
     public TACtoCFGAlgo(String input){
         nodes = new HashMap<>();
         edges = new HashSet<>();
         leaders = new ArrayList<>(1);
-        code = ThreeAddressCode.listFromString(input);
+        code = new ThreeAddressCode(input);
 
         mode = Mode.findLeaders;
         currentInstructionAddress = 0;
@@ -76,7 +77,7 @@ public class TACtoCFGAlgo {
                     mode = Mode.done;
                     return;
                 }
-                ThreeAddressCode currentInstruction = code.get(currentInstructionAddress);
+                ThreeAddressCodeInstruction currentInstruction = code.get(currentInstructionAddress);
                 if(leaders.contains(code.get(currentInstructionAddress))){
                     //set current leader
                     lastLeader = currentInstruction;
@@ -88,7 +89,7 @@ public class TACtoCFGAlgo {
                     currentInstruction.setComment(String.valueOf(lastLeader.getAddress()));
                 }
                 //if block ends here, tell to which Leaders it jumps
-                List<ThreeAddressCode> destinations = new LinkedList<>();
+                List<ThreeAddressCodeInstruction> destinations = new LinkedList<>();
                 if(currentInstruction.canJump())
                     destinations.add(code.get(Integer.parseInt(currentInstruction.getDestination())));
                 if(currentInstructionAddress+1<code.size())
@@ -103,7 +104,7 @@ public class TACtoCFGAlgo {
     }
 
     //adding edges
-    private void makeInstructionJumpTo(ThreeAddressCode instruction, List<ThreeAddressCode> destinations){
+    private void makeInstructionJumpTo(ThreeAddressCodeInstruction instruction, List<ThreeAddressCodeInstruction> destinations){
         StringBuilder comment = new StringBuilder(instruction.getComment());
         if(!destinations.isEmpty())
             comment.append(" jumps to: ");
@@ -128,7 +129,7 @@ public class TACtoCFGAlgo {
     }
     private void makeIndexLeader(int index){
         try{
-            ThreeAddressCode lastLeader = code.get(index);
+            ThreeAddressCodeInstruction lastLeader = code.get(index);
             code.get(index).setComment(index + " Leader");
             if(!leaders.contains(lastLeader))
                 leaders.add(code.get(index));
@@ -140,7 +141,7 @@ public class TACtoCFGAlgo {
     }
 
     //getters
-    public List<ThreeAddressCode> getCode(){
+    public ThreeAddressCode getCode(){
         return code;
     }
     public Collection<Node> getNodes() {

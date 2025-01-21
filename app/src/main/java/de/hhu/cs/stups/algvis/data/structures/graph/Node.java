@@ -4,16 +4,16 @@ import java.util.Objects;
 
 public class Node {
     private final String ID;
-    private String text;
-    public Node(String id, String text){
-        this.text = text;
+    private String label;
+    public Node(String id, String label){
+        this.label = label;
         this.ID = id;
     }
-    public String getText() {
-        return text;
+    public String getLabel() {
+        return label;
     }
-    public void setText(String text) {
-        this.text = text;
+    public void setLabel(String label) {
+        this.label = label;
     }
     public String getID() {
         return ID;
@@ -24,6 +24,6 @@ public class Node {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
-        return Objects.equals(ID, node.ID) && Objects.equals(text, node.text);
+        return Objects.equals(ID, node.ID) && Objects.equals(label, node.label);
     }
 }

@@ -1,21 +1,22 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoBB;
 
 import de.hhu.cs.stups.algvis.data.ThreeAddressCode;
+import de.hhu.cs.stups.algvis.data.ThreeAddressCodeInstruction;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class TACtoBBAlgo {
-    private final List<ThreeAddressCode> code;
-    private final List<ThreeAddressCode> leaders;
+    private final ThreeAddressCode code;
+    private final List<ThreeAddressCodeInstruction> leaders;
     private int currentInstructionAddress;
-    private ThreeAddressCode lastLeader;
+    private ThreeAddressCodeInstruction lastLeader;
     private Mode mode;
     private enum Mode{findLeaders, mapLeaders, done}
     public TACtoBBAlgo(String input){
         leaders = new ArrayList<>(1);
-        code = ThreeAddressCode.listFromString(input);
+        code = new ThreeAddressCode(input);
 
         currentInstructionAddress = 0;
         mode = Mode.findLeaders;
@@ -73,7 +74,7 @@ public class TACtoBBAlgo {
                     mode = Mode.done;
                     return;
                 }
-                ThreeAddressCode currentInstruction = code.get(currentInstructionAddress);
+                ThreeAddressCodeInstruction currentInstruction = code.get(currentInstructionAddress);
                 if(leaders.contains(code.get(currentInstructionAddress))){
                     //set current leader
                     lastLeader = currentInstruction;
@@ -85,7 +86,7 @@ public class TACtoBBAlgo {
                     currentInstruction.setComment(String.valueOf(lastLeader.getAddress()));
                 }
                 //if block ends here, tell to which Leaders it jumps
-                List<ThreeAddressCode> destinations = new LinkedList<>();
+                List<ThreeAddressCodeInstruction> destinations = new LinkedList<>();
                 if(currentInstruction.canJump())
                     destinations.add(code.get(Integer.parseInt(currentInstruction.getDestination())));
                 if(currentInstructionAddress+1<code.size())
@@ -99,7 +100,7 @@ public class TACtoBBAlgo {
         }
     }
 
-    private void makeInstructionJumpTo(ThreeAddressCode instruction, List<ThreeAddressCode> destinations){
+    private void makeInstructionJumpTo(ThreeAddressCodeInstruction instruction, List<ThreeAddressCodeInstruction> destinations){
         StringBuilder comment = new StringBuilder(instruction.getComment());
         if(!destinations.isEmpty())
             comment.append(" jumps to: ");
@@ -122,7 +123,7 @@ public class TACtoBBAlgo {
     }
     private void makeIndexLeader(int index){
         try{
-            ThreeAddressCode lastLeader = code.get(index);
+            ThreeAddressCodeInstruction lastLeader = code.get(index);
             code.get(index).setComment(index + " Leader");
             if(!leaders.contains(lastLeader))
                 leaders.add(code.get(index));
@@ -132,7 +133,7 @@ public class TACtoBBAlgo {
     }
 
     //getters
-    public List<ThreeAddressCode> getCode(){
+    public ThreeAddressCode getCode(){
         return code;
     }
     public int getCurrentInstructionAddress() {

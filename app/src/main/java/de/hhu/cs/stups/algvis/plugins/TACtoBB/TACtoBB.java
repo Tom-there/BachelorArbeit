@@ -1,7 +1,7 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoBB;
 
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
-import de.hhu.cs.stups.algvis.data.structures.code.Code;
+import de.hhu.cs.stups.algvis.data.structures.table.Code;
 import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
 import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
 import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
@@ -60,10 +60,8 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
     }
 
     @Override
-    public void run() {
-        while(currentPluginInstance.hasNextStep()){
-            step();
-        }
+    public boolean hasNextStep() {
+        return currentPluginInstance.hasNextStep();
     }
 
     //implementing LoadCodeFromFile

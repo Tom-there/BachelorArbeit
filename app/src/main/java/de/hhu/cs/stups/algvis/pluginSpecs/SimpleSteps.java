@@ -5,7 +5,7 @@ import java.util.List;
 public interface SimpleSteps {
     void reset();
     void step();
-    void run();
+    boolean hasNextStep();
 
     static List<ToolBarButton> getButtons(SimpleSteps impl){
         return List.of(new ToolBarButton() {
@@ -16,7 +16,10 @@ public interface SimpleSteps {
 
             @Override
             public void action() {
-                impl.step();
+                if(impl.hasNextStep())
+                    impl.step();
+                else
+                    System.out.println("At end of Algo");
             }
         }, new ToolBarButton() {
             @Override
@@ -36,7 +39,8 @@ public interface SimpleSteps {
 
             @Override
             public void action() {
-                impl.run();
+                while (impl.hasNextStep())
+                    impl.step();
             }
         });
     }
