@@ -25,9 +25,8 @@ public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAd
             }
         }
         //filter out gen list items and return
-        return instructionsThatWriteToGenListIdentifiers.stream().filter( i -> {
-            return ((i.getAddress()<firstAddress)
-                ||  (i.getAddress()>lastAddress));})
+        return instructionsThatWriteToGenListIdentifiers.stream()
+                .filter(i -> ((i.getAddress()<firstAddress) || (i.getAddress()>lastAddress)))
                 .map(ThreeAddressCodeInstruction::getAddress).toList();
     }
 
@@ -62,26 +61,23 @@ public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAd
         }
         lastAddresses.add(code.getLast().getAddress());
 
-        for (int i = 0; i < lastAddresses.size(); i++) {
-            int lastAddress = lastAddresses.get(i);
+        for (int lastAddress : lastAddresses) {
             List<Integer> successors = new ArrayList<>(0);
             firstAddressesOfSuccessors.add(successors);
-            switch(code.get(lastAddress).getOperation()){
-                case jmp -> {
-                    successors.add(Integer.valueOf(code.get(lastAddress).getDestination()));
-                }
+            switch (code.get(lastAddress).getOperation()) {
+                case jmp -> successors.add(Integer.valueOf(code.get(lastAddress).getDestination()));
                 case booleanJump, negatedBooleanJump -> {
                     successors.add(Integer.valueOf(code.get(lastAddress).getDestination()));
-                    if(lastAddress > code.size()-1)
+                    if (lastAddress > code.size() - 1)
                         System.err.println("WRN - at end of code, cannot add new successor to conditional jump");//todo: proper warning message
                     else
-                        successors.add(lastAddress+1);
+                        successors.add(lastAddress + 1);
                 }
                 default -> {
-                    if(lastAddress > code.size()-2)
+                    if (lastAddress > code.size() - 2)
                         System.err.println("WRN - at end of code, did not add a new successor");//todo: proper warning message
                     else
-                        successors.add(lastAddress+1);
+                        successors.add(lastAddress + 1);
                 }
             }
         }

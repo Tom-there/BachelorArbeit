@@ -12,7 +12,7 @@ import java.util.List;
 public class CodeTableModel implements TableModel {
 
     private String[][] code;
-    public List<TableModelListener> listeners;
+    public final List<TableModelListener> listeners;
 
     public CodeTableModel(){
         code = new String[][]{{"", "", "", "", "", "", ""}};

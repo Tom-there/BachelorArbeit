@@ -18,9 +18,9 @@ repositories {
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
+    testImplementation("org.hamcrest:hamcrest:3.0")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
 
     implementation("org.graphstream:gs-core:2.0")
     implementation("org.graphstream:gs-ui-swing:2.0")
@@ -40,4 +40,12 @@ java {
 application {
     // Define the main class for the application.
     mainClass = "de.hhu.cs.stups.AlgVis"
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+
+    testLogging{
+        events("passed")
+    }
 }

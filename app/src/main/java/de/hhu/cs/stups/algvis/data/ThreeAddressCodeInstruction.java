@@ -1,8 +1,5 @@
 package de.hhu.cs.stups.algvis.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ThreeAddressCodeInstruction {
     private final int address;
     private final Operation op;
@@ -140,7 +137,7 @@ public class ThreeAddressCodeInstruction {
                 return true;
             }
             default -> {
-                System.err.println("ERR - TACInstruction.writesValue(). Error in switch statement, could not determine if " + op.toString() + " writes or not");
+                System.err.println("ERR - TACInstruction.writesValue(). Error in switch statement, could not determine if " + op + " writes or not");
                 return false;
             }
         }

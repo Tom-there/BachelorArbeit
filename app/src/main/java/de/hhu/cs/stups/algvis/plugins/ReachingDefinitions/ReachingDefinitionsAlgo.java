@@ -39,8 +39,8 @@ public class ReachingDefinitionsAlgo {
         changeInCurrentIteration = false;
     }
 
-    public boolean isFinished() {
-        return !changeInLastIteration;
+    public boolean isNotFinished() {
+        return changeInLastIteration;
     }
     public void step() {
         if(!changeInLastIteration)

@@ -78,7 +78,7 @@ public class Graph implements DataRepresentation {
     public void addEdge(Edge newEdge){
         if(!edges.containsKey(newEdge.getID())) {
             edges.put(newEdge.getID(), newEdge);
-            graph.addEdge(newEdge.getID(), newEdge.getSourceNode().getID(), newEdge.getTargetNode().getID(), true);
+            graph.addEdge(newEdge.getID(), newEdge.sourceNode().getID(), newEdge.targetNode().getID(), true);
         }
     }
     public void addEdgeFromNodes(Node sourceNode, Node targetNode){

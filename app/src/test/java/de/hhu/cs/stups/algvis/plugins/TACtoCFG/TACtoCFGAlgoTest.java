@@ -1,6 +1,5 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoCFG;
 
-import de.hhu.cs.stups.algvis.data.ThreeAddressCodeInstruction;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -12,7 +12,7 @@ import java.util.List;
 public class DataTableModel implements TableModel {
 
     private String[][] data;
-    public List<TableModelListener> listeners;
+    public final List<TableModelListener> listeners;
 
     public DataTableModel(){
         this(1, 1);
