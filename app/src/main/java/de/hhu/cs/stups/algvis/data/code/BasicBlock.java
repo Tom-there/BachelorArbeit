@@ -1,33 +1,66 @@
-package de.hhu.cs.stups.algvis.data;
+package de.hhu.cs.stups.algvis.data.code;
+
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeOperation;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAddress, int lastAddress, List<Integer> firstAddressesOfSuccessors){
 
-    public List<Integer> gen(){
+    public Set<Integer> gen(){
         return instructions()
                 .stream()
                 .filter(ThreeAddressCodeInstruction::writesValue)
-                .map(ThreeAddressCodeInstruction::getAddress).toList();
+                .map(ThreeAddressCodeInstruction::getAddress)
+                .collect(Collectors.toSet());
     }
-
-    public List<Integer> kill(){
-        //get gen list
-        List<String> genList = gen().stream()
+    public Set<Integer> kill(){
+        //get Identifiers of gen set
+        Set<String> genList = gen().stream()
             .map(fullCode::get)
-            .map(ThreeAddressCodeInstruction::getDestination).toList();
-        //see which instructions also write to the identifiers of gen list items
-        List<ThreeAddressCodeInstruction> instructionsThatWriteToGenListIdentifiers = new LinkedList<>();
+            .map(ThreeAddressCodeInstruction::getDestination)
+            .collect(Collectors.toSet());
+        //get all instructions that write to the identifiers of gen set
+        Set<ThreeAddressCodeInstruction> instructionsThatWriteToGenListIdentifiers = new HashSet<>();
         for (String identifier:genList) {
             for (ThreeAddressCodeInstruction instruction:fullCode) {
                 if(instruction.getDestination().equals(identifier))
                     instructionsThatWriteToGenListIdentifiers.add(instruction);
             }
         }
-        //filter out gen list items and return
+        //filter out gen set items and return
         return instructionsThatWriteToGenListIdentifiers.stream()
                 .filter(i -> ((i.getAddress()<firstAddress) || (i.getAddress()>lastAddress)))
-                .map(ThreeAddressCodeInstruction::getAddress).toList();
+                .map(ThreeAddressCodeInstruction::getAddress)
+                .collect(Collectors.toSet());
+    }
+    public Set<String> def(){
+        List<ThreeAddressCodeInstruction> instructions = instructions();
+        Set<String> definedIdentifiers = new HashSet<>();
+        for (int i = 0; i < instructions.size(); i++) {
+            ThreeAddressCodeInstruction instruction = instructions.get(i);
+            if(!instruction.writesValue())
+                break;
+            String identifier = instruction.getDestination();
+            definedIdentifiers.add(identifier);
+            for (int j = 0; j < i; j++) {
+                if(instructions.get(j).getUsedIdentifiers().contains(identifier))
+                    definedIdentifiers.remove(identifier);
+            }
+        }
+        return definedIdentifiers;
+    }
+
+    public Set<String> use(){
+        List<ThreeAddressCodeInstruction> instructions = instructions();
+        Set<String> usedIdentifiers = new HashSet<>();
+        for (int i = instructions.size()-1; i > -1; i--) {
+            ThreeAddressCodeInstruction instruction = instructions.get(i);
+            usedIdentifiers.addAll(instruction.getUsedIdentifiers());
+            usedIdentifiers.remove(instruction.getDestination());
+        }
+        return usedIdentifiers;
     }
 
     private List<ThreeAddressCodeInstruction> instructions(){
