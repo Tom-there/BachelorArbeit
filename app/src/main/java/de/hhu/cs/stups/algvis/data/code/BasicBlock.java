@@ -72,7 +72,7 @@ public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAd
     }
     //Gen Basic Blocks
     public static List<BasicBlock> toBBList(List<ThreeAddressCodeInstruction> code){
-        //get indices of all leaders
+        //get all leaders
         Set<ThreeAddressCodeInstruction> leaders = new HashSet<>(1);
         if(!code.isEmpty())
             leaders.add(code.get(0));
@@ -86,6 +86,7 @@ public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAd
         }
         List<ThreeAddressCodeInstruction> sortedLeaders = leaders.stream().sorted(Comparator.comparingInt(ThreeAddressCodeInstruction::getAddress)).toList();
 
+        //map instruction to leader
         List<Integer> firstAddresses = sortedLeaders.stream().map(ThreeAddressCodeInstruction::getAddress).toList();
         List<Integer> lastAddresses = new ArrayList<>(leaders.size());
         List<List<Integer>> firstAddressesOfSuccessors = new ArrayList<>(leaders.size());
