@@ -1,4 +1,6 @@
-package de.hhu.cs.stups.algvis.data;
+package de.hhu.cs.stups.algvis.data.code;
+
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
 
 import java.util.*;
 

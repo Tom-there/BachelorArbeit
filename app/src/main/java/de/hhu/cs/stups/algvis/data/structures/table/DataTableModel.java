@@ -1,7 +1,8 @@
 package de.hhu.cs.stups.algvis.data.structures.table;
 
 
-import de.hhu.cs.stups.algvis.data.ThreeAddressCodeInstruction;
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeRepresentation;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -26,10 +27,10 @@ public class DataTableModel implements TableModel {
     public void setCodeList(List<ThreeAddressCodeInstruction> param){
         listeners.forEach(l -> l.tableChanged(new TableModelEvent(this)));
         int lines = param.size();
-        int columns = ThreeAddressCodeInstruction.TACRepresentation.size();
+        int columns = ThreeAddressCodeRepresentation.size();
         data = new String[lines][columns];
         for (int i = 0; i < data.length; i++) {
-            ThreeAddressCodeInstruction.TACRepresentation lineRepresentation = param.get(i).getRepresentation();
+            ThreeAddressCodeRepresentation lineRepresentation = param.get(i).getRepresentation();
             for (int j = 0; j < data[i].length; j++){
                 String cellRep = lineRepresentation.get(j);
                 if(cellRep == null){

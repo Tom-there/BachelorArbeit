@@ -47,7 +47,7 @@ public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAd
             if(code.get(i).canJump()){
                 ThreeAddressCodeInstruction destination = code.get(Integer.parseInt(code.get(i).getDestination()));
                 leaders.add(destination);
-                if(i+1<code.size() && code.get(i).getOperation()!= ThreeAddressCodeInstruction.Operation.jmp)
+                if(i+1<code.size() && code.get(i).getOperation()!= ThreeAddressCodeOperation.jmp)
                     leaders.add(code.get(i+1));
             }
         }

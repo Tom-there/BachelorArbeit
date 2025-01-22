@@ -1,7 +1,7 @@
 package de.hhu.cs.stups.algvis.plugins.ReachingDefinitions;
 
-import de.hhu.cs.stups.algvis.data.BasicBlock;
-import de.hhu.cs.stups.algvis.data.ThreeAddressCodeInstruction;
+import de.hhu.cs.stups.algvis.data.code.BasicBlock;
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
 import de.hhu.cs.stups.algvis.data.structures.Table;
 import de.hhu.cs.stups.algvis.data.structures.table.Code;
@@ -14,6 +14,7 @@ import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
 import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleSteps {
     private final Code instructionList;
@@ -78,8 +79,8 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
         }
 
         //updating data flow
-        List<Map<BasicBlock, List<String>>> inTable = pluginInstance.getIn();
-        List<Map<BasicBlock, List<String>>> outTable = pluginInstance.getOut();
+        List<Map<BasicBlock, Set<String>>> inTable = pluginInstance.getIn();
+        List<Map<BasicBlock, Set<String>>> outTable = pluginInstance.getOut();
         int rows = pluginInstance.getIn().size()*2+3;
         int cols = basicBlocks.size()+1;
         dataFlow.resizeTable(rows, cols);
@@ -93,8 +94,8 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
         dataFlow.setValueAt("gen[B]", 1, 0);
         dataFlow.setValueAt("kill[B]", 2, 0);
         for (int col = 0; col < basicBlocks.size(); col++) {
-            String genBlock = collectIdentifierListToString(basicBlocks.get(col).gen().stream().map(String::valueOf).toList());
-            String killBlock = collectIdentifierListToString(basicBlocks.get(col).kill().stream().map(String::valueOf).toList());
+            String genBlock = collectIdentifierSetToString(basicBlocks.get(col).gen().stream().map(String::valueOf).collect(Collectors.toSet()));
+            String killBlock = collectIdentifierSetToString(basicBlocks.get(col).kill().stream().map(String::valueOf).collect(Collectors.toSet()));
             dataFlow.setValueAt(genBlock, 1, col+1);
             dataFlow.setValueAt(killBlock, 2, col+1);
         }
@@ -102,20 +103,20 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
         //print each iteration of in and out sets
         for (int i = 0; i < inTable.size();i++) {
             int rowIndex = (i*2)+3;
-            Map<BasicBlock, List<String>> inMap = inTable.get(i);
-            Map<BasicBlock, List<String>> outMap = outTable.get(i);
+            Map<BasicBlock, Set<String>> inMap = inTable.get(i);
+            Map<BasicBlock, Set<String>> outMap = outTable.get(i);
             dataFlow.setValueAt("in[B]^"+i, rowIndex, 0);
             dataFlow.setValueAt("out[B]^"+i, rowIndex+1, 0);
             for (int j = 0; j < basicBlocks.size(); j++) {
-                List<String> inBlock = inMap.getOrDefault(basicBlocks.get(j), List.of("-"));
-                String inString = collectIdentifierListToString(inBlock);
+                Set<String> inBlock = inMap.getOrDefault(basicBlocks.get(j), Set.of("-"));
+                String inString = collectIdentifierSetToString(inBlock);
                 if(inString.isEmpty())
                     dataFlow.setValueAt("", rowIndex, j+1);
                 else
                     dataFlow.setValueAt(inString, rowIndex, j+1);
 
-                List<String> outBlock = outMap.getOrDefault(basicBlocks.get(j), List.of("-"));
-                String outString = collectIdentifierListToString(outBlock);
+                Set<String> outBlock = outMap.getOrDefault(basicBlocks.get(j), Set.of("-"));
+                String outString = collectIdentifierSetToString(outBlock);
                 if(outString.isEmpty())
                     dataFlow.setValueAt("", rowIndex+1, j+1);
                 else
@@ -124,11 +125,12 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
         }
     }
 
-    private static String collectIdentifierListToString(List<String> identifiers) {
+    private static String collectIdentifierSetToString(Set<String> identifiers) {
         StringBuilder ret = new StringBuilder();
-        for (int k = 0; k < identifiers.size(); k++) {
-            ret.append(identifiers.get(k));
-            if(k+1 < identifiers.size())
+        List<String> identifierList = identifiers.stream().toList();
+        for (int k = 0; k < identifierList.size(); k++) {
+            ret.append(identifierList.get(k));
+            if(k+1 < identifierList.size())
                 ret.append(", ");
         }
         return ret.toString();

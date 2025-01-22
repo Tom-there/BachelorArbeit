@@ -1,7 +1,7 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoCFG;
 
-import de.hhu.cs.stups.algvis.data.ThreeAddressCode;
-import de.hhu.cs.stups.algvis.data.ThreeAddressCodeInstruction;
+import de.hhu.cs.stups.algvis.data.code.ThreeAddressCode;
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
 import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
 import de.hhu.cs.stups.algvis.data.structures.graph.Node;
 

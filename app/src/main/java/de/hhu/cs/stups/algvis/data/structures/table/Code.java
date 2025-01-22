@@ -1,6 +1,6 @@
 package de.hhu.cs.stups.algvis.data.structures.table;
 
-import de.hhu.cs.stups.algvis.data.ThreeAddressCode;
+import de.hhu.cs.stups.algvis.data.code.ThreeAddressCode;
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
 
 import javax.swing.*;

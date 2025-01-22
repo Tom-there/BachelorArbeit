@@ -1,8 +1,8 @@
 package de.hhu.cs.stups.algvis.plugins.ReachingDefinitions;
 
-import de.hhu.cs.stups.algvis.data.BasicBlock;
-import de.hhu.cs.stups.algvis.data.ThreeAddressCode;
-import de.hhu.cs.stups.algvis.data.ThreeAddressCodeInstruction;
+import de.hhu.cs.stups.algvis.data.code.BasicBlock;
+import de.hhu.cs.stups.algvis.data.code.ThreeAddressCode;
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
 
 import java.util.*;
 
@@ -11,8 +11,8 @@ public class ReachingDefinitionsAlgo {
     private final HashMap<BasicBlock, List<BasicBlock>> ancestors;
     private final ThreeAddressCode code;
     //____________list_map_blocks_ids____id
-    private final List<Map<BasicBlock, List<String>>> in;
-    private final List<Map<BasicBlock, List<String>>> out;
+    private final List<Map<BasicBlock, Set<String>>> in;
+    private final List<Map<BasicBlock, Set<String>>> out;
     private boolean changeInCurrentIteration, changeInLastIteration;
     private int currentIndex, currentIteration;
     public ReachingDefinitionsAlgo(String rawCode) {
@@ -72,19 +72,14 @@ public class ReachingDefinitionsAlgo {
                                             .map(code::get)
                                             .map(ThreeAddressCodeInstruction::getDestination).toList();
 
-        List<String> currentIn = in.get(currentIteration).getOrDefault(currentBlock, new ArrayList<>());
+        Set<String> currentIn = in.get(currentIteration).getOrDefault(currentBlock, new HashSet<>());
 
         for (BasicBlock ancestorBlock:ancestorBlocks) {
-            List<String> lastOut;
-            if(currentIteration>0)
-                lastOut = out.get(currentIteration-1).get(ancestorBlock);
-            else
-                lastOut = new ArrayList<>(0);
+            Set<String> lastOut = (currentIteration>0) ? out.get(currentIteration-1).get(ancestorBlock) : Set.of();
             currentIn.addAll(lastOut);
         }
-        currentIn = currentIn.stream().sorted().distinct().toList();
 
-        List<String> currentOut = new ArrayList<>(currentIn);
+        Set<String> currentOut = new HashSet<>(currentIn);
         currentOut.removeAll(killedIdentifiers);
         currentOut.addAll(generatedIdentifiers);
 
@@ -107,6 +102,6 @@ public class ReachingDefinitionsAlgo {
         return basicBlocks;
     }
     public ThreeAddressCode getCode(){return code;}
-    public List<Map<BasicBlock, List<String>>> getIn(){return in;}
-    public List<Map<BasicBlock, List<String>>> getOut(){return out;}
+    public List<Map<BasicBlock, Set<String>>> getIn(){return in;}
+    public List<Map<BasicBlock, Set<String>>> getOut(){return out;}
 }
