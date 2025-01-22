@@ -3,6 +3,7 @@ package de.hhu.cs.stups;
 import de.hhu.cs.stups.algvis.Gui;
 import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
 import de.hhu.cs.stups.algvis.plugins.LivenessAnalysisBB.LivenessAnalysisBB;
+import de.hhu.cs.stups.algvis.plugins.LivenessAnalysisTAC.LivenessAnalysisTAC;
 import de.hhu.cs.stups.algvis.plugins.ReachingDefinitions.ReachingDefinitions;
 import de.hhu.cs.stups.algvis.plugins.TACtoBB.TACtoBB;
 import de.hhu.cs.stups.algvis.plugins.TACtoCFG.TACtoCFG;
@@ -18,6 +19,7 @@ class AlgVis {
         installedPlugins.add(new TACtoBB());
         installedPlugins.add(new ReachingDefinitions());
         installedPlugins.add(new LivenessAnalysisBB());
+        installedPlugins.add(new LivenessAnalysisTAC());
 
         return installedPlugins;
     }

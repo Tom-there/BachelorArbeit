@@ -30,7 +30,7 @@ public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps
     }
     @Override
     public String getName() {
-        return "Liveness Analysis";
+        return "Liveness Analysis for Basic Blocks";
     }
     @Override
     public void onPluginLoad() {

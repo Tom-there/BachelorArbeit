@@ -102,6 +102,29 @@ public class ThreeAddressCodeInstruction {
                     }
                 }
             }
+            case 6 -> {
+                // if y relop z goto x
+                tempDestination = pieces[5];
+                tempSource = pieces[1];
+                tempModifier = pieces[3];
+                tempComment = null;
+                switch (pieces[2]){
+                    case "<"  -> tempOperation = ThreeAddressCodeOperation.ltJump;
+                    case "<=" -> tempOperation = ThreeAddressCodeOperation.leJump;
+                    case ">"  -> tempOperation = ThreeAddressCodeOperation.gtJump;
+                    case ">=" -> tempOperation = ThreeAddressCodeOperation.geJump;
+                    case "==" -> tempOperation = ThreeAddressCodeOperation.eqJump;
+                    case "!=" -> tempOperation = ThreeAddressCodeOperation.neJump;
+                    default -> {
+                        tempOperation = ThreeAddressCodeOperation.noop;
+                        tempDestination = null;
+                        tempSource = null;
+                        tempModifier = null;
+                        tempComment = rawInput;
+                        System.err.println("ERR - unable to parse " + rawInput + " to TAC.\n inserted dummy line(Noticed while conditionalJump).");
+                    }
+                }
+            }
             default -> {
                 tempOperation = ThreeAddressCodeOperation.noop;
                 tempDestination = null;
@@ -116,6 +139,26 @@ public class ThreeAddressCodeInstruction {
         this.source = tempSource;
         this.modifier = tempModifier;
         this.comment = tempComment;
+    }
+    public Set<Integer> nextPossibleInstructionAdresses() {
+        switch (op) {
+            case noop -> {
+                return Set.of();
+            }
+            case jmp -> {
+                return Set.of(Integer.parseInt(destination));
+            }
+            case booleanJump, negatedBooleanJump -> {
+                return Set.of(Integer.parseInt(destination), address+1);
+            }
+            case add, sub, mul, div, neg, eq, neJump, eqJump, leJump, geJump, ltJump, gtJump -> {
+                return Set.of(address+1);
+            }
+            case null -> {
+                System.err.println("ERR - TACInstruction.nextPossibleInstructionAdresses()\nOperation is null, should be impossible");
+                return null;
+            }
+        }
     }
 
     //returns true if the instruction is a jump or a conditional jump
@@ -148,9 +191,17 @@ public class ThreeAddressCodeInstruction {
     public Collection<String> getUsedIdentifiers() {
         Set<String> ret = new HashSet<>();
         if(source!=null)
-            ret.add(source);
+            try{
+                Integer.parseInt(source);
+            }catch (NumberFormatException e){
+                ret.add(source);
+            }
         if(modifier!=null)
-            ret.add(modifier);
+            try{
+                Integer.parseInt(modifier);
+            }catch (NumberFormatException e){
+                ret.add(modifier);
+            }
         return ret;
     }
 
@@ -167,31 +218,34 @@ public class ThreeAddressCodeInstruction {
     @Override
     public String toString(){return getRepresentation().toString();}
     //gets representation for Table
-    public ThreeAddressCodeRepresentation getRepresentation(){
+    public ThreeAddressCodeRepresentation getRepresentation(){return getRepresentation(true);}
+    public ThreeAddressCodeRepresentation getRepresentation(boolean shortForm){
+        String commentString = shortForm ? comment : "";
+        String addressString = shortForm ? Integer.toString(address) : "";
         switch (op){
             case add, sub, mul, div -> {
-                return new ThreeAddressCodeRepresentation(Integer.toString(address), destination, "=", source, op.getRepresentation(), modifier, comment);
+                return new ThreeAddressCodeRepresentation(addressString, destination, "=", source, op.getRepresentation(), modifier, commentString);
             }
             case neg -> {
-                return new ThreeAddressCodeRepresentation(Integer.toString(address), destination, "=", op.getRepresentation(), source, "", comment);
+                return new ThreeAddressCodeRepresentation(addressString, destination, "=", op.getRepresentation(), source, "", commentString);
             }
             case eq -> {
-                return new ThreeAddressCodeRepresentation(Integer.toString(address), destination, op.getRepresentation(), source, "", "", comment);
+                return new ThreeAddressCodeRepresentation(addressString, destination, op.getRepresentation(), source, "", "", commentString);
             }
             case jmp -> {
-                return new ThreeAddressCodeRepresentation(Integer.toString(address), op.getRepresentation(), destination, "", "", "", comment);
+                return new ThreeAddressCodeRepresentation(addressString, op.getRepresentation(), destination, "", "", "", commentString);
             }
             case booleanJump, negatedBooleanJump -> {
-                return new ThreeAddressCodeRepresentation(Integer.toString(address), op.getRepresentation(), source, "goto", destination, "", comment);
+                return new ThreeAddressCodeRepresentation(addressString, op.getRepresentation(), source, "goto", destination, "", commentString);
             }
             case eqJump, neJump, leJump, geJump, ltJump, gtJump -> {
-                return new ThreeAddressCodeRepresentation(Integer.toString(address), "if", (source + op.getRepresentation() + modifier) , "goto", destination, "", comment);
+                return new ThreeAddressCodeRepresentation(addressString, "if", (source + op.getRepresentation() + modifier) , "goto", destination, "", commentString);
             }
             case noop -> {
-                return new ThreeAddressCodeRepresentation(Integer.toString(address), op.getRepresentation(), "", "", "", "", comment);
+                return new ThreeAddressCodeRepresentation(addressString, op.getRepresentation(), "", "", "", "", commentString);
             }
-            default -> {
-                System.err.println("ERR - was unable to get the Representation of a line of TAC because the value of the Operation enum was unexpected");
+            case null -> {
+                System.err.println("ERR - was unable to get the Representation of a line of TAC because the value of the Operation enum was null");
                 System.err.println("DST - " + destination);
                 System.err.println("SRC - " + source);
                 System.err.println("MOD - " + (modifier.isEmpty() ? modifier : "NO MODIFIER"));
