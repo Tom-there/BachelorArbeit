@@ -8,8 +8,6 @@ public enum ThreeAddressCodeOperation {
         jmp, // goto X (2)
         booleanJump, negatedBooleanJump, //if(false) Y goto X
         neJump, eqJump, leJump, geJump, ltJump, gtJump; //if y relOp z goto X (Relop: != == <= >= < >)
-        //TODO: call X
-        //TODO: param X
         public String getRepresentation() {
             return switch (this) {
                 case add -> "+";

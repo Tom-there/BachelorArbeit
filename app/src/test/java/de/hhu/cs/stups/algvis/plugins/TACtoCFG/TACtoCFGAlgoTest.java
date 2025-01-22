@@ -20,7 +20,6 @@ class TACtoCFGAlgoTest {
         //Graph is empty
         assertThat(algo.getNodes(), hasSize(0));
         assertThat(algo.getEdges(), hasSize(0));
-        //Code is formatted correctly todo
         assertThat(algo.getCode().size(), is(7));
 
         algo.step();
