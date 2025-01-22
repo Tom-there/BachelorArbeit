@@ -1,9 +1,7 @@
 package de.hhu.cs.stups.algvis.plugins.LivenessAnalysisTAC;
 
-import de.hhu.cs.stups.algvis.data.code.BasicBlock;
 import de.hhu.cs.stups.algvis.data.code.ThreeAddressCode;
 import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
-import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeOperation;
 
 import java.util.*;
 
@@ -55,9 +53,6 @@ public class LivenessAnalysisTACAlgo {
         }
 
         Set<String> usedIdentifiers = new HashSet<>(currentInstruction.getUsedIdentifiers());
-        Set<String> definedIdentifiers = (currentInstruction.writesValue())
-                                        ? Set.of(currentInstruction.getDestination())
-                                        : Set.of();
 
         //out_i = U in_s s iterates all successors
         Set<String> currentOut = new HashSet<>();
@@ -71,7 +66,6 @@ public class LivenessAnalysisTACAlgo {
         //in_i = use u (out - def)
         Set<String> currentIn = new HashSet<>(usedIdentifiers);
 
-        //check for change todo
         if(currentIteration>0){
             if(!out.get(currentIteration-1).get(currentInstruction).equals(currentOut))
                 changeInCurrentIteration = true;
