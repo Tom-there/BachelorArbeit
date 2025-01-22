@@ -102,18 +102,4 @@ public class CodeTableModel implements TableModel {
     public void removeTableModelListener(TableModelListener l) {
         listeners.remove(l);
     }
-
-    public int getMaxCharLengthForColumn(int j) {
-        int longest = 0;
-        for (String[] row : code) {
-            int current = 0;
-            try {
-                current = row[j].length();
-            } catch (NullPointerException e) {
-                System.err.println("WRN - Tried accessing a String that is null in CodeTableModel.getMaxCharLengthForColumn(...)");
-            }
-            longest = Math.max(longest, current);
-        }
-        return longest;
-    }
 }
