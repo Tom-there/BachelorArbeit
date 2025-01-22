@@ -55,7 +55,7 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     @Override
     public void reset() {
         currentPluginInstance = new TACtoCFGAlgo(currentlyLoadedCode);
-        cfg.purge();//todo
+        cfg.purge();
         refreshGuiElements();
     }
     @Override
