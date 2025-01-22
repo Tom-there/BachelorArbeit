@@ -1,9 +1,5 @@
 package de.hhu.cs.stups.algvis.data.structures.table;
 
-
-import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
-import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeRepresentation;
-
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -12,7 +8,7 @@ import java.util.List;
 
 public class DataTableModel implements TableModel {
 
-    private String[][] data;
+    private final String[][] data;
     public final List<TableModelListener> listeners;
 
     public DataTableModel(){
