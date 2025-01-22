@@ -49,7 +49,7 @@ public class Code implements DataRepresentation {
 
     public void setCode(ThreeAddressCode code){
         if(code == null){
-            System.err.println("ERROR - Code.setCode(null) ???"); //todo
+            System.err.println("ERR - Code.setCode(ThreeAddressCode code) code may not be null");
         }else {
             tableModel.setCodeList(code.getInstructions());
             resizeColumns();
