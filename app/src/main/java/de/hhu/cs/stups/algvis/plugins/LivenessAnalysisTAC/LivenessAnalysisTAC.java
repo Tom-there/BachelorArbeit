@@ -1,21 +1,17 @@
 package de.hhu.cs.stups.algvis.plugins.LivenessAnalysisTAC;
 
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
-import de.hhu.cs.stups.algvis.data.code.BasicBlock;
 import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
 import de.hhu.cs.stups.algvis.data.structures.Graph;
 import de.hhu.cs.stups.algvis.data.structures.Table;
 import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
 import de.hhu.cs.stups.algvis.data.structures.graph.Node;
-import de.hhu.cs.stups.algvis.data.structures.table.Code;
 import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
 import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
 import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
 import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
-import de.hhu.cs.stups.algvis.plugins.LivenessAnalysisBB.LivenessAnalysisBBAlgo;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleSteps {
     private final Table dataFlow;
@@ -85,7 +81,7 @@ public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleStep
             String instructionRepresentation = instructions.get(row).getRepresentation(false).toString();
             dataFlow.setValueAt(instructionRepresentation,row+1, 0);
             //def/use set
-            String instructionDef = instructions.get(row).writesValue() ? instructions.get(row).getDestination() : ""; //todo: replace when im using can jump instead of this
+            String instructionDef = instructions.get(row).writesValue() ? instructions.get(row).getDestination() : "";
             String instructionUse = collectIdentifierSetToString(instructions.get(row).getUsedIdentifiers());
             dataFlow.setValueAt(instructionDef, row+1, 1);
             dataFlow.setValueAt(instructionUse, row+1, 2);
