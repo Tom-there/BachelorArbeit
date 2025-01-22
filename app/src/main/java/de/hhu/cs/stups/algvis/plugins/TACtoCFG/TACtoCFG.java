@@ -1,5 +1,8 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoCFG;
 
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
+import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
+import de.hhu.cs.stups.algvis.data.structures.graph.Node;
 import de.hhu.cs.stups.algvis.data.structures.table.Code;
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
 import de.hhu.cs.stups.algvis.data.structures.Graph;
@@ -24,7 +27,7 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     //implementing Plugin
     @Override
     public String getName() {
-        return "TAC to CFG";
+        return "3-Address-Code to Control Flow Graph";
     }
     @Override
     public void onPluginLoad() {
@@ -46,9 +49,23 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
         tac.setCode(currentPluginInstance.getCode());
         tac.highlightLine(currentPluginInstance.getCurrentInstructionAddress());
 
-        currentPluginInstance.getNodes().forEach(cfg::addNode);
-        currentPluginInstance.getEdges().forEach(cfg::addEdge);
-
+        List<ThreeAddressCodeInstruction> leaders = currentPluginInstance.getSortedLeaders();
+        HashMap<ThreeAddressCodeInstruction, Node> nodeMap = new HashMap<>();
+        for (ThreeAddressCodeInstruction leader : currentPluginInstance.getSortedLeaders()) {
+            //adding all Nodes
+            String nodeID = Integer.toString(leader.getAddress());
+            String nodeLabel = "B_" + leaders.indexOf(leader);
+            nodeMap.put(leader, new Node(nodeID, nodeLabel));
+            cfg.addNode(nodeMap.get(leader));
+        }
+        Map<ThreeAddressCodeInstruction, Set<ThreeAddressCodeInstruction>> successorList = currentPluginInstance.getSuccessorMap();
+        for (ThreeAddressCodeInstruction source:successorList.keySet()) {
+            Node sourceNode = nodeMap.get(source);
+            for (ThreeAddressCodeInstruction destination:successorList.get(source)) {
+                Node destinationNode = nodeMap.get(destination);
+                cfg.addEdge(new Edge(sourceNode, destinationNode));
+            }
+        }
     }
 
     //implementing SimpleSteps

@@ -30,4 +30,8 @@ public class ThreeAddressCode{
     public List<ThreeAddressCodeInstruction> getInstructions() {
         return code;
     }
+
+    public ThreeAddressCodeInstruction getLast() {
+        return code.getLast();
+    }
 }

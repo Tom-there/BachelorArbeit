@@ -2,22 +2,21 @@ package de.hhu.cs.stups.algvis.plugins.TACtoBB;
 
 import de.hhu.cs.stups.algvis.data.code.ThreeAddressCode;
 import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeOperation;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class TACtoBBAlgo {
     private final ThreeAddressCode code;
-    private final List<ThreeAddressCodeInstruction> leaders;
+    private final Set<ThreeAddressCodeInstruction> leaders;
+    private final Map<ThreeAddressCodeInstruction, Set<ThreeAddressCodeInstruction>> successorMap;
     private int currentInstructionAddress;
-    private ThreeAddressCodeInstruction lastLeader;
     private Mode mode;
     private enum Mode{findLeaders, mapLeaders, done}
     public TACtoBBAlgo(String input){
-        leaders = new ArrayList<>(1);
         code = new ThreeAddressCode(input);
-
+        leaders = new HashSet<>(code.getBasicBlocks().size());
+        successorMap = new HashMap<>(code.getBasicBlocks().size());
         currentInstructionAddress = 0;
         mode = Mode.findLeaders;
     }
@@ -26,115 +25,83 @@ public class TACtoBBAlgo {
         return mode != Mode.done;
     }
    public void step() {
-        /* Nach Drachenbuch Algorithmus 8.5
-         * IN: List of TAC
-         * OUT: List of Basic Blocks and a mapping of every TAC instruction to a block
-         * METHOD:
-         *   1. find leaders
-         *   1.1. first instruction is always a leader
-         *   1.2. every instruction that is a destination of a jump is a leader
-         *   1.3. every instruction that is follows a jump is a leader
-         *   2. map every instruction to previous leader
-         */
-        if (currentInstructionAddress < 0) {
-            System.err.println("ERROR - Instruction Addresses cannot be negative");
-            return;
-        }
-        switch (mode){
-            case findLeaders -> {
-                //check if currentInstructionAddress is valid
-                if ((currentInstructionAddress == code.size())) {
-                    mode = Mode.mapLeaders;
-                    currentInstructionAddress = 0;
-                    return;
-                }else if(currentInstructionAddress > code.size()){
-                    System.err.println("ERR - tried to get a line number that does not exist(should be unreachable)");
-                }
-                if(currentInstructionAddress == 0) {
-                    //First Instruction is always a leader
-                    makeIndexLeader(currentInstructionAddress);
-                }else if(leaders.contains(code.get(currentInstructionAddress))){
-                    System.out.println("current line is already a leader");
-                }else if(code.get(currentInstructionAddress).canJump()){
-                    code.get(currentInstructionAddress).setComment("end");
-                    //next line is a leader
-                    makeIndexLeader(currentInstructionAddress+1);
-                    //destination of jump is a leader
-                    makeDestinationOfJumpLeader(currentInstructionAddress);
-                }
-                else{
-                    code.get(currentInstructionAddress).setComment("|");
-                }
+       if (currentInstructionAddress < 0) {
+           System.err.println("ERROR - Instruction Addresses cannot be negative");
+           return;
+       }
+       switch (mode){
+           case findLeaders -> checkIfAddressIsALeader(currentInstructionAddress);
+           case mapLeaders -> mapAddressToItsLeader(currentInstructionAddress);
+           case done -> System.out.println("No more steps");
+           case null -> {
+               System.err.println("ERR - Mode was null, this should not happen");
+               currentInstructionAddress = 0;
+           }
+       }
+       currentInstructionAddress++;
+       if ((currentInstructionAddress == code.size()) && mode == Mode.findLeaders) {
+           mode = Mode.mapLeaders;
+           currentInstructionAddress = 0;
+       }
+       if (!(currentInstructionAddress < code.size()) && mode == Mode.mapLeaders)
+           mode = Mode.done;
+    }
 
-                currentInstructionAddress++;
+    private void checkIfAddressIsALeader(int address) {
+        ThreeAddressCodeInstruction instruction = code.get(address);
+        if(address == 0) {
+            instruction.setComment("Leader");
+            leaders.add(instruction);
+        }
+        if(instruction.canJump()) {
+            ThreeAddressCodeInstruction destination = code.get(Integer.parseInt(instruction.getDestination()));
+            leaders.add(destination);
+            destination.setComment("Leader");
+            if(address+1 < code.size() && instruction.getOperation() != ThreeAddressCodeOperation.jmp) {
+                ThreeAddressCodeInstruction nextInstruction = code.get(address + 1);
+                leaders.add(nextInstruction);
+                nextInstruction.setComment("Leader");
             }
-            case mapLeaders -> {
-                //exit if done
-                if (!(currentInstructionAddress < code.size())) {
-                    mode = Mode.done;
-                    return;
-                }
-                ThreeAddressCodeInstruction currentInstruction = code.get(currentInstructionAddress);
-                if(leaders.contains(code.get(currentInstructionAddress))){
-                    //set current leader
-                    lastLeader = currentInstruction;
-                    //marks instruction as leader
-                    currentInstruction.setComment(currentInstructionAddress + " Leader");
-                }
-                else{
-                    //maps instruction to leader
-                    currentInstruction.setComment(String.valueOf(lastLeader.getAddress()));
-                }
-                //if block ends here, tell to which Leaders it jumps
-                List<ThreeAddressCodeInstruction> destinations = new LinkedList<>();
-                if(currentInstruction.canJump())
-                    destinations.add(code.get(Integer.parseInt(currentInstruction.getDestination())));
-                if(currentInstructionAddress+1<code.size())
-                    if(leaders.contains(code.get(currentInstructionAddress+1)))
-                        destinations.add(code.get(currentInstructionAddress+1));
-                makeInstructionJumpTo(currentInstruction, destinations);
-                currentInstructionAddress++;
+        }
+    }
 
+    private void mapAddressToItsLeader(int address) {
+        ThreeAddressCodeInstruction instruction = code.get(address);
+        if(leaders.contains(instruction)){
+            //do leader things
+            instruction.setComment("B_" + getSortedLeaders().indexOf(instruction) + " Leader");
+        }else{
+            ThreeAddressCodeInstruction lastLeader = getPreviousLeader(address);
+            instruction.setComment("B_" + getSortedLeaders().indexOf(lastLeader));
+        }
+        if(code.getLast().equals(instruction)) {
+            instruction.setComment(instruction.getComment() + " EOF");
+        }else if(leaders.contains(code.get(address+1))) {
+            StringBuilder postfix = new StringBuilder(" jumps to ");
+            List<ThreeAddressCodeInstruction> nextInstructions = instruction.nextPossibleInstructionAdresses().stream().map(code::get).toList();
+            for (int i = 0; i < nextInstructions.size(); i++) {
+                postfix.append(getSortedLeaders().indexOf(nextInstructions.get(i)));
+                if(i+1<nextInstructions.size())
+                    postfix.append(", ");
             }
-            case null, default -> currentInstructionAddress = 1;
+            successorMap.put(getPreviousLeader(address), new HashSet<>(nextInstructions));
+            instruction.setComment(instruction.getComment() + postfix);
         }
     }
-
-    private void makeInstructionJumpTo(ThreeAddressCodeInstruction instruction, List<ThreeAddressCodeInstruction> destinations){
-        StringBuilder comment = new StringBuilder(instruction.getComment());
-        if(!destinations.isEmpty())
-            comment.append(" jumps to: ");
-        for (int i = 0; i < destinations.size(); i++) {
-            comment.append(destinations.get(i).getAddress());
-            if(i+1 < destinations.size())
-                comment.append(" and ");
+    private ThreeAddressCodeInstruction getPreviousLeader(int threshold) {
+        ThreeAddressCodeInstruction closestLeader = getSortedLeaders().getFirst();
+        for (ThreeAddressCodeInstruction leader:leaders) {
+            if(leader.getAddress() > closestLeader.getAddress() && leader.getAddress() <= threshold)
+                closestLeader = leader;
         }
-        instruction.setComment(comment.toString());
+        return closestLeader;
     }
-
-    //adding leaders
-    private void makeDestinationOfJumpLeader(int line){
-        try {
-            int destinationIndex = Integer.parseInt(code.get(line).getDestination());
-            makeIndexLeader(destinationIndex);
-        } catch (NumberFormatException e) {
-            System.err.println("ERR - could not parse String '" + code.get(line).getDestination() + "' to a line number");
-        }
-    }
-    private void makeIndexLeader(int index){
-        try{
-            ThreeAddressCodeInstruction lastLeader = code.get(index);
-            code.get(index).setComment(index + " Leader");
-            if(!leaders.contains(lastLeader))
-                leaders.add(code.get(index));
-         }catch (IndexOutOfBoundsException e){
-            System.err.println("ERR - tried to set line " + (index) + " as leader. But it does not exist.");
-        }
-    }
-
     //getters
     public ThreeAddressCode getCode(){
         return code;
+    }
+    public List<ThreeAddressCodeInstruction> getSortedLeaders(){
+        return leaders.stream().map(ThreeAddressCodeInstruction::getAddress).sorted().map(code::get).toList();
     }
     public int getCurrentInstructionAddress() {
         return currentInstructionAddress;

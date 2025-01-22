@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ThreeAddressCodeInstruction {
+public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeInstruction>{
     private final int address;
     private final ThreeAddressCodeOperation op;
     private final String destination, source, modifier;
@@ -217,6 +217,11 @@ public class ThreeAddressCodeInstruction {
 
     @Override
     public String toString(){return getRepresentation().toString();}
+
+    @Override
+    public int compareTo(ThreeAddressCodeInstruction comparator) {
+        return address-comparator.getAddress();
+    }
     //gets representation for Table
     public ThreeAddressCodeRepresentation getRepresentation(){return getRepresentation(true);}
     public ThreeAddressCodeRepresentation getRepresentation(boolean shortForm){

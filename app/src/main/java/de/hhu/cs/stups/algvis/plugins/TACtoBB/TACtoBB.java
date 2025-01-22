@@ -23,7 +23,7 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
     //implementing Plugin
     @Override
     public String getName() {
-        return "TAC to BB";
+        return "3-Address-Code to Basic Blocks";
     }
     @Override
     public void onPluginLoad() {
