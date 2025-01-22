@@ -2,7 +2,6 @@ package de.hhu.cs.stups.algvis.plugins.LivenessAnalysisBB;
 
 import de.hhu.cs.stups.algvis.data.code.BasicBlock;
 import de.hhu.cs.stups.algvis.data.code.ThreeAddressCode;
-import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
 
 import java.util.*;
 
@@ -10,7 +9,6 @@ public class LivenessAnalysisBBAlgo {
     private final List<BasicBlock> basicBlocks;
     private final HashMap<BasicBlock, List<BasicBlock>> successors;
     private final ThreeAddressCode code;
-    //____________list_map_blocks_ids____id
     private final List<Map<BasicBlock, Set<String>>> in;
     private final List<Map<BasicBlock, Set<String>>> out;
     private boolean changeInCurrentIteration, changeInLastIteration;
@@ -61,12 +59,9 @@ public class LivenessAnalysisBBAlgo {
             changeInCurrentIteration = false;
         }
     }
-    //returns true if something changed
     private void lookAtBlock(int i){
         BasicBlock currentBlock = basicBlocks.get(i);
         List<BasicBlock> successorBlocks = successors.get(currentBlock);
-        Set<String> usedIdentifiers = currentBlock.use();
-        Set<String> definedIdentifiers = currentBlock.def();
 
         //out_i = U in_s s iterates all successors
         Set<String> currentOut = new HashSet<>();
@@ -82,7 +77,6 @@ public class LivenessAnalysisBBAlgo {
         Set<String> currentIn = new HashSet<>(currentBlock.use());
         currentIn.addAll(usedAndNotDefined);
 
-        //check for change todo
         if(currentIteration>0){
             if(!out.get(currentIteration-1).get(currentBlock).equals(currentOut))
                 changeInCurrentIteration = true;
