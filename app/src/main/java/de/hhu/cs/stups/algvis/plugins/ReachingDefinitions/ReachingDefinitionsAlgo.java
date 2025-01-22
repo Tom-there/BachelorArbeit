@@ -83,7 +83,6 @@ public class ReachingDefinitionsAlgo {
         currentOut.removeAll(killedIdentifiers);
         currentOut.addAll(generatedIdentifiers);
 
-        //check for change todo
         if(currentIteration>0){
             Set<String> lastOutMask = new HashSet<>(out.get(currentIteration-1).get(currentBlock));
             Set<String> currentOutMask = new HashSet<>(currentOut);
