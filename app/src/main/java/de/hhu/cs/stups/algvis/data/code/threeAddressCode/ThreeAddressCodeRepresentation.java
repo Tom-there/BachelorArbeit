@@ -21,6 +21,9 @@ public record ThreeAddressCodeRepresentation(String a, String b, String c, Strin
     }
 
     public String toString() {
-        return a + ": " + b + " " + c + " " + d + " " + e + " " + f + " " + g;
+        if(a.isEmpty())
+            return b + " " + c + " " + d + " " + e + " " + f + " " + g;
+        else
+            return a + ": " + b + " " + c + " " + d + " " + e + " " + f + " " + g;
     }
 }

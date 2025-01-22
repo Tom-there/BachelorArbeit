@@ -24,11 +24,6 @@ public class Graph implements DataRepresentation {
     public Graph(DataRepresentation.Location location){
         this.location = location;
         exportedPanel = new JPanel(new BorderLayout());
-        graph = new MultiGraph("Graph");
-        nodes = new HashMap<>();
-        edges = new HashMap<>();
-        graph.setAttribute("ui.stylesheet", "node { size-mode: fit; shape: rounded-box; fill-color: white; stroke-mode: plain; padding: 3px, 2px; }");
-
         switch (location){
             case left, right -> {
                 exportedPanel.setMinimumSize(new Dimension(180, 480));
@@ -42,14 +37,7 @@ public class Graph implements DataRepresentation {
             }
             case null, default -> System.err.println("ERROR, while generating Graph(Content visualizing). Locator parameter was not able to be interpreted");
         }
-
-
-        System.setProperty("org.graphstream.ui", "swing");
-        SwingViewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
-        view = viewer.addDefaultView(false);
-
-        viewer.enableAutoLayout();
-        exportedPanel.add((Component) view, BorderLayout.CENTER);
+        purge();
     }
 
     @Override
@@ -88,7 +76,7 @@ public class Graph implements DataRepresentation {
         graph = new MultiGraph("Graph");
         nodes = new HashMap<>();
         edges = new HashMap<>();
-        graph.setAttribute("ui.stylesheet", "node { size-mode: fit; shape: rounded-box; fill-color: white; stroke-mode: plain; padding: 3px, 2px; }");
+        graph.setAttribute("ui.stylesheet", "graph { padding: 40px; } node { text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #EBA; text-color: #222; }");
         SwingViewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
         view = viewer.addDefaultView(false);
 
