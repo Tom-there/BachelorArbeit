@@ -84,7 +84,7 @@ public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAd
                     leaders.add(code.get(i+1));
             }
         }
-        List<ThreeAddressCodeInstruction> sortedLeaders = leaders.stream().sorted((a, b) -> a.getAddress() - b.getAddress()).toList();
+        List<ThreeAddressCodeInstruction> sortedLeaders = leaders.stream().sorted(Comparator.comparingInt(ThreeAddressCodeInstruction::getAddress)).toList();
 
         List<Integer> firstAddresses = sortedLeaders.stream().map(ThreeAddressCodeInstruction::getAddress).toList();
         List<Integer> lastAddresses = new ArrayList<>(leaders.size());
@@ -101,15 +101,11 @@ public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAd
                 case jmp -> successors.add(Integer.valueOf(code.get(lastAddress).getDestination()));
                 case booleanJump, negatedBooleanJump -> {
                     successors.add(Integer.valueOf(code.get(lastAddress).getDestination()));
-                    if (lastAddress > code.size() - 1)
-                        System.err.println("WRN - at end of code, cannot add new successor to conditional jump");//todo: proper warning message
-                    else
+                    if (lastAddress+1 < code.size())
                         successors.add(lastAddress + 1);
                 }
                 default -> {
-                    if (lastAddress > code.size() - 2)
-                        System.err.println("WRN - at end of code, did not add a new successor");//todo: proper warning message
-                    else
+                    if (lastAddress+1 < code.size())
                         successors.add(lastAddress + 1);
                 }
             }
