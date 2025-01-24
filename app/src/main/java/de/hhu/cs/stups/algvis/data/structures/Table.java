@@ -41,10 +41,7 @@ public class Table extends JTable implements DataRepresentation {
         tableModel = new DataTableModel(rows, cols);
         this.setModel(tableModel);
     }
-    public DataTableModel getTableModel(){
-        return tableModel;
-    }@Override
-
+    @Override
     public Location getComponentLocation() {
         return location;
     }
