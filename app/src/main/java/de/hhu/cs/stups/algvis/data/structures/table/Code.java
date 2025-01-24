@@ -43,7 +43,7 @@ public class Code implements DataRepresentation {
         return table;
     }
     @Override
-    public DataRepresentation.Location getLocation() {
+    public DataRepresentation.Location getComponentLocation() {
         return location;
     }
 

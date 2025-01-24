@@ -62,7 +62,7 @@ public class Gui{
   private void switchToPlugin(Plugin plugin){
     contentPanel.removeAll();
     for (DataRepresentation content : plugin.getGuiElements()) {
-      switch (content.getLocation()){
+      switch (content.getComponentLocation()){
         case DataRepresentation.Location.left -> contentPanel.add(content.getSwingComponent(), BorderLayout.WEST);
         case DataRepresentation.Location.right -> contentPanel.add(content.getSwingComponent(), BorderLayout.EAST);
         case DataRepresentation.Location.center -> contentPanel.add(content.getSwingComponent(), BorderLayout.CENTER);

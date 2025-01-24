@@ -46,7 +46,7 @@ public class Graph implements DataRepresentation {
     }
 
     @Override
-    public DataRepresentation.Location getLocation() {
+    public DataRepresentation.Location getComponentLocation() {
         return location;
     }
 
@@ -56,6 +56,10 @@ public class Graph implements DataRepresentation {
             graph.addNode(newNode.getID());
             graph.getNode(newNode.getID()).setAttribute("ui.label", newNode.getLabel());
         }
+    }
+    public void changeLabelOfNode(String nodeID, String label) {
+        if(nodes.containsKey(nodeID))
+            graph.getNode(nodeID).setAttribute("ui.label", label);
     }
     public void addNodeWithEdges(Node newNode, List<Node> targets){
         addNode(newNode);
@@ -85,12 +89,13 @@ public class Graph implements DataRepresentation {
         exportedPanel.add((Component) view, BorderLayout.CENTER);
     }
 
-    public Collection<Edge> getEdges(){
-        return edges.values();
+    public  HashMap<String, Node> getNodes(){
+        return nodes;
     }
-    public Collection<Node> getNodes(){
-        return nodes.values();
+    public  HashMap<String, Edge> getEdges(){
+        return edges;
     }
+
     public enum GraphMode {
         CodeInNode, normal
     }
