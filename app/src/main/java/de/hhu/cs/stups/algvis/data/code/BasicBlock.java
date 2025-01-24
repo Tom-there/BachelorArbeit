@@ -57,8 +57,8 @@ public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAd
         Set<String> usedIdentifiers = new HashSet<>();
         for (int i = instructions.size()-1; i > -1; i--) {
             ThreeAddressCodeInstruction instruction = instructions.get(i);
-            usedIdentifiers.addAll(instruction.getUsedIdentifiers());
             usedIdentifiers.remove(instruction.getDestination());
+            usedIdentifiers.addAll(instruction.getUsedIdentifiers());
         }
         return usedIdentifiers;
     }
