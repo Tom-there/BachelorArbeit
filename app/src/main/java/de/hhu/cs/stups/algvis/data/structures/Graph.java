@@ -95,9 +95,4 @@ public class Graph implements DataRepresentation {
     public  HashMap<String, Edge> getEdges(){
         return edges;
     }
-
-    public enum GraphMode {
-        CodeInNode, normal
-    }
-
 }
