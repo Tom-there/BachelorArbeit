@@ -53,11 +53,14 @@ public class Table extends JTable implements DataRepresentation {
         Point p = mouseEvent.getPoint();
         int rowIndex = rowAtPoint(p);
         int colIndex = columnAtPoint(p);
-        int realColumnIndex = convertColumnIndexToModel(colIndex);
         super.getToolTipText(mouseEvent);
         String tip = "";
         try{
-            tip = tableModel.getValueAt(rowIndex, colIndex).toString();
+            if(rowIndex<getRowCount() && rowIndex> -1
+            && colIndex<getColumnCount() && colIndex> -1)
+                tip = tableModel.getValueAt(rowIndex, colIndex).toString();
+            else
+                tip = "";
         }catch (NullPointerException ignored){
 
         }
