@@ -148,10 +148,10 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
             case jmp -> {
                 return Set.of(Integer.parseInt(destination));
             }
-            case booleanJump, negatedBooleanJump -> {
+            case booleanJump, negatedBooleanJump, neJump, eqJump, leJump, geJump, ltJump, gtJump -> {
                 return Set.of(Integer.parseInt(destination), address+1);
             }
-            case add, sub, mul, div, neg, eq, neJump, eqJump, leJump, geJump, ltJump, gtJump -> {
+            case add, sub, mul, div, neg, eq -> {
                 return Set.of(address+1);
             }
             case null -> {
@@ -163,8 +163,18 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
 
     //returns true if the instruction is a jump or a conditional jump
     public boolean canJump() {
-        switch (op) { case jmp, booleanJump, negatedBooleanJump -> { return true; } }
-        return false;
+        switch (op) {
+            case noop, add, sub, mul, div, neg, eq -> {
+                return false;
+            }
+            case jmp, booleanJump, negatedBooleanJump, neJump, eqJump, leJump, geJump, ltJump, gtJump -> {
+                return true;
+            }
+            case null -> {
+                System.err.println("ThreeAddressCodeInstruction.canJump() operation was null, should be impossible");
+                return false;
+            }
+        }
     }
 
     //returns true if the instruction writes to a variable

@@ -100,7 +100,7 @@ public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAd
             firstAddressesOfSuccessors.add(successors);
             switch (code.get(lastAddress).getOperation()) {
                 case jmp -> successors.add(Integer.valueOf(code.get(lastAddress).getDestination()));
-                case booleanJump, negatedBooleanJump -> {
+                case booleanJump, negatedBooleanJump, eqJump, geJump, gtJump, leJump, ltJump, neJump -> {
                     successors.add(Integer.valueOf(code.get(lastAddress).getDestination()));
                     if (lastAddress+1 < code.size())
                         successors.add(lastAddress + 1);
