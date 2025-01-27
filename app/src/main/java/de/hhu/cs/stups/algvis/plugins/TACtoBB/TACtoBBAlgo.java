@@ -75,7 +75,13 @@ public class TACtoBBAlgo {
             instruction.setComment("B_" + getSortedLeaders().indexOf(lastLeader));
         }
         if(code.getLast().equals(instruction)) {
-            instruction.setComment(instruction.getComment() + " EOF");
+            if(instruction.canJump()){
+                StringBuilder postfix = new StringBuilder(" jumps to ");
+                ThreeAddressCodeInstruction nextInstruction = instruction.nextPossibleInstructionAdresses().stream().map(code::get).min(ThreeAddressCodeInstruction::compareTo).get();
+                postfix.append(getSortedLeaders().indexOf(nextInstruction));
+                successorMap.put(getPreviousLeader(address), new HashSet<>(Set.of(nextInstruction)));
+                instruction.setComment(instruction.getComment() + postfix.toString());
+            }
         }else if(leaders.contains(code.get(address+1))) {
             StringBuilder postfix = new StringBuilder(" jumps to ");
             List<ThreeAddressCodeInstruction> nextInstructions = instruction.nextPossibleInstructionAdresses().stream().map(code::get).toList();
@@ -86,6 +92,10 @@ public class TACtoBBAlgo {
             }
             successorMap.put(getPreviousLeader(address), new HashSet<>(nextInstructions));
             instruction.setComment(instruction.getComment() + postfix);
+        }
+
+        if(code.getLast().equals(instruction)) {
+            instruction.setComment(instruction.getComment() + " EOF");
         }
     }
     private ThreeAddressCodeInstruction getPreviousLeader(int threshold) {
