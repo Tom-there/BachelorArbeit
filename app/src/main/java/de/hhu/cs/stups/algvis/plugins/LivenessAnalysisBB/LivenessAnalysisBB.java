@@ -7,7 +7,6 @@ import de.hhu.cs.stups.algvis.data.structures.Graph;
 import de.hhu.cs.stups.algvis.data.structures.Table;
 import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
 import de.hhu.cs.stups.algvis.data.structures.graph.Node;
-import de.hhu.cs.stups.algvis.data.structures.table.Code;
 import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
 import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
 import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
@@ -17,14 +16,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps {
-    private final Code instructionList;
-    private final Table dataFlow;
+    private final Table instructionList, dataFlow;
     private final Graph basicBlockRelationGraph;
     private LivenessAnalysisBBAlgo pluginInstance;
     private String currentlyLoadedCode;
     public LivenessAnalysisBB(){
         currentlyLoadedCode = "empty";
-        this.instructionList = new Code(DataRepresentation.Location.left);
+        this.instructionList = new Table(DataRepresentation.Location.left);
         this.dataFlow = new Table(DataRepresentation.Location.right);
         this.basicBlockRelationGraph = new Graph();
     }
@@ -60,7 +58,10 @@ public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps
                 code.add(instruction);
             }
         }
-        instructionList.setCode(pluginInstance.getCode());
+        instructionList.resizeTable(code.size(), 7);
+        for (int i = 0; i < pluginInstance.getCode().size(); i++) {
+            instructionList.setRowTo(pluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
+        }
 
         //updating graph
         HashMap<Integer, Node> nodeMap = new HashMap<>();

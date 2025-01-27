@@ -40,7 +40,6 @@ public class DataTableModel implements TableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
-
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
@@ -51,16 +50,18 @@ public class DataTableModel implements TableModel {
             return null;
         }
     }
-
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        if(aValue == null)
+            return;
         listeners.forEach(l -> l.tableChanged(new TableModelEvent(this, rowIndex, columnIndex)));
         try {
             data[rowIndex][columnIndex] = aValue.toString();
             for (TableModelListener listener:listeners) {
                 listener.tableChanged(new TableModelEvent(this, rowIndex, columnIndex));
             }
-        }catch (ArrayIndexOutOfBoundsException e){
+        }
+        catch (ArrayIndexOutOfBoundsException e){
             System.err.println("ERR - nonExisting Index used for CodeTableModel.setValueAt(_, _)");
             System.err.println("    - size is (" + getRowCount() + "x" + getColumnCount() + " but tried to access " + rowIndex + ", " + columnIndex);
             e.printStackTrace();

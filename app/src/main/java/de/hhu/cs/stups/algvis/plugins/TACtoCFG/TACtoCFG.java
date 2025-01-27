@@ -1,9 +1,9 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoCFG;
 
 import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
+import de.hhu.cs.stups.algvis.data.structures.Table;
 import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
 import de.hhu.cs.stups.algvis.data.structures.graph.Node;
-import de.hhu.cs.stups.algvis.data.structures.table.Code;
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
 import de.hhu.cs.stups.algvis.data.structures.Graph;
 import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
@@ -14,12 +14,12 @@ import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
 import java.util.*;
 
 public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
-    private final Code tac;
+    private final Table tac;
     private final Graph cfg;
     private TACtoCFGAlgo currentPluginInstance;
     private String currentlyLoadedCode;
     public TACtoCFG() {
-        this.tac = new Code(DataRepresentation.Location.left);
+        this.tac = new Table(DataRepresentation.Location.left);
         this.cfg = new Graph(DataRepresentation.Location.center);
         currentlyLoadedCode = "empty";
     }
@@ -46,7 +46,10 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     }
     @Override
     public void refreshGuiElements() {
-        tac.setCode(currentPluginInstance.getCode());
+        tac.resizeTable(currentPluginInstance.getCode().size(), 7);
+        for (int i = 0; i < currentPluginInstance.getCode().size(); i++) {
+            tac.setRowTo(currentPluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
+        }
         tac.highlightLine(currentPluginInstance.getCurrentInstructionAddress());
 
         List<ThreeAddressCodeInstruction> leaders = currentPluginInstance.getSortedLeaders();
@@ -72,6 +75,7 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     @Override
     public void reset() {
         currentPluginInstance = new TACtoCFGAlgo(currentlyLoadedCode);
+        tac.setSize(1, 1);
         cfg.purge();
         refreshGuiElements();
     }

@@ -1,7 +1,7 @@
 package de.hhu.cs.stups.algvis.plugins.TACtoBB;
 
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
-import de.hhu.cs.stups.algvis.data.structures.table.Code;
+import de.hhu.cs.stups.algvis.data.structures.Table;
 import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
 import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
 import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Set;
 
 public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
-    private final Code tac;
+    private final Table tac;
     private TACtoBBAlgo currentPluginInstance;
     private String currentlyLoadedCode;
     public TACtoBB() {
-        this.tac = new Code();
+        this.tac = new Table();
         currentlyLoadedCode = "empty";
     }
 
@@ -43,7 +43,10 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
 
     @Override
     public void refreshGuiElements() {
-        tac.setCode(currentPluginInstance.getCode());
+        tac.resizeTable(currentPluginInstance.getCode().size(), 7);
+        for (int i = 0; i < currentPluginInstance.getCode().size(); i++) {
+            tac.setRowTo(currentPluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
+        }
         tac.highlightLine(currentPluginInstance.getCurrentInstructionAddress());
     }
 

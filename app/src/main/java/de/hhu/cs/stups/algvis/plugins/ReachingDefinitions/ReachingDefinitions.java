@@ -4,7 +4,6 @@ import de.hhu.cs.stups.algvis.data.code.BasicBlock;
 import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
 import de.hhu.cs.stups.algvis.data.structures.Table;
-import de.hhu.cs.stups.algvis.data.structures.table.Code;
 import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
 import de.hhu.cs.stups.algvis.data.structures.Graph;
 import de.hhu.cs.stups.algvis.data.structures.graph.Node;
@@ -17,14 +16,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleSteps {
-    private final Code instructionList;
-    private final Table dataFlow;
+    private final Table instructionList, dataFlow;
     private final Graph basicBlockRelationGraph;
     private ReachingDefinitionsAlgo pluginInstance;
     private String currentlyLoadedCode;
     public ReachingDefinitions(){
         currentlyLoadedCode = "empty";
-        this.instructionList = new Code(DataRepresentation.Location.left);
+        this.instructionList = new Table(DataRepresentation.Location.left);
         this.dataFlow = new Table(DataRepresentation.Location.right);
         this.basicBlockRelationGraph = new Graph();
     }
@@ -60,7 +58,10 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
                 code.add(instruction);
             }
         }
-        instructionList.setCode(pluginInstance.getCode());
+        instructionList.resizeTable(code.size(), 7);
+        for (int i = 0; i < code.size(); i++) {
+            instructionList.setRowTo(code.get(i).getRepresentationAsStringArray(), i);
+        }
 
         //updating graph
         HashMap<Integer, Node> nodeMap = new HashMap<>();
