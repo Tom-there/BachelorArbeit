@@ -1,0 +1,35 @@
+%!TeX root: thesis.tex
+Die Ziele dieser Bachelorarbeit waren
+einerseits einige Algorithmen und Konzepte
+aus dem Compilerbau zu visualisieren, 
+aber auch ein Framework zu entwickeln welches
+diese und beliebige weitere Algorithmen verständlich
+und Schritt für Schritt visualisieren kann.\\
+
+Folgende Algorithmen wurden implementiert:
+\begin{enumerate}
+  \item Analyse von erreichenden Definitionen für Grundblöcke 
+  \item Liveness Analyse für Grundblöcke 
+  \item Liveness Analyse für einzelne 3-Address-Code Instruktionen
+  \item Erstellen von Grundblöcken für ein Programm geschrieben in 3-Address-Code
+  \item Erstellen eines Kontrollflussgraphen für ein 3-Address-Code Programm
+\end{enumerate}
+
+Um diese Algorithmen simpel und gut verständlich zu visualisieren 
+brauchte das Framework zwei Arten von Darstellungen:
+\begin{enumerate}
+  \item Graphen: um Kontrollflussgraphen darzustellen
+  \item Tabellen: um Datenflusswerte darzustellen
+    und 3-Address-Code in einer angenehmen Art und Weise zu visualisieren
+\end{enumerate}
+Desweiteren brauchte es die Möglichkeit 3-Address-Code
+und Grundblöcke einfach zu verarbeiten.
+
+
+Außerdem ist es durch Implementierung eines Interfaces einfach 
+weitere Algorithmen hinzuzufügen.
+Es wurden weitere Interfaces implementiert mit 
+denen häufig genutzte Funktionalitäten wie zum Beispiel 
+einen Button, um Code aus einer Datei zu laden, einfach in neuen
+Plugins genutzt werden können. Somit können weitere Plugins
+mit sehr viel weniger Aufwand hinzugefügt werden.
