@@ -1,0 +1,102 @@
+\documentclass{hhuthesis}
+
+\usepackage[english,ngerman]{babel} % Deutsch
+
+\author{Tom Schreiner}
+\title{Visualisieren von Algorithmen in Compilern}
+\gratuationtype{Bachelor}
+
+%% Beginn- und Abgabedaten der Arbeit
+\begindate{05. November 2024} % Beginn
+\duedate{05. Februar 2025} % Abgabe
+
+%% Erst- und Zweitgutachter
+\firstexaminer{John~Witulski}
+\secondexaminer{Fabian~Ruhland}
+
+\usepackage[textsize=scriptsize]{todonotes}
+
+%% Zeige Zeilennummern in der Arbeit an.
+%% Der \linenumbers Befehl muss hierzu aufgerufen werden.
+%% Praktisch für Feedback Ihrer potentiellen Korrekturleser!
+\usepackage{lineno}
+% \linenumbers % <- Kommentar entfernen!
+
+
+%% Häufig benutzte mathematische Packages.
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\usepackage{listings} % Einbindung von Code
+\usepackage{algorithmicx} % Angabe von Algorithmen in Pseudocode
+\usepackage{siunitx} % \num Befehl zum einfacheren Formatieren von Zahlen.
+\usepackage{enumitem} % Leichter konfigurierbare enumerate-Umgebungen.
+\usepackage{subcaption} % Unterteilung von Figures in Subfigures.
+\usepackage{hyperref} % Klickbare Referenzen (z.B. im Inhaltsverzeichnis)
+\usepackage{url} % \url Kommando für Darstellung von Links
+\usepackage{csquotes} % Improved quoting.
+\usepackage{xspace} % Nicht terminierte Kommandos essen keinen Whitespace mehr.
+
+%% Tabellen
+\usepackage{tabularx} % tabularx Umgebung für mehr Kontrolle über Tabellen.
+\usepackage{booktabs} % \toprule, \midrule, \bottomrule
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{longtable} % Große Tabellen gehen über mehrere Seiten.
+
+%% Intelligenteres Referenzieren mittels \cref.
+%% \languagename um dynamisch zwischen ngerman oder english zu wechseln.
+\usepackage[\languagename,capitalize]{cleveref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% (Ende) LaTeX Packages in Nutzung                                           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+%% Set up title page, declaration of authorship, abstract, acknowledgements
+\frontmatter
+\makefrontmatter
+\tableofcontents
+
+\mainmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Der Inhalt der Arbeit                                                      %%
+%%                                                                            %%
+%% Hier können Sie die schriftliche Ausarbeitung ihrer Arbeit                 %%
+%% niederschreiben. Der Übersicht halber bietet sich jedoch an, dies in einer %%
+%% oder mehreren separaten Dateien zu tun, welche mittels \input eingebunden  %%
+%% werden --- wie auch in der Vorlage geschieht.                              %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{tex/einleitung.tex}
+\newpage
+\input{tex/implementierung.tex}
+\newpage
+\input{tex/einordnung.tex}
+
+%% Dieser Part kann auskommentiert werden, sollte kein Anhang nötig sein
+% \appendix
+% \input{appendix.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% (Ende) Der Inhalt der Arbeit                                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\backmatter
+\listoffigures
+\listoftables
+
+\clearpage
+\bibliography{references}
+%% Depending on Language, use german alphadin or original alpha
+\iflanguage{ngerman}{
+  \bibliographystyle{alphadin}
+}{
+  \bibliographystyle{alpha}
+}
+
+\end{document}

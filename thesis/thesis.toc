@@ -1,0 +1,28 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {section}{\numberline {1}Einleitung}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Motivation}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Theoretische Grundlagen}{1}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Drei Address Code}{1}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Grundblöcke}{2}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Kontrollflussgraphen}{3}{subsubsection.1.2.3}%
+\contentsline {subsubsection}{\numberline {1.2.4}Erreichende Definitionen}{3}{subsubsection.1.2.4}%
+\contentsline {subsubsection}{\numberline {1.2.5}Lebendige Variablen}{3}{subsubsection.1.2.5}%
+\contentsline {section}{\numberline {2}Framework}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Gui}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Graphen}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Tabellen}{6}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Drei Address Code}{6}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Implementierung von Algorithmen}{6}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Implementierte Algorithmen}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Erstellung von Grundblöcken aus 3-Address-Code}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Erstellung eines Kontrollflussgraphen aus 3-Address-Code}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Analyse von erreichenden Definitionen}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Analyse von lebendigen Variablen bezüglich Grundblöcken}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Analyse von lebendigen Variablen bezüglich einzelnen Instruktionen}{7}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Related Work}{8}{section.4}%
+\contentsline {section}{\numberline {5}Evaluation}{8}{section.5}%
+\contentsline {section}{\numberline {6}Future Work}{8}{section.6}%
+\contentsline {section}{\numberline {7}Fazit}{8}{section.7}%
+\contentsline {section}{Abbildungsverzeichnis}{9}{section*.2}%
+\contentsline {section}{Tabellenverzeichnis}{9}{section*.3}%
+\contentsline {section}{Literatur}{10}{section*.4}%
