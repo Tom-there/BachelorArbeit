@@ -234,9 +234,9 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
     }
     //gets representation for Table
     public ThreeAddressCodeRepresentation getRepresentation(){return getRepresentation(true);}
-    public ThreeAddressCodeRepresentation getRepresentation(boolean shortForm){
-        String commentString = shortForm ? comment : "";
-        String addressString = shortForm ? Integer.toString(address) : "";
+    public ThreeAddressCodeRepresentation getRepresentation(boolean longForm){
+        String commentString = longForm ? comment : "";
+        String addressString = longForm ? Integer.toString(address) : "";
         switch (op){
             case add, sub, mul, div -> {
                 return new ThreeAddressCodeRepresentation(addressString, destination, "=", source, op.getRepresentation(), modifier, commentString);
@@ -258,6 +258,43 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
             }
             case noop -> {
                 return new ThreeAddressCodeRepresentation(addressString, op.getRepresentation(), "", "", "", "", commentString);
+            }
+            case null -> {
+                System.err.println("ERR - was unable to get the Representation of a line of TAC because the value of the Operation enum was null");
+                System.err.println("DST - " + destination);
+                System.err.println("SRC - " + source);
+                System.err.println("MOD - " + (modifier.isEmpty() ? modifier : "NO MODIFIER"));
+                System.err.println("CMT - " + (modifier.isEmpty() ? modifier : "NO COMMENT"));
+                return null;
+            }
+        }
+    }
+    public String[] getRepresentationAsStringArray(){return getRepresentationAsStringArray(true);}
+
+    public String[] getRepresentationAsStringArray(boolean longForm) {
+        String commentString = longForm ? comment : "";
+        String addressString = longForm ? Integer.toString(address) : "";
+        switch (op){
+            case add, sub, mul, div -> {
+                return new String[]{addressString, destination, "=", source, op.getRepresentation(), modifier, commentString};
+            }
+            case neg -> {
+                return new String[]{addressString, destination, "=", op.getRepresentation(), source, "", commentString};
+            }
+            case eq -> {
+                return new String[]{addressString, destination, op.getRepresentation(), source, "", "", commentString};
+            }
+            case jmp -> {
+                return new String[]{addressString, op.getRepresentation(), destination, "", "", "", commentString};
+            }
+            case booleanJump, negatedBooleanJump -> {
+                return new String[]{addressString, op.getRepresentation(), source, "goto", destination, "", commentString};
+            }
+            case eqJump, neJump, leJump, geJump, ltJump, gtJump -> {
+                return new String[]{addressString, "if", (source + op.getRepresentation() + modifier) , "goto", destination, "", commentString};
+            }
+            case noop -> {
+                return new String[]{addressString, op.getRepresentation(), "", "", "", "", commentString};
             }
             case null -> {
                 System.err.println("ERR - was unable to get the Representation of a line of TAC because the value of the Operation enum was null");
