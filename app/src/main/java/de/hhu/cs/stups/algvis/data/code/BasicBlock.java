@@ -6,70 +6,8 @@ import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeOperati
 import java.util.*;
 import java.util.stream.Collectors;
 
-public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAddress, int lastAddress, List<Integer> firstAddressesOfSuccessors){
+public record BasicBlock(int firstAddress, int lastAddress, List<Integer> firstAddressesOfSuccessors){
 
-    public Set<Integer> gen(){
-        return instructions()
-                .stream()
-                .filter(ThreeAddressCodeInstruction::writesValue)
-                .map(ThreeAddressCodeInstruction::getAddress)
-                .collect(Collectors.toSet());
-    }
-    public Set<Integer> kill(){
-        //get Identifiers of gen set
-        Set<String> genList = gen().stream()
-            .map(fullCode::get)
-            .map(ThreeAddressCodeInstruction::getDestination)
-            .collect(Collectors.toSet());
-        //get all instructions that write to the identifiers of gen set
-        Set<ThreeAddressCodeInstruction> instructionsThatWriteToGenListIdentifiers = new HashSet<>();
-        for (String identifier:genList) {
-            for (ThreeAddressCodeInstruction instruction:fullCode) {
-                if(instruction.getDestination().equals(identifier))
-                    instructionsThatWriteToGenListIdentifiers.add(instruction);
-            }
-        }
-        //filter out gen set items and return
-        return instructionsThatWriteToGenListIdentifiers.stream()
-                .filter(i -> ((i.getAddress()<firstAddress) || (i.getAddress()>lastAddress)))
-                .map(ThreeAddressCodeInstruction::getAddress)
-                .collect(Collectors.toSet());
-    }
-    public Set<String> def(){
-        List<ThreeAddressCodeInstruction> instructions = instructions();
-        Set<String> definedIdentifiers = new HashSet<>();
-        for (int i = 0; i < instructions.size(); i++) {
-            ThreeAddressCodeInstruction instruction = instructions.get(i);
-            if(!instruction.writesValue())
-                break;
-            String identifier = instruction.getDestination();
-            definedIdentifiers.add(identifier);
-            for (int j = 0; j < i; j++) {
-                if(instructions.get(j).getUsedIdentifiers().contains(identifier))
-                    definedIdentifiers.remove(identifier);
-            }
-        }
-        return definedIdentifiers;
-    }
-
-    public Set<String> use(){
-        List<ThreeAddressCodeInstruction> instructions = instructions();
-        Set<String> usedIdentifiers = new HashSet<>();
-        for (int i = instructions.size()-1; i > -1; i--) {
-            ThreeAddressCodeInstruction instruction = instructions.get(i);
-            usedIdentifiers.remove(instruction.getDestination());
-            usedIdentifiers.addAll(instruction.getUsedIdentifiers());
-        }
-        return usedIdentifiers;
-    }
-
-    private List<ThreeAddressCodeInstruction> instructions(){
-        List<ThreeAddressCodeInstruction> instructions = new ArrayList<>(lastAddress-firstAddress);
-        for (int i = firstAddress; i < lastAddress+1; i++){
-            instructions.add(fullCode.get(i));
-        }
-        return instructions;
-    }
     //Gen Basic Blocks
     public static List<BasicBlock> toBBList(List<ThreeAddressCodeInstruction> code){
         //get all leaders
@@ -116,7 +54,7 @@ public record BasicBlock(List<ThreeAddressCodeInstruction> fullCode, int firstAd
             int firstAddress = firstAddresses.get(i);
             int lastAddress = lastAddresses.get(i);
             List<Integer> successors = firstAddressesOfSuccessors.get(i);
-            BasicBlock basicBlock = new BasicBlock(code, firstAddress, lastAddress, successors);
+            BasicBlock basicBlock = new BasicBlock(firstAddress, lastAddress, successors);
             basicBlocks.add(basicBlock);
         }
         return basicBlocks;

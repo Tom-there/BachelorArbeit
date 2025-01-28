@@ -14,7 +14,7 @@ public class Gui{
   private final JToolBar toolBar;
   public Gui(Collection<Plugin> installedPlugins) {
     // INIT Frame
-    // CONTENTS: MenuBar - ContentPanel
+    // CONTENTS: MenuBar - ContentPanel - ToolBar
     frame = new JFrame("AlgVis");
     frame.setMinimumSize(new Dimension(720, 480));
     frame.setPreferredSize(new Dimension(1600, 900));
@@ -53,8 +53,8 @@ public class Gui{
 
     refreshFrame();
   }
-  public void refreshFrame(){frame.setVisible(true);}
-  public void displayPlugin(Plugin plugin){
+  private void refreshFrame(){frame.setVisible(true);}
+  private void displayPlugin(Plugin plugin){
     switchToPlugin(plugin);
     setToolbarButtons(plugin.getToolBarButtons());
     plugin.onPluginLoad();

@@ -50,6 +50,7 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
         for (int i = 0; i < currentPluginInstance.getCode().size(); i++) {
             tac.setRowTo(currentPluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
         }
+        tac.resizeColumnDisplay();
         tac.highlightLine(currentPluginInstance.getCurrentInstructionAddress());
 
         List<ThreeAddressCodeInstruction> leaders = currentPluginInstance.getSortedLeaders();

@@ -1,5 +1,6 @@
 package de.hhu.cs.stups.algvis.data.code.threeAddressCode;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -140,6 +141,7 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
         this.modifier = tempModifier;
         this.comment = tempComment;
     }
+    //returns a Set of the next possible addresses
     public Set<Integer> nextPossibleInstructionAdresses() {
         switch (op) {
             case noop -> {
@@ -160,7 +162,6 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
             }
         }
     }
-
     //returns true if the instruction is a jump or a conditional jump
     public boolean canJump() {
         switch (op) {
@@ -176,7 +177,6 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
             }
         }
     }
-
     //returns true if the instruction writes to a variable
     public boolean writesValue(){
         switch (op){
@@ -196,7 +196,6 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
             }
         }
     }
-
     //returns the used Identifiers in this instruction
     public Collection<String> getUsedIdentifiers() {
         Set<String> ret = new HashSet<>();
@@ -214,7 +213,6 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
             }
         return ret;
     }
-
     //setters
     public void setComment(String c){
         comment = c;
@@ -224,77 +222,33 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
     public String getDestination() {return destination;}
     public String getComment() {return comment;}
     public int getAddress() {return address;}
-
-    @Override
-    public String toString(){return getRepresentation().toString();}
-
     @Override
     public int compareTo(ThreeAddressCodeInstruction comparator) {
         return address-comparator.getAddress();
     }
     //gets representation for Table
-    public ThreeAddressCodeRepresentation getRepresentation(){return getRepresentation(true);}
-    public ThreeAddressCodeRepresentation getRepresentation(boolean longForm){
-        String commentString = longForm ? comment : "";
-        String addressString = longForm ? Integer.toString(address) : "";
+    public String[] getRepresentationAsStringArray(){
         switch (op){
             case add, sub, mul, div -> {
-                return new ThreeAddressCodeRepresentation(addressString, destination, "=", source, op.getRepresentation(), modifier, commentString);
+                return new String[]{String.valueOf(address), destination, "=", source, op.getRepresentation(), modifier, comment};
             }
             case neg -> {
-                return new ThreeAddressCodeRepresentation(addressString, destination, "=", op.getRepresentation(), source, "", commentString);
+                return new String[]{String.valueOf(address), destination, "=", op.getRepresentation(), source, "", comment};
             }
             case eq -> {
-                return new ThreeAddressCodeRepresentation(addressString, destination, op.getRepresentation(), source, "", "", commentString);
+                return new String[]{String.valueOf(address), destination, op.getRepresentation(), source, "", "", comment};
             }
             case jmp -> {
-                return new ThreeAddressCodeRepresentation(addressString, op.getRepresentation(), destination, "", "", "", commentString);
+                return new String[]{String.valueOf(address), op.getRepresentation(), destination, "", "", "", comment};
             }
             case booleanJump, negatedBooleanJump -> {
-                return new ThreeAddressCodeRepresentation(addressString, op.getRepresentation(), source, "goto", destination, "", commentString);
+                return new String[]{String.valueOf(address), op.getRepresentation(), source, "goto", destination, "", comment};
             }
             case eqJump, neJump, leJump, geJump, ltJump, gtJump -> {
-                return new ThreeAddressCodeRepresentation(addressString, "if", (source + op.getRepresentation() + modifier) , "goto", destination, "", commentString);
+                return new String[]{String.valueOf(address), "if", (source + op.getRepresentation() + modifier) , "goto", destination, "", comment};
             }
             case noop -> {
-                return new ThreeAddressCodeRepresentation(addressString, op.getRepresentation(), "", "", "", "", commentString);
-            }
-            case null -> {
-                System.err.println("ERR - was unable to get the Representation of a line of TAC because the value of the Operation enum was null");
-                System.err.println("DST - " + destination);
-                System.err.println("SRC - " + source);
-                System.err.println("MOD - " + (modifier.isEmpty() ? modifier : "NO MODIFIER"));
-                System.err.println("CMT - " + (modifier.isEmpty() ? modifier : "NO COMMENT"));
-                return null;
-            }
-        }
-    }
-    public String[] getRepresentationAsStringArray(){return getRepresentationAsStringArray(true);}
-
-    public String[] getRepresentationAsStringArray(boolean longForm) {
-        String commentString = longForm ? comment : "";
-        String addressString = longForm ? Integer.toString(address) : "";
-        switch (op){
-            case add, sub, mul, div -> {
-                return new String[]{addressString, destination, "=", source, op.getRepresentation(), modifier, commentString};
-            }
-            case neg -> {
-                return new String[]{addressString, destination, "=", op.getRepresentation(), source, "", commentString};
-            }
-            case eq -> {
-                return new String[]{addressString, destination, op.getRepresentation(), source, "", "", commentString};
-            }
-            case jmp -> {
-                return new String[]{addressString, op.getRepresentation(), destination, "", "", "", commentString};
-            }
-            case booleanJump, negatedBooleanJump -> {
-                return new String[]{addressString, op.getRepresentation(), source, "goto", destination, "", commentString};
-            }
-            case eqJump, neJump, leJump, geJump, ltJump, gtJump -> {
-                return new String[]{addressString, "if", (source + op.getRepresentation() + modifier) , "goto", destination, "", commentString};
-            }
-            case noop -> {
-                return new String[]{addressString, op.getRepresentation(), "", "", "", "", commentString};
+                return new String[]{String.valueOf(address), op.getRepresentation(), "", "", "", "", comment};
             }
             case null -> {
                 System.err.println("ERR - was unable to get the Representation of a line of TAC because the value of the Operation enum was null");

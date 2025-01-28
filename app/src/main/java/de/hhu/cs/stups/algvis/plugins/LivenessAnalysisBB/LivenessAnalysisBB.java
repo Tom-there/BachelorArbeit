@@ -95,8 +95,9 @@ public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps
         dataFlow.setValueAt("def[B]", 1, 0);
         dataFlow.setValueAt("use[B]", 2, 0);
         for (int col = 0; col < basicBlocks.size(); col++) {
-            String genBlock = collectIdentifierSetToString(basicBlocks.get(col).def().stream().map(String::valueOf).collect(Collectors.toSet()));
-            String killBlock = collectIdentifierSetToString(basicBlocks.get(col).use().stream().map(String::valueOf).collect(Collectors.toSet()));
+            BasicBlock block = basicBlocks.get(col);
+            String genBlock = collectIdentifierSetToString(pluginInstance.getCode().def(block).stream().map(String::valueOf).collect(Collectors.toSet()));
+            String killBlock = collectIdentifierSetToString(pluginInstance.getCode().use(block).stream().map(String::valueOf).collect(Collectors.toSet()));
             dataFlow.setValueAt(genBlock, 1, col+1);
             dataFlow.setValueAt(killBlock, 2, col+1);
         }

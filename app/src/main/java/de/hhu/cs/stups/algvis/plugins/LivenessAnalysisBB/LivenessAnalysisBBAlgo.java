@@ -72,9 +72,9 @@ public class LivenessAnalysisBBAlgo {
 
         //in_i = use u (out - def)
         Set<String> usedAndNotDefined = new HashSet<>(currentOut);
-        usedAndNotDefined.removeAll(currentBlock.def());
+        usedAndNotDefined.removeAll(code.def(currentBlock));
 
-        Set<String> currentIn = new HashSet<>(currentBlock.use());
+        Set<String> currentIn = new HashSet<>(code.use(currentBlock));
         currentIn.addAll(usedAndNotDefined);
 
         if(currentIteration>0){

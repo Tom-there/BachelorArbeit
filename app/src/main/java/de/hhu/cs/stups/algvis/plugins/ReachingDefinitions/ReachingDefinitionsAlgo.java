@@ -65,10 +65,10 @@ public class ReachingDefinitionsAlgo {
     private void lookAtBlock(int i){
         BasicBlock currentBlock = basicBlocks.get(i);
         List<BasicBlock> ancestorBlocks = ancestors.get(currentBlock);
-        List<String> generatedIdentifiers = currentBlock.gen().stream()
+        List<String> generatedIdentifiers = code.gen(currentBlock).stream()
                                             .map(code::get)
                                             .map(ThreeAddressCodeInstruction::getDestination).toList();
-        List<String> killedIdentifiers = currentBlock.kill().stream()
+        List<String> killedIdentifiers = code.kill(currentBlock).stream()
                                             .map(code::get)
                                             .map(ThreeAddressCodeInstruction::getDestination).toList();
 

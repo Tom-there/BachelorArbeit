@@ -21,13 +21,9 @@ public class Table extends JTable implements DataRepresentation {
         tableModel = new DataTableModel();
         setModel(tableModel);
         switch (mode){
-            case code -> {
-                setSize(1, 7);
-            }
-            case normal -> {
-                setSize(1, 1);
-            }
-            case null -> System.err.println("ERROR, while generating Code(Content visualizing). Mode was null?");
+            case code -> setSize(1, 7);
+            case normal -> setSize(1, 1);
+            case null -> System.err.println("ERR - while generating Code(Content visualizing). Mode was null?");
         }
         switch (location){
             case left, right -> {
@@ -40,7 +36,7 @@ public class Table extends JTable implements DataRepresentation {
                 this.setPreferredSize(new Dimension(1600, 900));
                 this.setMaximumSize(new Dimension(1920, 1080));
             }
-            case null -> System.err.println("ERROR, while generating Code(Content visualizing). Locator was null?");
+            case null -> System.err.println("ERR - while generating Code(Content visualizing). Locator was null?");
         }
         this.setBackground(Color.lightGray);
         resizeColumnDisplay();
@@ -86,7 +82,7 @@ public class Table extends JTable implements DataRepresentation {
     public Component getSwingComponent() {
         return this;
     }
-    private void resizeColumnDisplay() {
+    public void resizeColumnDisplay() {
         TableColumnModel columnModel = this.getColumnModel();
         for (int i = 0; i < columnModel.getColumnCount()-1; i++) {
             int width = 0;

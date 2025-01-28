@@ -6,7 +6,6 @@ public interface SimpleSteps {
     void reset();
     void step();
     boolean hasNextStep();
-
     static List<ToolBarButton> getButtons(SimpleSteps impl){
         return List.of(new ToolBarButton() {
             @Override

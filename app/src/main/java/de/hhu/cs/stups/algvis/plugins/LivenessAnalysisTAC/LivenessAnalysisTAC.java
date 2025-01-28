@@ -50,7 +50,10 @@ public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleStep
         for (ThreeAddressCodeInstruction instruction : instructions) {
             //adding all Nodes
             String nodeID = String.valueOf(instruction.getAddress());
-            String nodeLabel = instruction.getRepresentation(false).toString();
+            String[] rep = new String[5];
+            System.arraycopy(instruction.getRepresentationAsStringArray(), 1, rep, 0, 5);
+            String nodeLabel = Arrays.stream(rep).reduce("", (a, b) -> a + " " + b);
+
             nodeMap.put(instruction.getAddress(), new Node(nodeID, nodeLabel));
             basicBlockRelationGraph.addNode(nodeMap.get(instruction.getAddress()));
         }
@@ -78,7 +81,9 @@ public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleStep
         dataFlow.setValueAt("use[i]", 0, 2);
         for (int row = 0; row < instructions.size(); row++) {
             //Header
-            String instructionRepresentation = instructions.get(row).getRepresentation(false).toString();
+            String[] rep = new String[5];
+            System.arraycopy(instructions.get(row).getRepresentationAsStringArray(), 1, rep, 0, 5);
+            String instructionRepresentation = Arrays.stream(rep).reduce("", (a, b) -> a + " " + b);
             dataFlow.setValueAt(instructionRepresentation,row+1, 0);
             //def/use set
             String instructionDef = instructions.get(row).writesValue() ? instructions.get(row).getDestination() : "";
