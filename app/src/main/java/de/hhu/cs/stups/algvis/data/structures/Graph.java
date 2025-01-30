@@ -88,11 +88,11 @@ public class Graph implements DataRepresentation {
     public void purge() {
         for (Edge edge: new HashSet<>(edges.values())) {
             graph.removeEdge(edge.getID());
-            edges.remove(edge);
+            edges.remove(edge.getID());
         }
         for (Node node: new HashSet<>(nodes.values())) {
             graph.removeNode(node.getID());
-            nodes.remove(node);
+            nodes.remove(node.getID());
         }
     }
 
