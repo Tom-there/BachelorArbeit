@@ -9,8 +9,8 @@ import de.hhu.cs.stups.algvis.data.structures.Graph;
 import de.hhu.cs.stups.algvis.data.structures.graph.Node;
 import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
 import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
-import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
-import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
+import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.LoadCodeFromFile;
+import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.SimpleSteps;
 
 import java.util.*;
 import java.util.stream.Collectors;
