@@ -37,8 +37,8 @@ public class Graph implements DataRepresentation {
             case null, default -> System.err.println("ERROR, while generating Graph(Content visualizing). Locator parameter was not able to be interpreted");
         }
 
-        nodes = new HashSet<>();
-        edges = new HashSet<>();
+        nodes = new HashMap<>();
+        edges = new HashMap<>();
         graph = new MultiGraph("Graph");
         graph.setAttribute("ui.stylesheet", "graph { padding: 40px; } node { text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #EBA; text-color: #222; }");
         SwingViewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
@@ -86,11 +86,11 @@ public class Graph implements DataRepresentation {
         addEdge(new Edge(sourceNode, targetNode));
     }
     public void purge() {
-        for (Edge edge: new HashSet<>(edges)) {
+        for (Edge edge: new HashSet<>(edges.values())) {
             graph.removeEdge(edge.getID());
             edges.remove(edge);
         }
-        for (Node node: new HashSet<>(nodes)) {
+        for (Node node: new HashSet<>(nodes.values())) {
             graph.removeNode(node.getID());
             nodes.remove(node);
         }
