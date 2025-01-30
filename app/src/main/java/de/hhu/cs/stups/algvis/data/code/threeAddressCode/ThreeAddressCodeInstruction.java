@@ -1,18 +1,18 @@
 package de.hhu.cs.stups.algvis.data.code.threeAddressCode;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeInstruction>{
+public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeInstruction> {
     private final int address;
     private final ThreeAddressCodeOperation op;
     private final String destination, source, modifier;
     private String comment;
-    public ThreeAddressCodeInstruction(String rawInput, int address){
+
+    public ThreeAddressCodeInstruction(String rawInput, int address) {
         ThreeAddressCodeOperation tempOperation;
-        String tempModifier,tempSource,tempDestination, tempComment;
+        String tempModifier, tempSource, tempDestination, tempComment;
         this.address = address;
         String[] pieces = rawInput.split(" ");
         switch (pieces.length) {
@@ -33,7 +33,7 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
             case 4 -> {
                 // X = op Y
                 // iff Y goto X
-                switch (pieces[2]){
+                switch (pieces[2]) {
                     case "-" -> {//X = op Y
                         tempOperation = ThreeAddressCodeOperation.neg;
                         tempDestination = pieces[0];
@@ -43,7 +43,7 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
                     }
                     case "goto" -> {
                         //iff Y goto X
-                        switch(pieces[0]){
+                        switch (pieces[0]) {
                             case "if" -> {//if Y goto X
                                 tempOperation = ThreeAddressCodeOperation.booleanJump;
                                 tempDestination = pieces[3];
@@ -84,15 +84,11 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
                 tempSource = pieces[2];
                 tempModifier = pieces[4];
                 tempComment = null;
-                switch (pieces[3]){
-                    case "+" ->
-                            tempOperation = ThreeAddressCodeOperation.add;
-                    case "-" ->
-                            tempOperation = ThreeAddressCodeOperation.sub;
-                    case "*" ->
-                            tempOperation = ThreeAddressCodeOperation.mul;
-                    case "/" ->
-                            tempOperation = ThreeAddressCodeOperation.div;
+                switch (pieces[3]) {
+                    case "+" -> tempOperation = ThreeAddressCodeOperation.add;
+                    case "-" -> tempOperation = ThreeAddressCodeOperation.sub;
+                    case "*" -> tempOperation = ThreeAddressCodeOperation.mul;
+                    case "/" -> tempOperation = ThreeAddressCodeOperation.div;
                     default -> {
                         tempOperation = ThreeAddressCodeOperation.noop;
                         tempDestination = null;
@@ -109,10 +105,10 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
                 tempSource = pieces[1];
                 tempModifier = pieces[3];
                 tempComment = null;
-                switch (pieces[2]){
-                    case "<"  -> tempOperation = ThreeAddressCodeOperation.ltJump;
+                switch (pieces[2]) {
+                    case "<" -> tempOperation = ThreeAddressCodeOperation.ltJump;
                     case "<=" -> tempOperation = ThreeAddressCodeOperation.leJump;
-                    case ">"  -> tempOperation = ThreeAddressCodeOperation.gtJump;
+                    case ">" -> tempOperation = ThreeAddressCodeOperation.gtJump;
                     case ">=" -> tempOperation = ThreeAddressCodeOperation.geJump;
                     case "==" -> tempOperation = ThreeAddressCodeOperation.eqJump;
                     case "!=" -> tempOperation = ThreeAddressCodeOperation.neJump;
@@ -141,6 +137,7 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
         this.modifier = tempModifier;
         this.comment = tempComment;
     }
+
     //returns a Set of the next possible addresses
     public Set<Integer> nextPossibleInstructionAdresses() {
         switch (op) {
@@ -151,10 +148,10 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
                 return Set.of(Integer.parseInt(destination));
             }
             case booleanJump, negatedBooleanJump, neJump, eqJump, leJump, geJump, ltJump, gtJump -> {
-                return Set.of(Integer.parseInt(destination), address+1);
+                return Set.of(Integer.parseInt(destination), address + 1);
             }
             case add, sub, mul, div, neg, eq -> {
-                return Set.of(address+1);
+                return Set.of(address + 1);
             }
             case null -> {
                 System.err.println("ERR - TACInstruction.nextPossibleInstructionAdresses()\nOperation is null, should be impossible");
@@ -162,6 +159,7 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
             }
         }
     }
+
     //returns true if the instruction is a jump or a conditional jump
     public boolean canJump() {
         switch (op) {
@@ -177,17 +175,18 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
             }
         }
     }
+
     //returns true if the instruction writes to a variable
-    public boolean writesValue(){
-        switch (op){
-             case   noop,
+    public boolean writesValue() {
+        switch (op) {
+            case noop,
                     jmp,
                     booleanJump, negatedBooleanJump,
                     eqJump, neJump, leJump, geJump, ltJump, gtJump -> {
                 return false;
             }
-            case    eq,
-                    add, sub,  mul, div, neg -> {
+            case eq,
+                    add, sub, mul, div, neg -> {
                 return true;
             }
             case null -> {
@@ -196,59 +195,75 @@ public class ThreeAddressCodeInstruction implements Comparable<ThreeAddressCodeI
             }
         }
     }
+
     //returns the used Identifiers in this instruction
     public Collection<String> getUsedIdentifiers() {
         Set<String> ret = new HashSet<>();
-        if(source!=null)
-            try{
+        if (source != null)
+            try {
                 Integer.parseInt(source);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 ret.add(source);
             }
-        if(modifier!=null)
-            try{
+        if (modifier != null)
+            try {
                 Integer.parseInt(modifier);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 ret.add(modifier);
             }
         return ret;
     }
+
     //setters
-    public void setComment(String c){
+    public void setComment(String c) {
         comment = c;
     }
+
     //getters
-    public ThreeAddressCodeOperation getOperation(){return op;}
-    public String getDestination() {return destination;}
-    public String getComment() {return comment;}
-    public int getAddress() {return address;}
+    public ThreeAddressCodeOperation getOperation() {
+        return op;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public int getAddress() {
+        return address;
+    }
+
     @Override
     public int compareTo(ThreeAddressCodeInstruction comparator) {
-        return address-comparator.getAddress();
+        return address - comparator.getAddress();
     }
+
     //gets representation for Table
-    public String[] getRepresentationAsStringArray(){
-        switch (op){
-            case add, sub, mul, div -> {
-                return new String[]{String.valueOf(address), destination, "=", source, op.getRepresentation(), modifier, comment};
+    public String[] getRepresentationAsStringArray() {
+        switch (op) {
+            case add, sub, mul, div -> { //0                X                       =                        ,                      Y               op                       Z       ,    c
+                return new String[]{String.valueOf(address), destination, "", "=", source, op.getRepresentation(), modifier, comment};
             }
-            case neg -> {
-                return new String[]{String.valueOf(address), destination, "=", op.getRepresentation(), source, "", comment};
+            case neg -> { //                0               X                       =                       -                       Y               ,                      ,        ,       c
+                return new String[]{String.valueOf(address), destination, "", "=", op.getRepresentation(), source, "", "", comment};
             }
-            case eq -> {
-                return new String[]{String.valueOf(address), destination, op.getRepresentation(), source, "", "", comment};
+            case eq -> {//                  0               X                       =                          ,                       Y            ,                       ,        ,     c
+                return new String[]{String.valueOf(address), destination, op.getRepresentation(), "", source, "", "", comment};
             }
-            case jmp -> {
-                return new String[]{String.valueOf(address), op.getRepresentation(), destination, "", "", "", comment};
+            case jmp -> {//                 0              goto                     ,                         ,                       ,           ,                       X      c
+                return new String[]{String.valueOf(address), op.getRepresentation(), "", "", "", "", destination, comment};
             }
-            case booleanJump, negatedBooleanJump -> {
-                return new String[]{String.valueOf(address), op.getRepresentation(), source, "goto", destination, "", comment};
+            case booleanJump, negatedBooleanJump -> {//0   if                       Y                       g                       ,           ,                        X       c
+                return new String[]{String.valueOf(address), op.getRepresentation(), source, "goto", "", "", destination, comment};
             }
-            case eqJump, neJump, leJump, geJump, ltJump, gtJump -> {
-                return new String[]{String.valueOf(address), "if", (source + op.getRepresentation() + modifier) , "goto", destination, "", comment};
+            case eqJump, neJump, leJump, geJump, ltJump, gtJump -> {//0 if          Y                       o                       Z            g                      X              c
+                return new String[]{String.valueOf(address), "if", source, op.getRepresentation(), modifier, "goto", destination, comment};
             }
             case noop -> {
-                return new String[]{String.valueOf(address), op.getRepresentation(), "", "", "", "", comment};
+                return new String[]{String.valueOf(address), op.getRepresentation(), "", "", "", "", "", comment};
             }
             case null -> {
                 System.err.println("ERR - was unable to get the Representation of a line of TAC because the value of the Operation enum was null");

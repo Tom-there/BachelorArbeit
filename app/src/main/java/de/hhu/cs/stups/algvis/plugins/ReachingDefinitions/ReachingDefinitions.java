@@ -45,7 +45,6 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
         buttons.addAll(SimpleSteps.getButtons(this));
         return buttons;
     }
-    @Override
     public void refreshGuiElements() {
         List<BasicBlock> basicBlocks = pluginInstance.getBasicBlocks();
         //updating Code representation
@@ -58,7 +57,6 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
                 code.add(instruction);
             }
         }
-        instructionList.resizeTable(code.size(), 7);
         for (int i = 0; i < code.size(); i++) {
             instructionList.setRowTo(code.get(i).getRepresentationAsStringArray(), i);
         }
@@ -149,6 +147,7 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
     public void reset() {
         pluginInstance = new ReachingDefinitionsAlgo(currentlyLoadedCode);
         basicBlockRelationGraph.purge();
+        instructionList.resizeTable(pluginInstance.getCode().size(), 8);
         refreshGuiElements();
     }
     @Override

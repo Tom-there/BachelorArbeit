@@ -1,4 +1,6 @@
-package de.hhu.cs.stups.algvis.pluginSpecs;
+package de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons;
+
+import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
 
 import javax.swing.*;
 import java.io.*;

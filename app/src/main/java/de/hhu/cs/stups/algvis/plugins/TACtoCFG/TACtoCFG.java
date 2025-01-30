@@ -7,9 +7,9 @@ import de.hhu.cs.stups.algvis.data.structures.graph.Node;
 import de.hhu.cs.stups.algvis.data.DataRepresentation;
 import de.hhu.cs.stups.algvis.data.structures.Graph;
 import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
-import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
+import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.LoadCodeFromFile;
 import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
-import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
+import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.SimpleSteps;
 
 import java.util.*;
 
@@ -44,9 +44,7 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
         buttons.addAll(SimpleSteps.getButtons(this));
         return buttons;
     }
-    @Override
     public void refreshGuiElements() {
-        tac.resizeTable(currentPluginInstance.getCode().size(), 7);
         for (int i = 0; i < currentPluginInstance.getCode().size(); i++) {
             tac.setRowTo(currentPluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
         }
@@ -76,8 +74,8 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     @Override
     public void reset() {
         currentPluginInstance = new TACtoCFGAlgo(currentlyLoadedCode);
-        tac.setSize(1, 1);
         cfg.purge();
+        tac.resizeTable(currentPluginInstance.getCode().size(), 8);
         refreshGuiElements();
     }
     @Override

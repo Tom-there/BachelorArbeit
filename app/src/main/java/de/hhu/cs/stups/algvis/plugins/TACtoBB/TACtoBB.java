@@ -4,8 +4,8 @@ import de.hhu.cs.stups.algvis.data.DataRepresentation;
 import de.hhu.cs.stups.algvis.data.structures.Table;
 import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
 import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
-import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
-import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
+import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.LoadCodeFromFile;
+import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.SimpleSteps;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -41,9 +41,7 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
         return buttons;
     }
 
-    @Override
     public void refreshGuiElements() {
-        tac.resizeTable(currentPluginInstance.getCode().size(), 7);
         for (int i = 0; i < currentPluginInstance.getCode().size(); i++) {
             tac.setRowTo(currentPluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
         }
@@ -54,6 +52,7 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
     @Override
     public void reset() {
         currentPluginInstance = new TACtoBBAlgo(currentlyLoadedCode);
+        tac.resizeTable(currentPluginInstance.getCode().size(), 8);
         refreshGuiElements();
     }
     @Override

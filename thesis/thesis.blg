@@ -8,44 +8,51 @@ Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: references.bib
-You've used 1 entry,
+Warning--entry type for "GS_graphs" isn't style-file defined
+--line 1 of file references.bib
+Warning--entry type for "GS_render" isn't style-file defined
+--line 9 of file references.bib
+Warning--entry type for "GS" isn't style-file defined
+--line 18 of file references.bib
+You've used 4 entries,
             4793 wiz_defined-function locations,
-            900 strings with 6500 characters,
-and the built_in function-call counts, 605 in all, are:
-= -- 56
-> -- 11
-< -- 21
-+ -- 21
-- -- 4
-* -- 37
-:= -- 118
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 4
-chr.to.int$ -- 1
-cite$ -- 1
-duplicate$ -- 18
-empty$ -- 42
-format.name$ -- 9
-if$ -- 110
-int.to.chr$ -- 1
+            914 strings with 6825 characters,
+and the built_in function-call counts, 1680 in all, are:
+= -- 164
+> -- 35
+< -- 27
++ -- 29
+- -- 10
+* -- 97
+:= -- 307
+add.period$ -- 6
+call.type$ -- 4
+change.case$ -- 16
+chr.to.int$ -- 2
+cite$ -- 4
+duplicate$ -- 60
+empty$ -- 135
+format.name$ -- 24
+if$ -- 350
+int.to.chr$ -- 3
 int.to.str$ -- 0
-missing$ -- 4
-newline$ -- 17
-num.names$ -- 4
-pop$ -- 5
+missing$ -- 22
+newline$ -- 35
+num.names$ -- 13
+pop$ -- 29
 preamble$ -- 1
-purify$ -- 6
+purify$ -- 24
 quote$ -- 0
-skip$ -- 35
+skip$ -- 77
 stack$ -- 0
-substring$ -- 32
-swap$ -- 3
-text.length$ -- 3
+substring$ -- 68
+swap$ -- 9
+text.length$ -- 9
 text.prefix$ -- 1
 top$ -- 0
-type$ -- 6
+type$ -- 36
 warning$ -- 0
-while$ -- 5
-width$ -- 2
-write$ -- 23
+while$ -- 14
+width$ -- 7
+write$ -- 62
+(There were 3 warnings)

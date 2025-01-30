@@ -80,6 +80,7 @@ public class Graph implements DataRepresentation {
         graph = new MultiGraph("Graph");
         nodes = new HashMap<>();
         edges = new HashMap<>();
+
         graph.setAttribute("ui.stylesheet", "graph { padding: 40px; } node { text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #EBA; text-color: #222; }");
         SwingViewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
         view = viewer.addDefaultView(false);

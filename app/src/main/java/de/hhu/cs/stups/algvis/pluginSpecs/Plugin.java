@@ -9,5 +9,4 @@ public interface Plugin{
   void onPluginLoad();
   Collection<DataRepresentation> getGuiElements();
   Collection<ToolBarButton> getToolBarButtons();
-  void refreshGuiElements();
 }

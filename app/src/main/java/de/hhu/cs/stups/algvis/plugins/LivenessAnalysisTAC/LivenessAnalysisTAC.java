@@ -6,9 +6,9 @@ import de.hhu.cs.stups.algvis.data.structures.Graph;
 import de.hhu.cs.stups.algvis.data.structures.Table;
 import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
 import de.hhu.cs.stups.algvis.data.structures.graph.Node;
-import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
+import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.LoadCodeFromFile;
 import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
-import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
+import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.SimpleSteps;
 import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
 
 import java.util.*;
@@ -42,7 +42,6 @@ public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleStep
         buttons.addAll(SimpleSteps.getButtons(this));
         return buttons;
     }
-    @Override
     public void refreshGuiElements() {
         List<ThreeAddressCodeInstruction> instructions = pluginInstance.getInstructions();
         //updating graph

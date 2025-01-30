@@ -1,4 +1,12 @@
 \babel@toc {ngerman}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Klassenstruktur der GUI-Klassen}}{6}{figure.caption.2}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Implementation der drei Address Code Klassen}}{9}{figure.caption.3}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Die ThreeAddressCodeInstruction Klasse}}{9}{figure.caption.4}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Resultierender Kontrollflussgraph}}{5}{figure.caption.4}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Klassenstruktur der GUI-Klassen}}{8}{figure.caption.9}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Ansicht des Programmes direkt nach Start}}{10}{figure.caption.10}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Das DataRepresentation Interface und sein Location enum}}{11}{figure.caption.11}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Rendering Pipeline eines Graphen}}{11}{figure.caption.12}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Klassenstruktur der Graph-Klassen}}{13}{figure.caption.13}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Implementation der drei Address Code Klassen}}{15}{figure.caption.15}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Die ThreeAddressCodeInstruction Klasse}}{15}{figure.caption.16}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Die ThreeAddressCodeInstruction Klasse}}{18}{figure.caption.17}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Das Plugin Interface}}{20}{figure.caption.19}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Das Plugin Interface}}{21}{figure.caption.20}%

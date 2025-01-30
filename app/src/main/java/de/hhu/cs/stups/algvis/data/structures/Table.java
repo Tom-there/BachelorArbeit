@@ -21,8 +21,8 @@ public class Table extends JTable implements DataRepresentation {
         tableModel = new DataTableModel();
         setModel(tableModel);
         switch (mode){
-            case code -> setSize(1, 7);
-            case normal -> setSize(1, 1);
+            case code -> resizeTable(1, 8);
+            case normal -> resizeTable(1, 1);
             case null -> System.err.println("ERR - while generating Code(Content visualizing). Mode was null?");
         }
         switch (location){

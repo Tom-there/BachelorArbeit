@@ -406,7 +406,7 @@
   \cleardoublepage
 
   \begin{abstract}
-    \input{abstract.tex}
+    \input{tex/00_abstract.tex}
   \end{abstract}
   \cleardoublepage
 }

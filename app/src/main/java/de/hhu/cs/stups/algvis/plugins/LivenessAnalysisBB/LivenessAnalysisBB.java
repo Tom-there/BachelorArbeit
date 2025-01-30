@@ -7,9 +7,9 @@ import de.hhu.cs.stups.algvis.data.structures.Graph;
 import de.hhu.cs.stups.algvis.data.structures.Table;
 import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
 import de.hhu.cs.stups.algvis.data.structures.graph.Node;
-import de.hhu.cs.stups.algvis.pluginSpecs.LoadCodeFromFile;
+import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.LoadCodeFromFile;
 import de.hhu.cs.stups.algvis.pluginSpecs.Plugin;
-import de.hhu.cs.stups.algvis.pluginSpecs.SimpleSteps;
+import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.SimpleSteps;
 import de.hhu.cs.stups.algvis.pluginSpecs.ToolBarButton;
 
 import java.util.*;
@@ -45,7 +45,6 @@ public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps
         buttons.addAll(SimpleSteps.getButtons(this));
         return buttons;
     }
-    @Override
     public void refreshGuiElements() {
         List<BasicBlock> basicBlocks = pluginInstance.getBasicBlocks();
         //updating Code representation
@@ -58,7 +57,6 @@ public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps
                 code.add(instruction);
             }
         }
-        instructionList.resizeTable(code.size(), 7);
         for (int i = 0; i < pluginInstance.getCode().size(); i++) {
             instructionList.setRowTo(pluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
         }
@@ -149,6 +147,7 @@ public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps
     public void reset() {
         pluginInstance = new LivenessAnalysisBBAlgo(currentlyLoadedCode);
         basicBlockRelationGraph.purge();
+        instructionList.resizeTable(pluginInstance.getCode().size(), 8);
         refreshGuiElements();
     }
     @Override
