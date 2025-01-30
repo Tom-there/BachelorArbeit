@@ -4,6 +4,8 @@ import de.hhu.cs.stups.algvis.data.DataRepresentation;
 import de.hhu.cs.stups.algvis.data.structures.graph.Edge;
 import de.hhu.cs.stups.algvis.data.structures.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
+import org.graphstream.ui.layout.Layout;
+import org.graphstream.ui.layout.springbox.implementations.LinLog;
 import org.graphstream.ui.swing_viewer.SwingViewer;
 import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
@@ -11,14 +13,15 @@ import org.graphstream.ui.view.Viewer;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class Graph implements DataRepresentation {
     private final JPanel exportedPanel;
     private org.graphstream.graph.Graph graph;
+    private final SwingViewer viewer;
+    private final Layout layout;
     private final DataRepresentation.Location location;
-    private HashMap<String, Node> nodes;
-    private HashMap<String, Edge> edges;
+    private Set<Node> nodes;
+    private Set<Edge> edges;
     public Graph(){this(DataRepresentation.Location.center);}
     public Graph(DataRepresentation.Location location){
         this.location = location;
@@ -37,14 +40,16 @@ public class Graph implements DataRepresentation {
             case null, default -> System.err.println("ERROR, while generating Graph(Content visualizing). Locator parameter was not able to be interpreted");
         }
 
-        nodes = new HashMap<>();
-        edges = new HashMap<>();
+        nodes = new HashSet<>();
+        edges = new HashSet<>();
         graph = new MultiGraph("Graph");
         graph.setAttribute("ui.stylesheet", "graph { padding: 40px; } node { text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #EBA; text-color: #222; }");
-        SwingViewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+        viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
         View view = viewer.addDefaultView(false);
 
-        viewer.enableAutoLayout();
+        layout = new LinLog();
+        viewer.enableAutoLayout(layout);
+
         exportedPanel.removeAll();
         exportedPanel.add((Component) view, BorderLayout.CENTER);
     }
@@ -60,15 +65,16 @@ public class Graph implements DataRepresentation {
     }
 
     public void addNode(Node newNode){
-        if(!nodes.containsKey(newNode.getID())){
-            nodes.put(newNode.getID(), newNode);
-            graph.addNode(newNode.getID());
-            graph.getNode(newNode.getID()).setAttribute("ui.label", newNode.getLabel());
-        }
+        if(nodes.contains(newNode))
+            return;
+        nodes.add(newNode);
+        graph.addNode(newNode.getId());
+        layout.shake();
     }
-    public void changeLabelOfNode(String nodeID, String label) {
-        if(nodes.containsKey(nodeID))
-            graph.getNode(nodeID).setAttribute("ui.label", label);
+    public void changeLabelOfNode(Node node, String label) {
+        if(nodes.contains(node))
+            graph.getNode(node.getId()).setAttribute("ui.label", label);
+
     }
     public void addNodeWithEdges(Node newNode, Collection<Node> targets){
         addNode(newNode);
@@ -77,29 +83,29 @@ public class Graph implements DataRepresentation {
         }
     }
     public void addEdge(Edge newEdge){
-        if(!edges.containsKey(newEdge.getID())) {
-            edges.put(newEdge.getID(), newEdge);
-            graph.addEdge(newEdge.getID(), newEdge.sourceNode().getID(), newEdge.targetNode().getID(), true);
+        if(!edges.contains(newEdge)) {
+            edges.add(newEdge);
+            graph.addEdge(newEdge.getID(), newEdge.sourceNode().getId(), newEdge.targetNode().getId(), true);
         }
     }
     public void addEdgeFromNodes(Node sourceNode, Node targetNode){
         addEdge(new Edge(sourceNode, targetNode));
     }
     public void purge() {
-        for (Edge edge: new HashSet<>(edges.values())) {
+        for (Edge edge: new HashSet<>(edges)) {
             graph.removeEdge(edge.getID());
-            edges.remove(edge.getID());
+            edges.remove(edge);
         }
-        for (Node node: new HashSet<>(nodes.values())) {
-            graph.removeNode(node.getID());
-            nodes.remove(node.getID());
+        for (Node node: new HashSet<>(nodes)) {
+            graph.removeNode(node.getId());
+            nodes.remove(node);
         }
     }
 
-    public  HashMap<String, Node> getNodes(){
+    public  Set<Node> getNodes(){
         return nodes;
     }
-    public  HashMap<String, Edge> getEdges(){
+    public  Set<Edge> getEdges(){
         return edges;
     }
 }

@@ -15,13 +15,13 @@ import java.util.*;
 
 public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleSteps {
     private final Table dataFlow;
-    private final Graph basicBlockRelationGraph;
+    private final Graph instructionFlowGraph;
     private LivenessAnalysisTACAlgo pluginInstance;
     private String currentlyLoadedCode;
     public LivenessAnalysisTAC(){
         currentlyLoadedCode = "empty";
         this.dataFlow = new Table(DataRepresentation.Location.right);
-        this.basicBlockRelationGraph = new Graph();
+        this.instructionFlowGraph = new Graph();
     }
     @Override
     public String getName() {
@@ -33,7 +33,7 @@ public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleStep
     }
     @Override
     public Set<DataRepresentation> getGuiElements() {
-        return Set.of(basicBlockRelationGraph, dataFlow);
+        return Set.of(instructionFlowGraph, dataFlow);
     }
     @Override
     public List<ToolBarButton> getToolBarButtons() {
@@ -45,26 +45,6 @@ public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleStep
     public void refreshGuiElements() {
         List<ThreeAddressCodeInstruction> instructions = pluginInstance.getInstructions();
         //updating graph
-        HashMap<Integer, Node> nodeMap = new HashMap<>();
-        for (ThreeAddressCodeInstruction instruction : instructions) {
-            //adding all Nodes
-            String nodeID = String.valueOf(instruction.getAddress());
-            String[] rep = new String[5];
-            System.arraycopy(instruction.getRepresentationAsStringArray(), 1, rep, 0, 5);
-            String nodeLabel = Arrays.stream(rep).reduce("", (a, b) -> a + " " + b);
-
-            nodeMap.put(instruction.getAddress(), new Node(nodeID, nodeLabel));
-            basicBlockRelationGraph.addNode(nodeMap.get(instruction.getAddress()));
-        }
-        for (ThreeAddressCodeInstruction instruction : instructions) {
-            //adding all Edges
-            Node n = nodeMap.get(instruction.getAddress());
-            Set<Integer> successors = instruction.nextPossibleInstructionAdresses();
-            successors.forEach(s -> {
-                if(nodeMap.containsKey(s))
-                    basicBlockRelationGraph.addEdge(new Edge(n, nodeMap.get(s)));
-            });
-        }
 
         //updating data flow
         List<Map<ThreeAddressCodeInstruction, Set<String>>> inTable = pluginInstance.getIn();
@@ -136,7 +116,30 @@ public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleStep
     @Override
     public void reset() {
         pluginInstance = new LivenessAnalysisTACAlgo(currentlyLoadedCode);
-        basicBlockRelationGraph.purge();
+
+        instructionFlowGraph.purge();
+        HashMap<Integer, Node> nodeMap = new HashMap<>();
+        for (ThreeAddressCodeInstruction instruction : pluginInstance.getInstructions()) {
+            //generate representation
+            String[] rep = new String[5];
+            System.arraycopy(instruction.getRepresentationAsStringArray(), 1, rep, 0, 5);
+            String nodeLabel = Arrays.stream(rep).reduce("", (a, b) -> a + " " + b);
+            //add Node
+            Node node = new Node();
+            nodeMap.put(instruction.getAddress(), node);
+            instructionFlowGraph.addNode(nodeMap.get(instruction.getAddress()));
+            instructionFlowGraph.changeLabelOfNode(node, nodeLabel);
+        }
+        for (ThreeAddressCodeInstruction instruction : pluginInstance.getInstructions()) {
+            //adding all Edges
+            Node n = nodeMap.get(instruction.getAddress());
+            Set<Integer> successors = instruction.nextPossibleInstructionAdresses();
+            successors.forEach(s -> {
+                if(nodeMap.containsKey(s))
+                    instructionFlowGraph.addEdge(new Edge(n, nodeMap.get(s)));
+            });
+        }
+
         refreshGuiElements();
     }
     @Override

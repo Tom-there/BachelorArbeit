@@ -1,23 +1,13 @@
 package de.hhu.cs.stups.algvis.data.structures.graph;
 
-import java.util.Objects;
-
 public class Node {
-    private final String ID;
-    private String label;
-    public Node(String id, String label){
-        this.label = label;
-        this.ID = id;
+    private static int UID=0;
+    private final String id;
+    public Node(){
+        this.id = Integer.toString(++UID);
     }
-
-    public String getLabel() {
-        return (label == null) ? "" : label;
-    }
-    public void setLabel(String label) {
-        this.label = label;
-    }
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -25,6 +15,6 @@ public class Node {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
-        return Objects.equals(ID, node.ID) && Objects.equals(label, node.label);
+        return id == node.getId();
     }
 }

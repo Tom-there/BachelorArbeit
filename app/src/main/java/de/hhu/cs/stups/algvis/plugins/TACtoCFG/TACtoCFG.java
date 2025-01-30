@@ -16,11 +16,13 @@ import java.util.*;
 public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     private final Table tac;
     private final Graph cfg;
+    private HashMap<ThreeAddressCodeInstruction, Node> nodeMap;
     private TACtoCFGAlgo currentPluginInstance;
     private String currentlyLoadedCode;
     public TACtoCFG() {
         this.tac = new Table(DataRepresentation.Location.left);
         this.cfg = new Graph(DataRepresentation.Location.center);
+        this.nodeMap = new HashMap<>();
         currentlyLoadedCode = "empty";
     }
 
@@ -45,20 +47,24 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
         return buttons;
     }
     public void refreshGuiElements() {
+        //set TAC
         for (int i = 0; i < currentPluginInstance.getCode().size(); i++) {
             tac.setRowTo(currentPluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
         }
         tac.resizeColumnDisplay();
         tac.highlightLine(currentPluginInstance.getCurrentInstructionAddress());
 
+
+        //set CFG
         List<ThreeAddressCodeInstruction> leaders = currentPluginInstance.getSortedLeaders();
-        HashMap<ThreeAddressCodeInstruction, Node> nodeMap = new HashMap<>();
         for (ThreeAddressCodeInstruction leader : currentPluginInstance.getSortedLeaders()) {
             //adding all Nodes
-            String nodeID = Integer.toString(leader.getAddress());
-            String nodeLabel = "B_" + leaders.indexOf(leader);
-            nodeMap.put(leader, new Node(nodeID, nodeLabel));
-            cfg.addNode(nodeMap.get(leader));
+            if(!nodeMap.containsKey(leader)) {
+                Node node = new Node();
+                nodeMap.put(leader, node);
+                cfg.addNode(nodeMap.get(leader));
+            }
+            cfg.changeLabelOfNode(nodeMap.get(leader), Integer.toString(leaders.indexOf(leader)));
         }
         Map<ThreeAddressCodeInstruction, Set<ThreeAddressCodeInstruction>> successorList = currentPluginInstance.getSuccessorMap();
         for (ThreeAddressCodeInstruction source:successorList.keySet()) {
@@ -75,6 +81,7 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     public void reset() {
         currentPluginInstance = new TACtoCFGAlgo(currentlyLoadedCode);
         cfg.purge();
+        nodeMap = new HashMap<>();
         tac.resizeTable(currentPluginInstance.getCode().size(), 8);
         refreshGuiElements();
     }

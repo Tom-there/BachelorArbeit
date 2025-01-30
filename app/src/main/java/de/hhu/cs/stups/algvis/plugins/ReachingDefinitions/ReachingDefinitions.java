@@ -61,22 +61,6 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
             instructionList.setRowTo(code.get(i).getRepresentationAsStringArray(), i);
         }
 
-        //updating graph
-        HashMap<Integer, Node> nodeMap = new HashMap<>();
-        for (BasicBlock block : basicBlocks) {
-            //adding all Nodes
-            String nodeID = Integer.toString(block.firstAddress());
-            String nodeLabel = code.get(block.firstAddress()).getComment();
-            nodeMap.put(block.firstAddress(), new Node(nodeID, nodeLabel));
-            basicBlockRelationGraph.addNode(nodeMap.get(block.firstAddress()));
-        }
-        for (BasicBlock basicBlock : basicBlocks) {
-            //adding all Edges
-            Node n = nodeMap.get(basicBlock.firstAddress());
-            List<Integer> successors = basicBlock.firstAddressesOfSuccessors();
-            successors.forEach(s -> basicBlockRelationGraph.addEdge(new Edge(n, nodeMap.get(s))));
-        }
-
         //updating data flow
         List<Map<BasicBlock, Set<String>>> inTable = pluginInstance.getIn();
         List<Map<BasicBlock, Set<String>>> outTable = pluginInstance.getOut();
@@ -146,8 +130,26 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
     @Override
     public void reset() {
         pluginInstance = new ReachingDefinitionsAlgo(currentlyLoadedCode);
-        basicBlockRelationGraph.purge();
         instructionList.resizeTable(pluginInstance.getCode().size(), 8);
+
+        basicBlockRelationGraph.purge();
+        //updating graph
+        HashMap<Integer, Node> nodeMap = new HashMap<>();
+        for (BasicBlock block : pluginInstance.getBasicBlocks()) {
+            //adding all Nodes
+            String nodeLabel = "B_"+pluginInstance.getBasicBlocks().indexOf(block);
+            Node node = new Node();
+            nodeMap.put(block.firstAddress(), node);
+            basicBlockRelationGraph.addNode(nodeMap.get(block.firstAddress()));
+            basicBlockRelationGraph.changeLabelOfNode(node, nodeLabel);
+        }
+        for (BasicBlock basicBlock : pluginInstance.getBasicBlocks()) {
+            //adding all Edges
+            Node n = nodeMap.get(basicBlock.firstAddress());
+            List<Integer> successors = basicBlock.firstAddressesOfSuccessors();
+            successors.forEach(s -> basicBlockRelationGraph.addEdge(new Edge(n, nodeMap.get(s))));
+        }
+
         refreshGuiElements();
     }
     @Override
