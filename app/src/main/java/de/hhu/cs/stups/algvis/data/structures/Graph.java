@@ -16,7 +16,6 @@ import java.util.List;
 public class Graph implements DataRepresentation {
     private final JPanel exportedPanel;
     private org.graphstream.graph.Graph graph;
-    private View view;
     private final DataRepresentation.Location location;
     private HashMap<String, Node> nodes;
     private HashMap<String, Edge> edges;
@@ -37,7 +36,17 @@ public class Graph implements DataRepresentation {
             }
             case null, default -> System.err.println("ERROR, while generating Graph(Content visualizing). Locator parameter was not able to be interpreted");
         }
-        purge();
+
+        nodes = new HashSet<>();
+        edges = new HashSet<>();
+        graph = new MultiGraph("Graph");
+        graph.setAttribute("ui.stylesheet", "graph { padding: 40px; } node { text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #EBA; text-color: #222; }");
+        SwingViewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+        View view = viewer.addDefaultView(false);
+
+        viewer.enableAutoLayout();
+        exportedPanel.removeAll();
+        exportedPanel.add((Component) view, BorderLayout.CENTER);
     }
 
     @Override
@@ -61,7 +70,7 @@ public class Graph implements DataRepresentation {
         if(nodes.containsKey(nodeID))
             graph.getNode(nodeID).setAttribute("ui.label", label);
     }
-    public void addNodeWithEdges(Node newNode, List<Node> targets){
+    public void addNodeWithEdges(Node newNode, Collection<Node> targets){
         addNode(newNode);
         for (Node target:targets) {
             addEdgeFromNodes(newNode, target);
@@ -77,17 +86,14 @@ public class Graph implements DataRepresentation {
         addEdge(new Edge(sourceNode, targetNode));
     }
     public void purge() {
-        graph = new MultiGraph("Graph");
-        nodes = new HashMap<>();
-        edges = new HashMap<>();
-
-        graph.setAttribute("ui.stylesheet", "graph { padding: 40px; } node { text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #EBA; text-color: #222; }");
-        SwingViewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
-        view = viewer.addDefaultView(false);
-
-        viewer.enableAutoLayout();
-        exportedPanel.removeAll();
-        exportedPanel.add((Component) view, BorderLayout.CENTER);
+        for (Edge edge: new HashSet<>(edges)) {
+            graph.removeEdge(edge.getID());
+            edges.remove(edge);
+        }
+        for (Node node: new HashSet<>(nodes)) {
+            graph.removeNode(node.getID());
+            nodes.remove(node);
+        }
     }
 
     public  HashMap<String, Node> getNodes(){
