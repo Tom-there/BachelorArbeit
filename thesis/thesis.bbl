@@ -32,4 +32,10 @@
 \newblock \url{https://graphstream-project.org/}. --
 \newblock zuletzt besucht am 30.01.2025
 
+\bibitem[GTd]{GS_data}
+\textsc{Graphstream-Team}:
+\newblock \emph{Storing, retrieving and displaying data in graphs}.
+\newblock \url{https://graphstream-project.org/doc/Tutorials/Storing-retrieving-and-displaying-data-in-graphs/}. --
+\newblock zuletzt besucht am 31.01.2025
+
 \end{thebibliography}

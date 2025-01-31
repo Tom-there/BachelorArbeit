@@ -43,27 +43,23 @@ public class Graph implements DataRepresentation {
         nodes = new HashSet<>();
         edges = new HashSet<>();
         graph = new MultiGraph("Graph");
-        graph.setAttribute("ui.stylesheet", "graph { padding: 40px; } node { text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #EBA; text-color: #222; }");
+        graph.setAttribute("ui.stylesheet", "graph { padding: 40px; } node { text-alignment: at-right; text-padding: 2px, 3px; text-background-mode: rounded-box; text-background-color: #EBA; text-color: #222; }");
         viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
         View view = viewer.addDefaultView(false);
 
         layout = new LinLog();
         viewer.enableAutoLayout(layout);
 
-        exportedPanel.removeAll();
         exportedPanel.add((Component) view, BorderLayout.CENTER);
     }
-
     @Override
     public Component getSwingComponent() {
         return exportedPanel;
     }
-
     @Override
     public DataRepresentation.Location getComponentLocation() {
         return location;
     }
-
     public void addNode(Node newNode){
         if(nodes.contains(newNode))
             return;
@@ -71,37 +67,36 @@ public class Graph implements DataRepresentation {
         graph.addNode(newNode.getId());
         layout.shake();
     }
-    public void changeLabelOfNode(Node node, String label) {
+    public void removeNode(Node node){
+        if(!nodes.contains(node))
+            return;
+        nodes.remove(node);
+        graph.removeNode(node.getId());
+        layout.shake();
+    }
+    public void setLabelOfNode(Node node, String label) {
         if(nodes.contains(node))
             graph.getNode(node.getId()).setAttribute("ui.label", label);
 
     }
-    public void addNodeWithEdges(Node newNode, Collection<Node> targets){
-        addNode(newNode);
-        for (Node target:targets) {
-            addEdgeFromNodes(newNode, target);
-        }
-    }
     public void addEdge(Edge newEdge){
-        if(!edges.contains(newEdge)) {
-            edges.add(newEdge);
-            graph.addEdge(newEdge.getID(), newEdge.sourceNode().getId(), newEdge.targetNode().getId(), true);
-        }
+        if(edges.contains(newEdge))
+            return;
+        edges.add(newEdge);
+        graph.addEdge(newEdge.getID(), newEdge.sourceNode().getId(), newEdge.targetNode().getId(), true);
     }
-    public void addEdgeFromNodes(Node sourceNode, Node targetNode){
-        addEdge(new Edge(sourceNode, targetNode));
+    public void removeEdge(Edge edge){
+        if(!edges.contains(edge))
+            return;
+        edges.remove(edge);
+        graph.removeEdge(edge.getID());
     }
     public void purge() {
-        for (Edge edge: new HashSet<>(edges)) {
-            graph.removeEdge(edge.getID());
-            edges.remove(edge);
-        }
-        for (Node node: new HashSet<>(nodes)) {
-            graph.removeNode(node.getId());
-            nodes.remove(node);
-        }
+        for (Edge edge: new HashSet<>(edges))
+            removeEdge(edge);
+        for (Node node: new HashSet<>(nodes))
+            removeNode(node);
     }
-
     public  Set<Node> getNodes(){
         return nodes;
     }

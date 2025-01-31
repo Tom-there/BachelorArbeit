@@ -121,14 +121,14 @@ public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleStep
         HashMap<Integer, Node> nodeMap = new HashMap<>();
         for (ThreeAddressCodeInstruction instruction : pluginInstance.getInstructions()) {
             //generate representation
-            String[] rep = new String[5];
-            System.arraycopy(instruction.getRepresentationAsStringArray(), 1, rep, 0, 5);
-            String nodeLabel = Arrays.stream(rep).reduce("", (a, b) -> a + " " + b);
+            String[] rep = new String[6];
+            System.arraycopy(instruction.getRepresentationAsStringArray(), 1, rep, 0, 6);
+            String nodeLabel = Arrays.stream(rep).filter(s -> !s.isEmpty()).reduce("", (a, b) -> a + " " + b);
             //add Node
             Node node = new Node();
             nodeMap.put(instruction.getAddress(), node);
             instructionFlowGraph.addNode(nodeMap.get(instruction.getAddress()));
-            instructionFlowGraph.changeLabelOfNode(node, nodeLabel);
+            instructionFlowGraph.setLabelOfNode(node, nodeLabel);
         }
         for (ThreeAddressCodeInstruction instruction : pluginInstance.getInstructions()) {
             //adding all Edges

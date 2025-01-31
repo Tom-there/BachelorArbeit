@@ -140,7 +140,7 @@ public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps
             Node node = new Node();
             nodeMap.put(block.firstAddress(), node);
             basicBlockRelationGraph.addNode(nodeMap.get(block.firstAddress()));
-            basicBlockRelationGraph.changeLabelOfNode(node, nodeLabel);
+            basicBlockRelationGraph.setLabelOfNode(node, nodeLabel);
         }
         for (BasicBlock basicBlock : pluginInstance.getBasicBlocks()) {
             //adding all Edges

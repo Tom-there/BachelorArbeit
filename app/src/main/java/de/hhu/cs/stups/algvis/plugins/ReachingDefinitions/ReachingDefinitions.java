@@ -141,7 +141,7 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
             Node node = new Node();
             nodeMap.put(block.firstAddress(), node);
             basicBlockRelationGraph.addNode(nodeMap.get(block.firstAddress()));
-            basicBlockRelationGraph.changeLabelOfNode(node, nodeLabel);
+            basicBlockRelationGraph.setLabelOfNode(node, nodeLabel);
         }
         for (BasicBlock basicBlock : pluginInstance.getBasicBlocks()) {
             //adding all Edges

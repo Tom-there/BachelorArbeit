@@ -12,24 +12,24 @@
 \contentsline {subsection}{\numberline {2.1}Gui}{10}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Darstellen von Daten}{11}{subsection.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.1}Graphen}{11}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Tabellen}{14}{subsubsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.3}Drei Address Code}{15}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Die ThreeAddressCodeInstruction Klasse}{15}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Die BasicBlock Record-Klasse}{18}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3}Die ThreeAddressCode Klasse}{19}{subsubsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.4}Implementierung von Algorithmen}{20}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Das Plugin Interface}{21}{subsubsection.2.4.1}%
-\contentsline {section}{\numberline {3}Implementierte Algorithmen}{22}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Erstellung von Grundblöcken aus 3-Address-Code}{23}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Erstellung eines Kontrollflussgraphen aus 3-Address-Code}{24}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Analyse von erreichenden Definitionen}{25}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Analyse von lebendigen Variablen bezüglich Grundblöcken}{26}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Analyse von lebendigen Variablen bezüglich einzelnen Instruktionen}{27}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Optimierung von Grundblöcken mit Konstantenfaltung}{28}{subsection.3.6}%
-\contentsline {section}{\numberline {4}Related Work}{29}{section.4}%
-\contentsline {section}{\numberline {5}Evaluation}{29}{section.5}%
-\contentsline {section}{\numberline {6}Future Work}{29}{section.6}%
-\contentsline {section}{\numberline {7}Fazit}{29}{section.7}%
-\contentsline {section}{Abbildungsverzeichnis}{30}{section*.32}%
-\contentsline {section}{Tabellenverzeichnis}{30}{section*.33}%
-\contentsline {section}{Literatur}{31}{section*.34}%
+\contentsline {subsubsection}{\numberline {2.2.2}Tabellen}{16}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Drei Address Code}{17}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Die ThreeAddressCodeInstruction Klasse}{17}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Die BasicBlock Record-Klasse}{20}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Die ThreeAddressCode Klasse}{21}{subsubsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}Implementierung von Algorithmen}{22}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Das Plugin Interface}{23}{subsubsection.2.4.1}%
+\contentsline {section}{\numberline {3}Implementierte Algorithmen}{24}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Erstellung von Grundblöcken aus 3-Address-Code}{25}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Erstellung eines Kontrollflussgraphen aus 3-Address-Code}{26}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Analyse von erreichenden Definitionen}{27}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Analyse von lebendigen Variablen bezüglich Grundblöcken}{28}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Analyse von lebendigen Variablen bezüglich einzelnen Instruktionen}{29}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Optimierung von Grundblöcken mit Konstantenfaltung}{30}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Related Work}{31}{section.4}%
+\contentsline {section}{\numberline {5}Evaluation}{31}{section.5}%
+\contentsline {section}{\numberline {6}Future Work}{31}{section.6}%
+\contentsline {section}{\numberline {7}Fazit}{31}{section.7}%
+\contentsline {section}{Abbildungsverzeichnis}{32}{section*.32}%
+\contentsline {section}{Tabellenverzeichnis}{32}{section*.33}%
+\contentsline {section}{Literatur}{33}{section*.34}%

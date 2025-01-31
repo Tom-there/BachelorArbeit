@@ -64,7 +64,7 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
                 nodeMap.put(leader, node);
                 cfg.addNode(nodeMap.get(leader));
             }
-            cfg.changeLabelOfNode(nodeMap.get(leader), Integer.toString(leaders.indexOf(leader)));
+            cfg.setLabelOfNode(nodeMap.get(leader), Integer.toString(leaders.indexOf(leader)));
         }
         Map<ThreeAddressCodeInstruction, Set<ThreeAddressCodeInstruction>> successorList = currentPluginInstance.getSuccessorMap();
         for (ThreeAddressCodeInstruction source:successorList.keySet()) {
