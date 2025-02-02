@@ -92,7 +92,7 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     }
     @Override
     public boolean hasNextStep() {
-        return currentPluginInstance.hasNextStep();
+        return !currentPluginInstance.isFinished();
     }
 
     //implementing LoadCodeFromFile

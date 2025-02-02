@@ -20,8 +20,8 @@ public class TACtoCFGAlgo {
         mode = Mode.findLeaders;
         currentInstructionAddress = 0;
     }
-    public boolean hasNextStep(){
-        return mode!=Mode.done;
+    public boolean isFinished(){
+        return mode == Mode.done;
     }
 
     /**

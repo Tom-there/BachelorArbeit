@@ -160,6 +160,6 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
     }
     @Override
     public boolean hasNextStep() {
-        return pluginInstance.isNotFinished();
+        return !pluginInstance.isFinished();
     }
 }

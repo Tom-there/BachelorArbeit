@@ -21,8 +21,8 @@ public class TACtoBBAlgo {
         mode = Mode.findLeaders;
     }
 
-    public boolean hasNextStep(){
-        return mode != Mode.done;
+    public boolean isFinished(){
+        return mode == Mode.done;
     }
    public void step() {
        if (currentInstructionAddress < 0) {

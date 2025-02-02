@@ -63,7 +63,7 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
 
     @Override
     public boolean hasNextStep() {
-        return pluginInstance.hasNextStep();
+        return !pluginInstance.isFinished();
     }
 
     //implementing LoadCodeFromFile

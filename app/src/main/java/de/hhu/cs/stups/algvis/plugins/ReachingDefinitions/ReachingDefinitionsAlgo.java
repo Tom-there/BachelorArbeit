@@ -5,7 +5,6 @@ import de.hhu.cs.stups.algvis.data.code.ThreeAddressCode;
 import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ReachingDefinitionsAlgo {
     private final List<BasicBlock> basicBlocks;
@@ -75,8 +74,8 @@ public class ReachingDefinitionsAlgo {
         changeInCurrentIteration = false;
     }
 
-    public boolean isNotFinished() {
-        return changeInLastIteration;
+    public boolean isFinished() {
+        return !changeInLastIteration;
     }
     public void step() {
         if(!changeInLastIteration)
