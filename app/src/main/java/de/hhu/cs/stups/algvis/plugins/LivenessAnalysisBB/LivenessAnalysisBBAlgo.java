@@ -2,12 +2,14 @@ package de.hhu.cs.stups.algvis.plugins.LivenessAnalysisBB;
 
 import de.hhu.cs.stups.algvis.data.code.BasicBlock;
 import de.hhu.cs.stups.algvis.data.code.ThreeAddressCode;
+import de.hhu.cs.stups.algvis.data.code.threeAddressCode.ThreeAddressCodeInstruction;
 
 import java.util.*;
 
 public class LivenessAnalysisBBAlgo {
     private final List<BasicBlock> basicBlocks;
     private final HashMap<BasicBlock, List<BasicBlock>> successors;
+    private final HashMap<BasicBlock, Set<String>> def, use;
     private final ThreeAddressCode code;
     private final List<Map<BasicBlock, Set<String>>> in;
     private final List<Map<BasicBlock, Set<String>>> out;
@@ -16,16 +18,47 @@ public class LivenessAnalysisBBAlgo {
     public LivenessAnalysisBBAlgo(String rawCode) {
         code = new ThreeAddressCode(rawCode);
         basicBlocks = code.getBasicBlocks();
-        successors = new HashMap<>(basicBlocks.size());
+        int size = basicBlocks.size();
+        successors = new HashMap<>(size);
+        def = new HashMap<>(size);
+        use = new HashMap<>(size);
         for (BasicBlock block:basicBlocks) {
             successors.put(block, new LinkedList<>());
+            def.put(block, new HashSet<>());
+            use.put(block, new HashSet<>());
         }
         for (BasicBlock block:basicBlocks) {
+            //successors
             List<Integer> firstAddressesOfSuccessors = block.firstAddressesOfSuccessors();
             for (int address:firstAddressesOfSuccessors) {
                 for (BasicBlock potentialSuccessor:basicBlocks) {
                     if(potentialSuccessor.firstAddress() == address)
                         successors.get(block).add(potentialSuccessor);
+                }
+            }
+            //def
+            Set<String> currentDefSet = def.get(block);
+            for (int i = block.lastAddress(); i >= block.firstAddress(); i--) {
+                ThreeAddressCodeInstruction instruction = code.get(i);
+                if(!instruction.writesValue())
+                    continue;
+                String identifier = instruction.getDestination();
+                currentDefSet.add(identifier);
+                for (int j = 0; j < i; j++) {
+                    if(code.get(j).getUsedIdentifiers().contains(identifier))
+                        currentDefSet.remove(identifier);
+                }
+            }
+            //use
+            Set<String> currentUseSet = use.get(block);
+            for (int i = block.lastAddress(); i >= block.firstAddress(); i--) {
+                ThreeAddressCodeInstruction instruction = code.get(i);
+                for (String used:instruction.getUsedIdentifiers()) {
+                    currentUseSet.add(used);
+                    for (int j = 0; j < i; j++) {
+                        if(code.get(j).writesValue() && code.get(j).getDestination().equals(used))
+                            currentUseSet.remove(used);
+                    }
                 }
             }
         }
@@ -72,9 +105,9 @@ public class LivenessAnalysisBBAlgo {
 
         //in_i = use u (out - def)
         Set<String> usedAndNotDefined = new HashSet<>(currentOut);
-        usedAndNotDefined.removeAll(code.def(currentBlock));
+        usedAndNotDefined.removeAll(def.get(currentBlock));
 
-        Set<String> currentIn = new HashSet<>(code.use(currentBlock));
+        Set<String> currentIn = new HashSet<>(use.get(currentBlock));
         currentIn.addAll(usedAndNotDefined);
 
         if(currentIteration>0){
@@ -98,4 +131,6 @@ public class LivenessAnalysisBBAlgo {
     public ThreeAddressCode getCode(){return code;}
     public List<Map<BasicBlock, Set<String>>> getIn(){return in;}
     public List<Map<BasicBlock, Set<String>>> getOut(){return out;}
+    public Map<BasicBlock, Set<String>> getDef(){return def;}
+    public Map<BasicBlock, Set<String>> getUse(){return use;}
 }

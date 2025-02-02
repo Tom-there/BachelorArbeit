@@ -14,17 +14,14 @@ import java.awt.event.MouseEvent;
 public class Table extends JTable implements DataRepresentation {
     private DataTableModel tableModel;
     private final Location location;
-    private final Mode mode;
     public Table(Location location, Mode mode){
         this.location = location;
-        this.mode = mode;
-        tableModel = new DataTableModel();
-        setModel(tableModel);
         switch (mode){
-            case code -> resizeTable(1, 8);
-            case normal -> resizeTable(1, 1);
+            case code -> tableModel = new DataTableModel(1, 8);
+            case normal -> tableModel = new DataTableModel();
             case null -> System.err.println("ERR - while generating Code(Content visualizing). Mode was null?");
         }
+        setModel(tableModel);
         switch (location){
             case left, right -> {
                 this.setMinimumSize(new Dimension(180, 480));
@@ -62,20 +59,18 @@ public class Table extends JTable implements DataRepresentation {
     }
     @Override
     public String getToolTipText(MouseEvent mouseEvent) {
+        String tip = null;
         Point p = mouseEvent.getPoint();
+
         int rowIndex = rowAtPoint(p);
         int colIndex = columnAtPoint(p);
-        super.getToolTipText(mouseEvent);
-        String tip = "";
+
         try{
             if(rowIndex<getRowCount() && rowIndex> -1
             && colIndex<getColumnCount() && colIndex> -1)
                 tip = tableModel.getValueAt(rowIndex, colIndex).toString();
-            else
-                tip = "";
-        }catch (NullPointerException ignored){
+        }catch (NullPointerException ignored){}
 
-        }
         return tip;
     }
     @Override

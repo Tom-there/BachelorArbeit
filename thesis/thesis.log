@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.13)  31 JAN 2025 13:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.13)  2 FEB 2025 18:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -920,7 +920,7 @@ Package hyperref Info: Link coloring OFF on input line 58.
 \@outlinefile=\write4
 \openout4 = `thesis.out'.
 
-<fig/hhu-logo-rgb.pdf, id=143, 1163.57709pt x 444.64217pt>
+<fig/hhu-logo-rgb.pdf, id=139, 1163.57709pt x 444.64217pt>
 File: fig/hhu-logo-rgb.pdf Graphic file (type pdf)
 <use fig/hhu-logo-rgb.pdf>
 Package pdftex.def Info: fig/hhu-logo-rgb.pdf  used on input line 61.
@@ -957,496 +957,553 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--13
 [1
 
 ]
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 35.
+Underfull \hbox (badness 1142) in paragraph at lines 39--39
+[][][]\T1/phv/m/n/9 Zwischencode hat vie-le Nut-zungs-ge-bie-te in ei-nem Com-pi-ler, ei-ner-seits ver-bin-det es das Fron-
+ []
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--42
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--46
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--77
-
+Overfull \hbox (2.42241pt too wide) in paragraph at lines 47--51
+[]\T1/phv/m/n/10.95 Für die-se Ba-che-lor-ar-beit wur-de ei-ne Teil-men-ge des im Drachenbuch[[], Ka-pi-tel 6.2.1]
  []
 
-Package cleveref Info: loaded `ngerman' language definitions on input line 77.
+Package cleveref Info: loaded `ngerman' language definitions on input line 73.
 [2]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 79.
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 82.
- (/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ts1phv.fd
+Underfull \hbox (badness 10000) in paragraph at lines 75--82
+
+ []
+
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 84.
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 88.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
 )
-Package cleveref Info: loaded `ngerman' language definitions on input line 109.
- [3]
-Underfull \hbox (badness 10000) in paragraph at lines 110--114
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 101.
+
+Overfull \hbox (3.74731pt too wide) in paragraph at lines 102--109
+\T1/phv/m/n/10.95 Um ein Pro-gramm in Grund-blö-cke auf-zu-tei-len kann man wie folgt vorgehen[[], S.643]: 
+ []
+
+Package cleveref Info: loaded `ngerman' language definitions on input line 115.
+[3]
+Package cleveref Info: loaded `ngerman' language definitions on input line 115.
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 116--120
 
  []
 
 
-Overfull \hbox (33.11238pt too wide) in paragraph at lines 126--127
+Overfull \hbox (33.11238pt too wide) in paragraph at lines 133--134
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-Package cleveref Info: loaded `ngerman' language definitions on input line 137.
-[4]
-Package cleveref Info: loaded `ngerman' language definitions on input line 176.
- [5]
-Underfull \hbox (badness 10000) in paragraph at lines 187--191
+Package cleveref Info: loaded `ngerman' language definitions on input line 144.
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 146--148
 
  []
 
+Package cleveref Info: loaded `ngerman' language definitions on input line 188.
+[6]
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 203.
 
-Overfull \hbox (13.07695pt too wide) in paragraph at lines 202--206
-\T1/phv/m/n/10.95 Com-pi-le-zeit be-rech-net, wo-durch sie zur Lauf-zeit nicht mehr be-rech-net wer-den muss.[[]] 
+Overfull \hbox (8.10036pt too wide) in paragraph at lines 214--218
+\T1/phv/m/n/10.95 Hierbei han-delt es sich um einen Fix-punk-tal-go-rith-mus. Das heiÿt, wir be-gin-nen mit $\OML/cmm/m/it/10.95 out\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 B\OT1/cmr/m/n/10.95 ] =
+ []
+
+Package cleveref Info: loaded `ngerman' language definitions on input line 221.
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 243--247
+
+ []
+
+Package cleveref Info: loaded `ngerman' language definitions on input line 261.
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 279--283
+
  []
 
 )
 Package cleveref Info: loaded `ngerman' language definitions on input line 76.
- [6] (./tex/02_implementierung.tex
-Underfull \hbox (badness 10000) in paragraph at lines 24--35
+ [9] (./tex/02_implementierung.tex
+<fig/3AC_classes.png, id=342, 1195.46625pt x 785.93625pt>
+File: fig/3AC_classes.png Graphic file (type png)
+<use fig/3AC_classes.png>
+Package pdftex.def Info: fig/3AC_classes.png  used on input line 26.
+(pdftex.def)             Requested size: 285.9494pt x 187.99295pt.
+Package cleveref Info: loaded `ngerman' language definitions on input line 32.
+ [10 <./fig/3AC_classes.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 33--42
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 37--40
-
+<fig/GUI_classes.png, id=356, 867.9627pt x 906.2658pt>
+File: fig/GUI_classes.png Graphic file (type png)
+<use fig/GUI_classes.png>
+Package pdftex.def Info: fig/GUI_classes.png  used on input line 49.
+(pdftex.def)             Requested size: 309.42632pt x 323.08871pt.
+[11 <./fig/GUI_classes.png>]
+Overfull \hbox (2.12105pt too wide) in paragraph at lines 68--71
+[]\T1/phv/m/n/10.95 Im Packa-ge \T1/phv/m/sl/10.95 de.hhu.cs.stups.algvis.data.code \T1/phv/m/n/10.95 sind die vor-hin ge-nann-ten Da-ten-struk-
  []
 
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 42--43
-
- []
-
-<fig/overview.png, id=334, 867.9627pt x 906.2658pt>
-File: fig/overview.png Graphic file (type png)
-<use fig/overview.png>
-Package pdftex.def Info: fig/overview.png  used on input line 46.
-(pdftex.def)             Requested size: 422.52576pt x 441.17015pt.
-Package cleveref Info: loaded `ngerman' language definitions on input line 51.
-[8 <./fig/overview.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 53--55
-
- []
-
-
-Overfull \hbox (57.73006pt too wide) in paragraph at lines 55--58
-\T1/phv/m/n/10.95 go-rith-men be-nö-ti-gen um hin-zu-ge-fügt zu wer-den, die-se wer-den in $\OML/cmm/m/it/10.95 de:hhu:cs:stups:algvis:plugins$
- []
-
-
-Overfull \hbox (27.57513pt too wide) in paragraph at lines 64--67
-\T1/phv/m/n/10.95 tu-ren für 3-Address-Code, Grund-blö-cke, 3-Address-Code-Instruktionen und -Operationen
- []
-
-[9]
-<fig/Screenshot_SplashScreen.png, id=347, 724.7075pt x 482.80376pt>
+Package cleveref Info: loaded `ngerman' language definitions on input line 73.
+[12]
+<fig/Screenshot_SplashScreen.png, id=372, 724.7075pt x 482.80376pt>
 File: fig/Screenshot_SplashScreen.png Graphic file (type png)
 <use fig/Screenshot_SplashScreen.png>
-Package pdftex.def Info: fig/Screenshot_SplashScreen.png  used on input line 95.
+Package pdftex.def Info: fig/Screenshot_SplashScreen.png  used on input line 99.
 (pdftex.def)             Requested size: 298.75262pt x 199.03377pt.
-Package cleveref Info: loaded `ngerman' language definitions on input line 104.
- [10 <./fig/Screenshot_SplashScreen.png>]
-<fig/DataRepresentation.png, id=357, 529.98pt x 544.0325pt>
-File: fig/DataRepresentation.png Graphic file (type png)
-<use fig/DataRepresentation.png>
-Package pdftex.def Info: fig/DataRepresentation.png  used on input line 108.
+Package cleveref Info: loaded `ngerman' language definitions on input line 108.
+ [13 <./fig/Screenshot_SplashScreen.png>]
+<fig/GUI_DataRepresentation.png, id=382, 529.98pt x 544.0325pt>
+File: fig/GUI_DataRepresentation.png Graphic file (type png)
+<use fig/GUI_DataRepresentation.png>
+Package pdftex.def Info: fig/GUI_DataRepresentation.png  used on input line 112.
 (pdftex.def)             Requested size: 128.0387pt x 131.43379pt.
 
-Underfull \hbox (badness 4899) in paragraph at lines 110--110
+Underfull \hbox (badness 4899) in paragraph at lines 114--114
 \T1/phv/m/n/10 pre-sen-ta-ti-on In-ter-face und
  []
 
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 114.
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--128
+Underfull \hbox (badness 10000) in paragraph at lines 130--132
 
  []
 
-<fig/Graph_rendering_pipeline.png, id=358, 154.5775pt x 564.1075pt>
-File: fig/Graph_rendering_pipeline.png Graphic file (type png)
-<use fig/Graph_rendering_pipeline.png>
-Package pdftex.def Info: fig/Graph_rendering_pipeline.png  used on input line 136.
-(pdftex.def)             Requested size: 55.48495pt x 202.48462pt.
+<fig/GUI_Graph_rendering_pipeline.png, id=383, 154.5775pt x 564.1075pt>
+File: fig/GUI_Graph_rendering_pipeline.png Graphic file (type png)
+<use fig/GUI_Graph_rendering_pipeline.png>
+Package pdftex.def Info: fig/GUI_Graph_rendering_pipeline.png  used on input line 140.
+(pdftex.def)             Requested size: 58.6825pt x 214.1565pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--137
-[]\T1/phv/b/n/10 Abbildung 5:
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+[]\T1/phv/b/n/10 Abbildung 6:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--137
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
 |\T1/phv/m/n/10 Ren-de-ring Pi-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--137
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
 \T1/phv/m/n/10 pe-li-ne ei-nes
  []
 
 
-Underfull \hbox (badness 4739) in paragraph at lines 141--146
-[]\T1/phv/m/n/10.95 Graphen wer-den durch die Klas-se $\OML/cmm/m/it/10.95 Graph$ \T1/phv/m/n/10.95 und zwei Sub-klas-
+Underfull \hbox (badness 2012) in paragraph at lines 145--151
+[]\T1/phv/m/n/10.95 Graphen wer-den durch die Klas-se \T1/phv/m/sl/10.95 Graph \T1/phv/m/n/10.95 und zwei Sub-klas-sen
  []
 
 
-Underfull \hbox (badness 4229) in paragraph at lines 141--146
-\T1/phv/m/n/10.95 sen $\OML/cmm/m/it/10.95 Edge$ \T1/phv/m/n/10.95 und $\OML/cmm/m/it/10.95 Node$ \T1/phv/m/n/10.95 rea-li-siert. Da das schrei-ben ei-ner ei-ge-
+Underfull \hbox (badness 2626) in paragraph at lines 145--151
+\T1/phv/m/sl/10.95 Ed-ge \T1/phv/m/n/10.95 und \T1/phv/m/sl/10.95 No-de \T1/phv/m/n/10.95 rea-li-siert(siehe Abb. []7[]). Da das schrei-ben ei-
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 141--146
-\T1/phv/m/n/10.95 nen En-gi-ne für die Dar-stel-lung von Gra-phen die-se Ba-che-lor-ar-
- []
-
-
-Underfull \hbox (badness 3769) in paragraph at lines 141--146
-\T1/phv/m/n/10.95 beit über-tref-fen wür-de wur-de ent-schie-den ei-ne ex-ter-ne Li-bra-ry
- []
-
-
-Underfull \hbox (badness 2293) in paragraph at lines 141--146
-\T1/phv/m/n/10.95 zu ver-wen-den. Hier wur-de sich für GraphStream[[]] ent-schie-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 141--146
+Underfull \hbox (badness 10000) in paragraph at lines 145--151
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--162
+Underfull \hbox (badness 10000) in paragraph at lines 152--167
 
  []
 
-Package cleveref Info: loaded `ngerman' language definitions on input line 162.
-[11 <./fig/DataRepresentation.png> <./fig/Graph_rendering_pipeline.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 163--174
+Package cleveref Info: loaded `ngerman' language definitions on input line 167.
+[14 <./fig/GUI_DataRepresentation.png> <./fig/GUI_Graph_rendering_pipeline.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 168--179
 
  []
 
 
-Overfull \hbox (17.78867pt too wide) in paragraph at lines 180--183
+Overfull \hbox (17.78867pt too wide) in paragraph at lines 185--188
 \T1/phv/m/n/10.95 be-stimmt. Die-ses set-zen wir für das Graph-Objekt mit \T1/phv/m/sl/10.95 graph.setAttribute(^^Rui.stylesheet^^P,
  []
 
 
-Overfull \hbox (19.74387pt too wide) in paragraph at lines 183--190
+Overfull \hbox (19.74387pt too wide) in paragraph at lines 188--195
 \T1/phv/m/n/10.95 Kno-ten ein La-bel zu ge-ben ist un-ser Me-tho-den-auf-ruf folg-lich \T1/phv/m/sl/10.95 no-de.setAttribute(^^Rui.label^^P,
  []
 
-Package cleveref Info: loaded `ngerman' language definitions on input line 193.
-[12]
-<fig/Graph.png, id=386, 1451.4225pt x 752.8125pt>
-File: fig/Graph.png Graphic file (type png)
-<use fig/Graph.png>
-Package pdftex.def Info: fig/Graph.png  used on input line 198.
+Package cleveref Info: loaded `ngerman' language definitions on input line 198.
+[15]
+<fig/GUI_Graph_classes_methods.png, id=412, 1451.4225pt x 752.8125pt>
+File: fig/GUI_Graph_classes_methods.png Graphic file (type png)
+<use fig/GUI_Graph_classes_methods.png>
+Package pdftex.def Info: fig/GUI_Graph_classes_methods.png  used on input line 203.
 (pdftex.def)             Requested size: 422.52576pt x 219.14857pt.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/02/21 1.10 listings language file
 )
-Package cleveref Info: loaded `ngerman' language definitions on input line 218.
- [13 <./fig/Graph.png>]
-Overfull \hbox (26.54233pt too wide) in paragraph at lines 227--229
+Package cleveref Info: loaded `ngerman' language definitions on input line 223.
+ [16 <./fig/GUI_Graph_classes_methods.png>]
+Overfull \hbox (26.54233pt too wide) in paragraph at lines 232--234
 [][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (13.40222pt too wide) in paragraph at lines 233--234
+Overfull \hbox (13.40222pt too wide) in paragraph at lines 238--239
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--263
+Underfull \hbox (badness 10000) in paragraph at lines 266--268
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 265--267
+Underfull \hbox (badness 10000) in paragraph at lines 270--272
 
  []
 
-Package cleveref Info: loaded `ngerman' language definitions on input line 267.
-[14]
-Overfull \hbox (63.6325pt too wide) in paragraph at lines 268--270
-[]\T1/phv/m/n/10.95 Um ei-nem Kno-ten ein La-bel zu ge-ben, wur-de die Me-tho-de \T1/phv/m/sl/10.95 set-La-be-lOf-No-de(Node, String)\T1/phv/m/n/10.95 (Listing []6[])hin-
- []
-
-Package cleveref Info: loaded `ngerman' language definitions on input line 279.
-[15]
-Package cleveref Info: loaded `ngerman' language definitions on input line 289.
- [16]
-<fig/3AC_compact.png, id=444, 1195.46625pt x 785.93625pt>
-File: fig/3AC_compact.png Graphic file (type png)
-<use fig/3AC_compact.png>
-Package pdftex.def Info: fig/3AC_compact.png  used on input line 295.
-(pdftex.def)             Requested size: 341.43436pt x 224.47385pt.
-<fig/ThreeAddressCodeInstruction.png, id=445, 656.4525pt x 568.1225pt>
-File: fig/ThreeAddressCodeInstruction.png Graphic file (type png)
-<use fig/ThreeAddressCodeInstruction.png>
-Package pdftex.def Info: fig/ThreeAddressCodeInstruction.png  used on input line 305.
-(pdftex.def)             Requested size: 170.71393pt x 147.74303pt.
-
-Overfull \hbox (29.87201pt too wide) in paragraph at lines 305--306
- [][] 
- []
-
-
-Underfull \hbox (badness 4316) in paragraph at lines 306--306
-[]\T1/phv/b/n/10 Abbildung 8: |\T1/phv/m/n/10 Die Three-Ad-
- []
-
-
-Underfull \hbox (badness 3118) in paragraph at lines 310--321
-[]\T1/phv/m/n/10.95 Um ein-zel-ne In-struk-tio-nen zu mo-del-lie-ren wird die
- []
-
-
-Underfull \hbox (badness 6300) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 ne-riert wer-den die-se aus ei-nem $\OML/cmm/m/it/10.95 String$ \T1/phv/m/n/10.95 und ei-
- []
-
-
-Underfull \hbox (badness 2781) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 ner Zahl, näm-lich der Ad-dres-se an der Stel-le ih-
- []
-
-
-Underfull \hbox (badness 3049) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 res Pro-gramms. Dies ist zwar streng ge-se-hen ei-
- []
-
-
-Underfull \hbox (badness 1127) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 ne Un-ge-nau-ig-keit der Mo-del-lie-rung, da je-de In-struk-
- []
-
-
-Underfull \hbox (badness 1478) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 ti-on zwar ei-ne Ad-dres-se hat, die-se je-doch nicht in
- []
-
-
-Underfull \hbox (badness 1019) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 Be-zug di-rekt auf die ein-zel-ne In-struk-ti-on steht, son-
- []
-
-
-Underfull \hbox (badness 4505) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 dern nur im Kon-text des Ge-samt-pro-gram-mes ge-
- []
-
-
-Underfull \hbox (badness 2671) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 se-hen wer-den kann. Da es je-doch die Im-ple-men-
- []
-
-
-Underfull \hbox (badness 1694) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 tie-rung ei-ni-ger fol-gen-der Me-tho-den stark ver-ein-facht
- []
-
-
-Underfull \hbox (badness 3219) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 und um ak-tu-el-len Use-ca-se des Fra-me-works kei-ne
- []
-
-
-Underfull \hbox (badness 1281) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 In-struk-ti-on oh-ne ein-deu-ti-ge Ad-dres-se exis-tiert wur-de
- []
-
-
-Underfull \hbox (badness 1097) in paragraph at lines 310--321
-\T1/phv/m/n/10.95 sich da-zu ent-schie-den für die-se ein At-tri-but an-zu-le-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 310--321
+Package cleveref Info: loaded `ngerman' language definitions on input line 272.
+[17]
+Package cleveref Info: loaded `ngerman' language definitions on input line 284.
+ [18]
+Underfull \hbox (badness 10000) in paragraph at lines 286--289
 
  []
 
-Package cleveref Info: loaded `ngerman' language definitions on input line 322.
-[17 <./fig/3AC_compact.png> <./fig/ThreeAddressCodeInstruction.png>]
-Overfull \hbox (0.99173pt too wide) in paragraph at lines 325--327
-[]\T1/phv/m/n/10.95 Eine $\OML/cmm/m/it/10.95 ThreeAddressCodeOperation$ \T1/phv/m/n/10.95 dies ist ein enum, wel-ches de-fi-niert wel-che Ope-
+<fig/GUI_Table_classes.png, id=466, 724.7075pt x 945.5325pt>
+File: fig/GUI_Table_classes.png Graphic file (type png)
+<use fig/GUI_Table_classes.png>
+Package pdftex.def Info: fig/GUI_Table_classes.png  used on input line 292.
+(pdftex.def)             Requested size: 281.68384pt x 367.51541pt.
+Package cleveref Info: loaded `ngerman' language definitions on input line 303.
+[19 <./fig/GUI_Table_classes.png>]
+Overfull \hbox (13.40222pt too wide) in paragraph at lines 320--321
+[][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-Package cleveref Info: loaded `ngerman' language definitions on input line 337.
-[18]
-Overfull \hbox (0.26212pt too wide) in paragraph at lines 344--345
+
+Underfull \hbox (badness 10000) in paragraph at lines 345--347
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 348--352
+
+ []
+
+Package cleveref Info: loaded `ngerman' language definitions on input line 352.
+[20]
+Overfull \hbox (13.40222pt too wide) in paragraph at lines 363--364
+[][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.40222pt too wide) in paragraph at lines 380--381
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (33.11238pt too wide) in paragraph at lines 381--382
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (171.0835pt too wide) in paragraph at lines 388--389
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (190.79366pt too wide) in paragraph at lines 389--390
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+Package cleveref Info: loaded `ngerman' language definitions on input line 390.
+[21]
+Overfull \hbox (19.97227pt too wide) in paragraph at lines 390--391
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (79.10275pt too wide) in paragraph at lines 392--393
 [][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (26.54233pt too wide) in paragraph at lines 350--351
+Overfull \hbox (223.64392pt too wide) in paragraph at lines 393--394
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+Package cleveref Info: loaded `ngerman' language definitions on input line 399.
+[22]
+File: fig/3AC_classes.png Graphic file (type png)
+<use fig/3AC_classes.png>
+Package pdftex.def Info: fig/3AC_classes.png  used on input line 405.
+(pdftex.def)             Requested size: 341.43436pt x 224.47385pt.
+<fig/3AC_ThreeAddressCodeInstruction_methods.png, id=541, 656.4525pt x 568.1225pt>
+File: fig/3AC_ThreeAddressCodeInstruction_methods.png Graphic file (type png)
+<use fig/3AC_ThreeAddressCodeInstruction_methods.png>
+Package pdftex.def Info: fig/3AC_ThreeAddressCodeInstruction_methods.png  used on input line 415.
+(pdftex.def)             Requested size: 170.71393pt x 147.74303pt.
+
+Overfull \hbox (29.87201pt too wide) in paragraph at lines 415--416
+ [][] 
+ []
+
+
+Underfull \hbox (badness 1371) in paragraph at lines 416--416
+[]\T1/phv/b/n/10 Abbildung 10: |\T1/phv/m/n/10 Die Three-Ad-
+ []
+
+
+Underfull \hbox (badness 3118) in paragraph at lines 420--431
+[]\T1/phv/m/n/10.95 Um ein-zel-ne In-struk-tio-nen zu mo-del-lie-ren wird die
+ []
+
+
+Underfull \hbox (badness 2865) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 Klas-se \T1/phv/m/sl/10.95 Three-Ad-dress-Co-de-In-struc-ti-on \T1/phv/m/n/10.95 ver-wen-det. Ge-
+ []
+
+
+Underfull \hbox (badness 3646) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 ne-riert wer-den die-se aus ei-nem String und ei-ner
+ []
+
+
+Underfull \hbox (badness 1845) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 gramms. Dies ist zwar streng ge-se-hen ei-ne Un-ge-
+ []
+
+
+Underfull \hbox (badness 1331) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 nau-ig-keit der Mo-del-lie-rung, da je-de In-struk-ti-on zwar
+ []
+
+
+Underfull \hbox (badness 1178) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 ei-ne Ad-dres-se hat, die-se je-doch nicht in Be-zug di-
+ []
+
+
+Underfull \hbox (badness 1728) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 rekt auf die ein-zel-ne In-struk-ti-on steht, son-dern nur
+ []
+
+
+Underfull \hbox (badness 4072) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 Da es je-doch die Im-ple-men-tie-rung ei-ni-ger fol-gen-
+ []
+
+
+Underfull \hbox (badness 3428) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 der Me-tho-den stark ver-ein-facht und kei-ne In-struk-
+ []
+
+
+Underfull \hbox (badness 2653) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 ti-on oh-ne ein-deu-ti-ge Ad-dres-se an der sie ge-spei-
+ []
+
+
+Underfull \hbox (badness 2435) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 chert oder aus-ge-führt wer-den kann exis-tiert wur-de
+ []
+
+
+Underfull \hbox (badness 1097) in paragraph at lines 420--431
+\T1/phv/m/n/10.95 sich da-zu ent-schie-den für die-se ein At-tri-but an-zu-le-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 420--431
+
+ []
+
+Package cleveref Info: loaded `ngerman' language definitions on input line 431.
+[23 <./fig/3AC_ThreeAddressCodeInstruction_methods.png>]
+Package cleveref Info: loaded `ngerman' language definitions on input line 451.
+ [24]
+Overfull \hbox (0.26212pt too wide) in paragraph at lines 453--454
+[][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (26.54233pt too wide) in paragraph at lines 459--460
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 352.
+(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 461.
 
-Overfull \hbox (26.54233pt too wide) in paragraph at lines 356--357
+Overfull \hbox (26.54233pt too wide) in paragraph at lines 465--466
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 374--375
+Underfull \hbox (badness 10000) in paragraph at lines 483--484
 
  []
 
-Package cleveref Info: loaded `ngerman' language definitions on input line 384.
-[19]
-Overfull \hbox (316.71951pt too wide) in paragraph at lines 398--399
+Package cleveref Info: loaded `ngerman' language definitions on input line 485.
+[25]
+Overfull \hbox (0.11145pt too wide) in paragraph at lines 499--504
+[]\T1/phv/m/sl/10.95 nextPossibleInstructionAddresses() \T1/phv/m/n/10.95 gibt die Men-ge der nächs-ten mög-li-chen In-struk-
+ []
+
+
+Overfull \hbox (316.71951pt too wide) in paragraph at lines 508--509
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-<fig/BasicBlock.png, id=499, 604.2575pt x 238.8925pt>
-File: fig/BasicBlock.png Graphic file (type png)
-<use fig/BasicBlock.png>
-Package pdftex.def Info: fig/BasicBlock.png  used on input line 409.
+<fig/3AC_BasicBlock_methods.png, id=593, 604.2575pt x 238.8925pt>
+File: fig/3AC_BasicBlock_methods.png Graphic file (type png)
+<use fig/3AC_BasicBlock_methods.png>
+Package pdftex.def Info: fig/3AC_BasicBlock_methods.png  used on input line 517.
 (pdftex.def)             Requested size: 170.71393pt x 67.49089pt.
 
-Overfull \hbox (29.87201pt too wide) in paragraph at lines 409--410
+Overfull \hbox (29.87201pt too wide) in paragraph at lines 517--518
  [][] 
  []
 
 
-Underfull \hbox (badness 4316) in paragraph at lines 410--410
-[]\T1/phv/b/n/10 Abbildung 9: |\T1/phv/m/n/10 Die Three-Ad-
+Underfull \hbox (badness 1371) in paragraph at lines 518--518
+[]\T1/phv/b/n/10 Abbildung 11: |\T1/phv/m/n/10 Die Three-Ad-
  []
 
 
-Underfull \hbox (badness 2253) in paragraph at lines 413--417
+Underfull \hbox (badness 2253) in paragraph at lines 521--525
 []\T1/phv/m/n/10.95 Um die Grund-blö-cke ei-nes Pro-gram-mes zu mo-del-
  []
 
 
-Underfull \hbox (badness 6876) in paragraph at lines 413--417
+Underfull \hbox (badness 6876) in paragraph at lines 521--525
 \T1/phv/m/n/10.95 lie-ren reicht uns ei-ne Record-Klasse, da Grund-
  []
 
 
-Underfull \hbox (badness 5622) in paragraph at lines 413--417
+Underfull \hbox (badness 5622) in paragraph at lines 521--525
 \T1/phv/m/n/10.95 blö-cke im-mer ein ge-sam-tes Pro-gramm par-ti-tio-nie-
  []
 
 
-Underfull \hbox (badness 2237) in paragraph at lines 413--417
+Underfull \hbox (badness 2237) in paragraph at lines 521--525
 \T1/phv/m/n/10.95 ren reicht es die ers-te und letz-te der ent-hal-te-nen
  []
 
 
-Underfull \hbox (badness 3039) in paragraph at lines 413--417
+Underfull \hbox (badness 3039) in paragraph at lines 521--525
 \T1/phv/m/n/10.95 und die Men-ge der fol-gen-den Ad-dres-sen zu ken-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 413--417
+Underfull \hbox (badness 10000) in paragraph at lines 521--525
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 413--417
+Underfull \hbox (badness 10000) in paragraph at lines 521--525
 
  []
 
-Package cleveref Info: loaded `ngerman' language definitions on input line 420.
-[20 <./fig/BasicBlock.png>]
-Package cleveref Info: loaded `ngerman' language definitions on input line 424.
- [21]
-<fig/ToolBarButtons.png, id=517, 821.0675pt x 857.2025pt>
-File: fig/ToolBarButtons.png Graphic file (type png)
-<use fig/ToolBarButtons.png>
-Package pdftex.def Info: fig/ToolBarButtons.png  used on input line 431.
+Package cleveref Info: loaded `ngerman' language definitions on input line 528.
+[26 <./fig/3AC_BasicBlock_methods.png>]
+Package cleveref Info: loaded `ngerman' language definitions on input line 532.
+ [27]
+<fig/GUI_ToolBar_classes_methods.png, id=613, 821.0675pt x 857.2025pt>
+File: fig/GUI_ToolBar_classes_methods.png Graphic file (type png)
+<use fig/GUI_ToolBar_classes_methods.png>
+Package pdftex.def Info: fig/GUI_ToolBar_classes_methods.png  used on input line 539.
 (pdftex.def)             Requested size: 170.71393pt x 178.22589pt.
 
-Overfull \hbox (29.87201pt too wide) in paragraph at lines 431--432
+Overfull \hbox (29.87201pt too wide) in paragraph at lines 539--540
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 427--434
+Underfull \hbox (badness 10000) in paragraph at lines 535--542
 
  []
 
 
-Underfull \hbox (badness 1648) in paragraph at lines 437--447
+Underfull \hbox (badness 1648) in paragraph at lines 545--555
 \T1/phv/m/n/10.95 ter-face. Letz-te-res spe-zi-fi-ziert al-le But-tons wel-che in
  []
 
 
-Underfull \hbox (badness 1297) in paragraph at lines 437--447
+Underfull \hbox (badness 1297) in paragraph at lines 545--555
 \T1/phv/m/n/10.95 der Tool-bar an-ge-zeigt wer-den wenn das Plu-gin ge-
  []
 
 
-Underfull \hbox (badness 3000) in paragraph at lines 437--447
+Underfull \hbox (badness 3000) in paragraph at lines 545--555
 \T1/phv/m/n/10.95 la-den ist. Es ist sehr ein-fach auf-ge-baut und ver-
  []
 
 
-Underfull \hbox (badness 2564) in paragraph at lines 437--447
+Underfull \hbox (badness 2564) in paragraph at lines 545--555
 \T1/phv/m/n/10.95 gibt einen String zu-rück, wel-cher im But-ton an-ge-
  []
 
 
-Underfull \hbox (badness 1701) in paragraph at lines 437--447
+Underfull \hbox (badness 1701) in paragraph at lines 545--555
 \T1/phv/m/n/10.95 führt wenn der Nut-zer auf den zu-ge-hö-ri-gen But-ton
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 437--447
+Underfull \hbox (badness 10000) in paragraph at lines 545--555
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 437--447
+Underfull \hbox (badness 10000) in paragraph at lines 545--555
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 448--456
+Underfull \hbox (badness 10000) in paragraph at lines 556--564
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 457--463
+Underfull \hbox (badness 10000) in paragraph at lines 565--571
 
  []
 
-Package cleveref Info: loaded `ngerman' language definitions on input line 464.
-[22 <./fig/ToolBarButtons.png>]
-<fig/Plugin.png, id=526, 694.595pt x 293.095pt>
-File: fig/Plugin.png Graphic file (type png)
-<use fig/Plugin.png>
-Package pdftex.def Info: fig/Plugin.png  used on input line 468.
+Package cleveref Info: loaded `ngerman' language definitions on input line 572.
+[28 <./fig/GUI_ToolBar_classes_methods.png>]
+<fig/Plugin_methods.png, id=622, 694.595pt x 293.095pt>
+File: fig/Plugin_methods.png Graphic file (type png)
+<use fig/Plugin_methods.png>
+Package pdftex.def Info: fig/Plugin_methods.png  used on input line 576.
 (pdftex.def)             Requested size: 170.71393pt x 72.03474pt.
 
-Overfull \hbox (29.87201pt too wide) in paragraph at lines 468--469
+Overfull \hbox (29.87201pt too wide) in paragraph at lines 576--577
  [][] 
  []
 
 
-Overfull \hbox (55.17764pt too wide) in paragraph at lines 482--484
+Overfull \hbox (55.17764pt too wide) in paragraph at lines 590--592
 []$\OML/cmm/m/it/10.95 getGuiElements\OT1/cmr/m/n/10.95 ()$ \T1/phv/m/n/10.95 gibt ei-ne Col-lec-ti-on der $\OML/cmm/m/it/10.95 DataRepresentation$
  []
 
 )
 Package cleveref Info: loaded `ngerman' language definitions on input line 78.
- [23 <./fig/Plugin.png>] (./tex/03_plugins.tex
-Package cleveref Info: loaded `ngerman' language definitions on input line 4.
- [24]
-Package cleveref Info: loaded `ngerman' language definitions on input line 7.
- [25]
-Package cleveref Info: loaded `ngerman' language definitions on input line 10.
- [26]
-Package cleveref Info: loaded `ngerman' language definitions on input line 13.
- [27]
-Package cleveref Info: loaded `ngerman' language definitions on input line 16.
- [28]
-Package cleveref Info: loaded `ngerman' language definitions on input line 19.
- [29])
+ [29 <./fig/Plugin_methods.png>] (./tex/03_plugins.tex
+Package cleveref Info: loaded `ngerman' language definitions on input line 5.
+ [30]
+Package cleveref Info: loaded `ngerman' language definitions on input line 8.
+ [31]
+Package cleveref Info: loaded `ngerman' language definitions on input line 11.
+ [32]
+Package cleveref Info: loaded `ngerman' language definitions on input line 14.
+ [33]
+Package cleveref Info: loaded `ngerman' language definitions on input line 17.
+ [34]
+Package cleveref Info: loaded `ngerman' language definitions on input line 20.
+ [35])
 Package cleveref Info: loaded `ngerman' language definitions on input line 80.
- [30] (./tex/04_einordnung.tex) [31] (./thesis.lof
+ [36] (./tex/04_einordnung.tex) [37] (./thesis.lof
 Package cleveref Info: loaded `ngerman' language definitions on input line 1.
 )
 \tf@lof=\write6
@@ -1459,7 +1516,7 @@ Package cleveref Info: loaded `ngerman' language definitions on input line 1.
 \openout7 = `thesis.lot'.
 
 Package cleveref Info: loaded `ngerman' language definitions on input line 95.
- [32
+ [38
 
 ] (./thesis.bbl
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 15.
@@ -1487,7 +1544,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--40
 
 )
 Package cleveref Info: loaded `ngerman' language definitions on input line 104.
- [33
+ [39
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] (./thesis.aux
 Package cleveref Info: loaded `ngerman' language definitions on input line 8.
@@ -1497,21 +1554,21 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 42DE0733584A4C68CA0FDCAF321E6D02;6021.
+(rerunfilecheck)             Checksum: BDC7EF539DA04DDA9DAECF12CCB6D747;5868.
  ) 
 Here is how much of TeX's memory you used:
- 43972 strings out of 474116
- 1020908 string characters out of 5743682
+ 44021 strings out of 474116
+ 1021645 string characters out of 5743682
  1973187 words of memory out of 5000000
- 65406 multiletter control sequences out of 15000+600000
+ 65400 multiletter control sequences out of 15000+600000
  614468 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,9n,121p,747b,1437s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on thesis.pdf (41 pages, 1062681 bytes).
+ 117i,11n,121p,747b,2563s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on thesis.pdf (47 pages, 1208156 bytes).
 PDF statistics:
- 712 PDF objects out of 1000 (max. 8388607)
- 615 compressed objects within 7 object streams
- 250 named destinations out of 1000 (max. 500000)
- 340 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 839 PDF objects out of 1000 (max. 8388607)
+ 725 compressed objects within 8 object streams
+ 305 named destinations out of 1000 (max. 500000)
+ 337 words of extra memory for PDF output out of 10000 (max. 10000000)
 

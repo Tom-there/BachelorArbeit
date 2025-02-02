@@ -78,8 +78,8 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
         dataFlow.setValueAt("kill[B]", 2, 0);
         for (int col = 0; col < basicBlocks.size(); col++) {
             BasicBlock block = basicBlocks.get(col);
-            String genBlock = collectIdentifierSetToString(pluginInstance.getCode().gen(block).stream().map(String::valueOf).collect(Collectors.toSet()));
-            String killBlock = collectIdentifierSetToString(pluginInstance.getCode().kill(block).stream().map(String::valueOf).collect(Collectors.toSet()));
+            String genBlock = collectIdentifierSetToString(pluginInstance.getGen().get(block).stream().map(String::valueOf).collect(Collectors.toSet()));
+            String killBlock = collectIdentifierSetToString(pluginInstance.getKill().get(block).stream().map(String::valueOf).collect(Collectors.toSet()));
             dataFlow.setValueAt(genBlock, 1, col+1);
             dataFlow.setValueAt(killBlock, 2, col+1);
         }
@@ -152,6 +152,7 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
 
         refreshGuiElements();
     }
+
     @Override
     public void step() {
         pluginInstance.step();

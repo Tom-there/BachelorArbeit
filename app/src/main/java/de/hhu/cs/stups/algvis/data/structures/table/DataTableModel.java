@@ -7,14 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataTableModel implements TableModel {
-
     private final String[][] data;
     public final List<TableModelListener> listeners;
-
     public DataTableModel(){
         this(1, 1);
     }
-
     public DataTableModel(int rows, int cols) {
         data = new String[rows][cols];
         listeners = new ArrayList<>(1);
@@ -53,13 +50,11 @@ public class DataTableModel implements TableModel {
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         if(aValue == null)
-            return;
-        listeners.forEach(l -> l.tableChanged(new TableModelEvent(this, rowIndex, columnIndex)));
+            aValue="";
         try {
             data[rowIndex][columnIndex] = aValue.toString();
-            for (TableModelListener listener:listeners) {
-                listener.tableChanged(new TableModelEvent(this, rowIndex, columnIndex));
-            }
+            TableModelEvent event = new TableModelEvent(this, rowIndex, rowIndex, columnIndex);
+            listeners.forEach(l->l.tableChanged(event));
         }
         catch (ArrayIndexOutOfBoundsException e){
             System.err.println("ERR - nonExisting Index used for CodeTableModel.setValueAt(_, _)");
