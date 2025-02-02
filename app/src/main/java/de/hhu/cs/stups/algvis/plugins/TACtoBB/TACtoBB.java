@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Set;
 
 public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
-    private final Table tac;
-    private TACtoBBAlgo currentPluginInstance;
+    private final Table code;
+    private TACtoBBAlgo pluginInstance;
     private String currentlyLoadedCode;
     public TACtoBB() {
-        this.tac = new Table();
+        this.code = new Table();
         currentlyLoadedCode = "empty";
     }
 
@@ -31,7 +31,7 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
     }
     @Override
     public Set<DataRepresentation> getGuiElements() {
-        return Set.of(tac);
+        return Set.of(code);
     }
     @Override
     public List<ToolBarButton> getToolBarButtons() {
@@ -42,28 +42,28 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
     }
 
     public void refreshGuiElements() {
-        for (int i = 0; i < currentPluginInstance.getCode().size(); i++) {
-            tac.setRowTo(currentPluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
+        for (int i = 0; i < pluginInstance.getCode().size(); i++) {
+            code.setRowTo(pluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
         }
-        tac.highlightLine(currentPluginInstance.getCurrentInstructionAddress());
+        code.highlightLine(pluginInstance.getCurrentInstructionAddress());
     }
 
     //implementing SimpleSteps
     @Override
     public void reset() {
-        currentPluginInstance = new TACtoBBAlgo(currentlyLoadedCode);
-        tac.resizeTable(currentPluginInstance.getCode().size(), 8);
+        pluginInstance = new TACtoBBAlgo(currentlyLoadedCode);
+        code.resizeTable(pluginInstance.getCode().size(), 8);
         refreshGuiElements();
     }
     @Override
     public void step() {
-        currentPluginInstance.step();
+        pluginInstance.step();
         refreshGuiElements();
     }
 
     @Override
     public boolean hasNextStep() {
-        return currentPluginInstance.hasNextStep();
+        return pluginInstance.hasNextStep();
     }
 
     //implementing LoadCodeFromFile

@@ -14,14 +14,14 @@ import de.hhu.cs.stups.algvis.pluginSpecs.toolBarButtons.SimpleSteps;
 import java.util.*;
 
 public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
-    private final Table tac;
-    private final Graph cfg;
+    private final Table code;
+    private final Graph controlFlowGraph;
     private HashMap<ThreeAddressCodeInstruction, Node> nodeMap;
     private TACtoCFGAlgo currentPluginInstance;
     private String currentlyLoadedCode;
     public TACtoCFG() {
-        this.tac = new Table(DataRepresentation.Location.left);
-        this.cfg = new Graph(DataRepresentation.Location.center);
+        this.code = new Table(DataRepresentation.Location.left);
+        this.controlFlowGraph = new Graph(DataRepresentation.Location.center);
         this.nodeMap = new HashMap<>();
         currentlyLoadedCode = "empty";
     }
@@ -37,7 +37,7 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     }
     @Override
     public Set<DataRepresentation> getGuiElements() {
-        return Set.of(tac, cfg);
+        return Set.of(code, controlFlowGraph);
     }
     @Override
     public List<ToolBarButton> getToolBarButtons() {
@@ -49,10 +49,10 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     public void refreshGuiElements() {
         //set TAC
         for (int i = 0; i < currentPluginInstance.getCode().size(); i++) {
-            tac.setRowTo(currentPluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
+            code.setRowTo(currentPluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
         }
-        tac.resizeColumnDisplay();
-        tac.highlightLine(currentPluginInstance.getCurrentInstructionAddress());
+        code.resizeColumnDisplay();
+        code.highlightLine(currentPluginInstance.getCurrentInstructionAddress());
 
 
         //set CFG
@@ -62,16 +62,16 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
             if(!nodeMap.containsKey(leader)) {
                 Node node = new Node();
                 nodeMap.put(leader, node);
-                cfg.addNode(nodeMap.get(leader));
+                controlFlowGraph.addNode(nodeMap.get(leader));
             }
-            cfg.setLabelOfNode(nodeMap.get(leader), Integer.toString(leaders.indexOf(leader)));
+            controlFlowGraph.setLabelOfNode(nodeMap.get(leader), Integer.toString(leaders.indexOf(leader)));
         }
         Map<ThreeAddressCodeInstruction, Set<ThreeAddressCodeInstruction>> successorList = currentPluginInstance.getSuccessorMap();
         for (ThreeAddressCodeInstruction source:successorList.keySet()) {
             Node sourceNode = nodeMap.get(source);
             for (ThreeAddressCodeInstruction destination:successorList.get(source)) {
                 Node destinationNode = nodeMap.get(destination);
-                cfg.addEdge(new Edge(sourceNode, destinationNode));
+                controlFlowGraph.addEdge(new Edge(sourceNode, destinationNode));
             }
         }
     }
@@ -80,9 +80,9 @@ public class TACtoCFG implements Plugin, SimpleSteps, LoadCodeFromFile {
     @Override
     public void reset() {
         currentPluginInstance = new TACtoCFGAlgo(currentlyLoadedCode);
-        cfg.purge();
+        controlFlowGraph.purge();
         nodeMap = new HashMap<>();
-        tac.resizeTable(currentPluginInstance.getCode().size(), 8);
+        code.resizeTable(currentPluginInstance.getCode().size(), 8);
         refreshGuiElements();
     }
     @Override

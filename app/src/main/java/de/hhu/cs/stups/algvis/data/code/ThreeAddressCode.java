@@ -15,10 +15,9 @@ public class ThreeAddressCode{
         for (int i = 0; i < inputLines.size(); i++) {
             code.add(new ThreeAddressCodeInstruction(inputLines.get(i), i));
         }
-
         basicBlocks = toBBList(code);
     }
-    private List<BasicBlock> toBBList(List<ThreeAddressCodeInstruction> code){
+    private static List<BasicBlock> toBBList(List<ThreeAddressCodeInstruction> code){
         //get all leaders
         Set<ThreeAddressCodeInstruction> leaders = new HashSet<>(1);
         if(!code.isEmpty())
@@ -67,13 +66,6 @@ public class ThreeAddressCode{
             basicBlocks.add(basicBlock);
         }
         return basicBlocks;
-    }
-    private List<ThreeAddressCodeInstruction> instructionsOfBasicBlock(BasicBlock block){
-        List<ThreeAddressCodeInstruction> instructions = new ArrayList<>(block.lastAddress()-block.firstAddress());
-        for (int i = block.firstAddress(); i < block.lastAddress()+1; i++){
-            instructions.add(code.get(i));
-        }
-        return instructions;
     }
     public int size() {
         return code.size();

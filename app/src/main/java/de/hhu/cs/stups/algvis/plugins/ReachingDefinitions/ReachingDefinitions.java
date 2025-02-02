@@ -17,14 +17,14 @@ import java.util.stream.Collectors;
 
 public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleSteps {
     private final Table instructionList, dataFlow;
-    private final Graph basicBlockRelationGraph;
+    private final Graph controlFlowGraph;
     private ReachingDefinitionsAlgo pluginInstance;
     private String currentlyLoadedCode;
     public ReachingDefinitions(){
         currentlyLoadedCode = "empty";
         this.instructionList = new Table(DataRepresentation.Location.left);
         this.dataFlow = new Table(DataRepresentation.Location.right);
-        this.basicBlockRelationGraph = new Graph();
+        this.controlFlowGraph = new Graph();
     }
     @Override
     public String getName() {
@@ -36,7 +36,7 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
     }
     @Override
     public Set<DataRepresentation> getGuiElements() {
-        return Set.of(instructionList, basicBlockRelationGraph, dataFlow);
+        return Set.of(instructionList, controlFlowGraph, dataFlow);
     }
     @Override
     public List<ToolBarButton> getToolBarButtons() {
@@ -132,7 +132,7 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
         pluginInstance = new ReachingDefinitionsAlgo(currentlyLoadedCode);
         instructionList.resizeTable(pluginInstance.getCode().size(), 8);
 
-        basicBlockRelationGraph.purge();
+        controlFlowGraph.purge();
         //updating graph
         HashMap<Integer, Node> nodeMap = new HashMap<>();
         for (BasicBlock block : pluginInstance.getBasicBlocks()) {
@@ -140,14 +140,14 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
             String nodeLabel = "B_"+pluginInstance.getBasicBlocks().indexOf(block);
             Node node = new Node();
             nodeMap.put(block.firstAddress(), node);
-            basicBlockRelationGraph.addNode(nodeMap.get(block.firstAddress()));
-            basicBlockRelationGraph.setLabelOfNode(node, nodeLabel);
+            controlFlowGraph.addNode(nodeMap.get(block.firstAddress()));
+            controlFlowGraph.setLabelOfNode(node, nodeLabel);
         }
         for (BasicBlock basicBlock : pluginInstance.getBasicBlocks()) {
             //adding all Edges
             Node n = nodeMap.get(basicBlock.firstAddress());
             List<Integer> successors = basicBlock.firstAddressesOfSuccessors();
-            successors.forEach(s -> basicBlockRelationGraph.addEdge(new Edge(n, nodeMap.get(s))));
+            successors.forEach(s -> controlFlowGraph.addEdge(new Edge(n, nodeMap.get(s))));
         }
 
         refreshGuiElements();
