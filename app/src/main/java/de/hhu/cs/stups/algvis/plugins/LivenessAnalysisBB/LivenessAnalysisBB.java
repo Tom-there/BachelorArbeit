@@ -89,22 +89,22 @@ public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps
             int rowIndex = (i*2)+3;
             Map<BasicBlock, Set<String>> inMap = inTable.get(i);
             Map<BasicBlock, Set<String>> outMap = outTable.get(i);
-            dataFlow.setValueAt("in[B]^"+i, rowIndex, 0);
-            dataFlow.setValueAt("out[B]^"+i, rowIndex+1, 0);
+            dataFlow.setValueAt("out[B]^"+i, rowIndex, 0);
+            dataFlow.setValueAt("in[B]^"+i, rowIndex+1, 0);
             for (int j = 0; j < basicBlocks.size(); j++) {
-                Set<String> inBlock = inMap.getOrDefault(basicBlocks.get(j), Set.of("-"));
-                String inString = collectIdentifierSetToString(inBlock);
-                if(inString.isEmpty())
-                    dataFlow.setValueAt("", rowIndex, j+1);
-                else
-                    dataFlow.setValueAt(inString, rowIndex, j+1);
-
                 Set<String> outBlock = outMap.getOrDefault(basicBlocks.get(j), Set.of("-"));
                 String outString = collectIdentifierSetToString(outBlock);
                 if(outString.isEmpty())
+                    dataFlow.setValueAt("", rowIndex, j+1);
+                else
+                    dataFlow.setValueAt(outString, rowIndex, j+1);
+
+                Set<String> inBlock = inMap.getOrDefault(basicBlocks.get(j), Set.of("-"));
+                String inString = collectIdentifierSetToString(inBlock);
+                if(inString.isEmpty())
                     dataFlow.setValueAt("", rowIndex+1, j+1);
                 else
-                    dataFlow.setValueAt(outString, rowIndex+1, j+1);
+                    dataFlow.setValueAt(inString, rowIndex+1, j+1);
             }
         }
     }

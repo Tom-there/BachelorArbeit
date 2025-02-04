@@ -26,7 +26,7 @@ public class ThreeAddressCode{
             if(code.get(i).canJump()){
                 ThreeAddressCodeInstruction destination = code.get(Integer.parseInt(code.get(i).getDestination()));
                 leaders.add(destination);
-                if(i+1<code.size() && code.get(i).getOperation()!= ThreeAddressCodeOperation.jmp)
+                if(i+1<code.size())
                     leaders.add(code.get(i+1));
             }
         }

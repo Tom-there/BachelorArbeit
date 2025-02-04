@@ -11,24 +11,24 @@
 \contentsline {subsection}{\numberline {2.1}Gui}{12}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Darstellen von Daten}{13}{subsection.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.1}Graphen}{13}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Tabellen}{18}{subsubsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.3}Drei Address Code}{22}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Die ThreeAddressCodeInstruction Klasse}{22}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Die BasicBlock Record-Klasse}{25}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3}Die ThreeAddressCode Klasse}{26}{subsubsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.4}Implementierung von Algorithmen}{27}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Das Plugin Interface}{28}{subsubsection.2.4.1}%
-\contentsline {section}{\numberline {3}Implementierte Algorithmen}{29}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Erstellung von Grundblöcken aus 3-Address-Code}{30}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Erstellung eines Kontrollflussgraphen aus 3-Address-Code}{31}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Analyse von erreichenden Definitionen}{32}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Analyse von lebendigen Variablen bezüglich Grundblöcken}{33}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Analyse von lebendigen Variablen bezüglich einzelnen Instruktionen}{34}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Optimierung von Grundblöcken mit Konstantenfaltung}{35}{subsection.3.6}%
-\contentsline {section}{\numberline {4}Related Work}{36}{section.4}%
-\contentsline {section}{\numberline {5}Evaluation}{36}{section.5}%
-\contentsline {section}{\numberline {6}Future Work}{36}{section.6}%
-\contentsline {section}{\numberline {7}Fazit}{36}{section.7}%
-\contentsline {section}{Abbildungsverzeichnis}{37}{section*.29}%
-\contentsline {section}{Tabellenverzeichnis}{37}{section*.30}%
-\contentsline {section}{Literatur}{38}{section*.31}%
+\contentsline {subsubsection}{\numberline {2.2.2}Tabellen}{16}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Drei Address Code}{18}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Die ThreeAddressCodeInstruction Klasse}{18}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Die BasicBlock Record-Klasse}{20}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Die ThreeAddressCode Klasse}{20}{subsubsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}Implementierung von Algorithmen}{21}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Das Plugin Interface}{22}{subsubsection.2.4.1}%
+\contentsline {section}{\numberline {3}Implementierte Algorithmen}{23}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Erstellung von Grundblöcken aus 3-Address-Code}{24}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Erstellung eines Kontrollflussgraphen aus 3-Address-Code}{27}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Analyse von erreichenden Definitionen}{30}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Analyse von lebendigen Variablen bezüglich Grundblöcken}{31}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Analyse von lebendigen Variablen bezüglich einzelnen Instruktionen}{32}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Related Work}{33}{section.4}%
+\contentsline {section}{\numberline {5}Evaluation}{33}{section.5}%
+\contentsline {section}{\numberline {6}Future Work}{33}{section.6}%
+\contentsline {section}{\numberline {7}Fazit}{33}{section.7}%
+\contentsline {section}{Anhang{}~A\hspace {1em}Codebeispiele}{34}{section*.27}%
+\contentsline {section}{Abbildungsverzeichnis}{41}{section*.28}%
+\contentsline {section}{Tabellenverzeichnis}{41}{section*.29}%
+\contentsline {section}{Literatur}{42}{section*.30}%

@@ -68,6 +68,7 @@ public class Gui{
         case DataRepresentation.Location.center -> contentPanel.add(content.getSwingComponent(), BorderLayout.CENTER);
       }
     }
+    frame.setTitle("Algvis - " + plugin.getName());
     contentPanel.setVisible(true);
     refreshFrame();
   }

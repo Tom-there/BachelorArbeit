@@ -9,14 +9,12 @@ import java.util.*;
 public class TACtoBBAlgo {
     private final ThreeAddressCode code;
     private final Set<ThreeAddressCodeInstruction> leaders;
-    private final Map<ThreeAddressCodeInstruction, Set<ThreeAddressCodeInstruction>> successorMap;
     private int currentInstructionAddress;
     private Mode mode;
     private enum Mode{findLeaders, mapLeaders, done}
     public TACtoBBAlgo(String input){
         code = new ThreeAddressCode(input);
         leaders = new HashSet<>(code.getBasicBlocks().size());
-        successorMap = new HashMap<>(code.getBasicBlocks().size());
         currentInstructionAddress = 0;
         mode = Mode.findLeaders;
     }
@@ -25,13 +23,15 @@ public class TACtoBBAlgo {
         return mode == Mode.done;
     }
    public void step() {
-       if (currentInstructionAddress < 0) {
-           System.err.println("ERROR - Instruction Addresses cannot be negative");
-           return;
-       }
        switch (mode){
-           case findLeaders -> checkIfAddressIsALeader(currentInstructionAddress);
-           case mapLeaders -> mapAddressToItsLeader(currentInstructionAddress);
+           case findLeaders -> {
+               if(currentInstructionAddress == 0) {
+                   code.get(0).setComment("Leader");
+                   leaders.add(code.get(0));
+               }else
+                   checkJump(currentInstructionAddress);
+           }
+           case mapLeaders -> mapAddressToItsBlock(currentInstructionAddress);
            case done -> System.out.println("No more steps");
            case null -> {
                System.err.println("ERR - Mode was null, this should not happen");
@@ -46,13 +46,8 @@ public class TACtoBBAlgo {
        if (!(currentInstructionAddress < code.size()) && mode == Mode.mapLeaders)
            mode = Mode.done;
     }
-
-    private void checkIfAddressIsALeader(int address) {
+    private void checkJump(int address) {
         ThreeAddressCodeInstruction instruction = code.get(address);
-        if(address == 0) {
-            instruction.setComment("Leader");
-            leaders.add(instruction);
-        }
         if(instruction.canJump()) {
             ThreeAddressCodeInstruction destination = code.get(Integer.parseInt(instruction.getDestination()));
             leaders.add(destination);
@@ -64,8 +59,7 @@ public class TACtoBBAlgo {
             }
         }
     }
-
-    private void mapAddressToItsLeader(int address) {
+    private void mapAddressToItsBlock(int address) {
         ThreeAddressCodeInstruction instruction = code.get(address);
         if(leaders.contains(instruction)){
             //do leader things
@@ -79,7 +73,6 @@ public class TACtoBBAlgo {
                 StringBuilder postfix = new StringBuilder(" jumps to ");
                 ThreeAddressCodeInstruction nextInstruction = instruction.nextPossibleInstructionAdresses().stream().map(code::get).min(ThreeAddressCodeInstruction::compareTo).get();
                 postfix.append(getSortedLeaders().indexOf(nextInstruction));
-                successorMap.put(getPreviousLeader(address), new HashSet<>(Set.of(nextInstruction)));
                 instruction.setComment(instruction.getComment() + postfix.toString());
             }
         }else if(leaders.contains(code.get(address+1))) {
@@ -90,7 +83,6 @@ public class TACtoBBAlgo {
                 if(i+1<nextInstructions.size())
                     postfix.append(", ");
             }
-            successorMap.put(getPreviousLeader(address), new HashSet<>(nextInstructions));
             instruction.setComment(instruction.getComment() + postfix);
         }
 

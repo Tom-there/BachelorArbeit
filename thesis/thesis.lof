@@ -1,15 +1,18 @@
 \babel@toc {ngerman}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Resultierender Kontrollflussgraph}}{5}{figure.caption.3}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Die Drei Address Code Klassen im Überblick}}{9}{figure.caption.6}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Klassenstruktur der GUI-Klassen}}{10}{figure.caption.7}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Ansicht des Programmes direkt nach Start}}{12}{figure.caption.8}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Das DataRepresentation Interface und sein Location enum}}{13}{figure.caption.9}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Rendering Pipeline eines Graphen}}{13}{figure.caption.10}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Klassenstruktur der Graph-Klassen}}{15}{figure.caption.11}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Klassenstruktur der Tabellenvisualisierung}}{18}{figure.caption.12}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Implementation der drei Address Code Klassen}}{22}{figure.caption.13}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Die ThreeAddressCodeInstruction Klasse}}{22}{figure.caption.14}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Die ThreeAddressCodeInstruction Klasse}}{25}{figure.caption.15}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Die ThreeAddressCode Klasse}}{26}{figure.caption.16}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Das ToolBarButton Interface}}{27}{figure.caption.17}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Das Plugin Interface}}{28}{figure.caption.18}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Resultierender Kontrollflussgraph}}{5}{figure.caption.2}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Die Drei Address Code Klassen im Überblick}}{9}{figure.caption.5}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Klassenstruktur der GUI-Klassen}}{11}{figure.caption.6}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Ansicht des Programmes direkt nach Start}}{12}{figure.caption.7}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Das DataRepresentation Interface und sein Location enum}}{13}{figure.caption.8}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Rendering Pipeline eines Graphen}}{13}{figure.caption.9}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Klassenstruktur der Graph-Klassen}}{15}{figure.caption.10}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Klassenstruktur der Tabellenvisualisierung}}{16}{figure.caption.11}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Implementation der drei Address Code Klassen}}{18}{figure.caption.12}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Die ThreeAddressCodeInstruction Klasse}}{18}{figure.caption.13}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Die ThreeAddressCodeInstruction Klasse}}{20}{figure.caption.14}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Die ThreeAddressCode Klasse}}{20}{figure.caption.15}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Das ToolBarButton Interface}}{21}{figure.caption.16}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Das Plugin Interface}}{22}{figure.caption.17}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Das "3-Address-Code zu Grundblöcken" Plugin}}{24}{figure.caption.18}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Das "3-Address-Code zu Grundblöcken" Plugin}}{27}{figure.caption.19}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Das "Reaching Definitions" Plugin}}{30}{figure.caption.20}%

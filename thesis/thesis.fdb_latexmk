@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex thesis"] 1738524964.98653 "thesis.aux" "thesis.bbl" "thesis" 1738524979.29522 0
-  "./references.bib" 1738320658.65768 1316 1f9a139d00ba43eac8aae40df19685b2 ""
+["bibtex thesis"] 1738610597.88472 "thesis.aux" "thesis.bbl" "thesis" 1738610602.19408 0
+  "./references.bib" 1738591837.58853 1717 94a98fc85e04549a200aef00ddc171af ""
   "/usr/local/texlive/2024/texmf-dist/bibtex/bst/din1505/alphadin.bst" 1199804912 55981 bb3d488c43a074e2c361fac27856c205 ""
-  "thesis.aux" 1738524978.98016 17101 ebb1e254baa34a32a11c3b67601c57d2 "pdflatex"
+  "thesis.aux" 1738610601.87916 20965 1b3d9a58f65dc8f2822f0216163b817e "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1738524975.19501 "thesis.tex" "thesis.pdf" "thesis" 1738524979.29536 0
+["pdflatex"] 1738610597.97623 "thesis.tex" "thesis.pdf" "thesis" 1738610602.19422 0
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -289,21 +289,25 @@
   "fig/GUI_ToolBar_classes_methods.png" 1738085974.35181 92382 b2a436a08a0381b2ccbfe329dc506048 ""
   "fig/GUI_classes.png" 1738001540.56686 196712 c7900e25908d23e1fb733fde48e07d5c ""
   "fig/Plugin_methods.png" 1738089001.84255 39528 1a2ba7c952604c4db8a2a777526b5b26 ""
+  "fig/Screenshot_ReachingDefinitions.png" 1738538038.26533 52668 c952d2878afaea7d537ff2d2ce8bdb06 ""
   "fig/Screenshot_SplashScreen.png" 1738098287.59052 18011 0b9030af58b6ad38b3af82ce47db6235 ""
+  "fig/Screenshot_TacToBb.png" 1738537677.03622 36692 a1f8c874177e0f25b79c4ffd31bb45f0 ""
+  "fig/Screenshot_TacToCFG.png" 1738537951.19822 38243 8e109774f1c2082f2fcb4423ef0e3a27 ""
   "fig/hhu-logo-rgb.pdf" 1571079178 378789 17fe8b49e53526571593582b91198dd4 ""
   "hhuthesis.cls" 1738230976.55458 11478 edec84f345d7d7daf5210dbe161181ce ""
   "tex/00_abstract.tex" 1738522222.1787 1589 51aa0e6adfb85fdad0a9a048d2e3615b ""
-  "tex/01_einleitung.tex" 1738523908.89448 15468 3998c9ee87f10a6c0d2a2145ef9fb537 ""
-  "tex/02_implementierung.tex" 1738524974.69043 31103 47a9ea571528e6b6e4a29ecce7c808f2 ""
-  "tex/03_plugins.tex" 1738353840.08321 680 bb31a0b2a47ae48967c859819330ac5a ""
+  "tex/01_einleitung.tex" 1738607028.94281 15986 2e442a41c3b6461190da799ca4c79a62 ""
+  "tex/02_implementierung.tex" 1738607117.90975 26291 b7514a03d52e27bab3da4b857fc86928 ""
+  "tex/03_plugins.tex" 1738610592.1733 12506 be1013f844ee8d2721e5775485b4eced ""
   "tex/04_einordnung.tex" 1738230832.27532 177 55e6e65af09f5b437c6a82320a22d137 ""
-  "thesis.aux" 1738524978.98016 17101 ebb1e254baa34a32a11c3b67601c57d2 "pdflatex"
-  "thesis.bbl" 1738524965.08664 1583 809f913b6592d0128eb0ef9f2f760710 "bibtex thesis"
-  "thesis.lof" 1738524978.99527 1651 974713c0285a0f9abf44a8ab227f331c "pdflatex"
-  "thesis.lot" 1738524978.99529 389 fd0eecbab5894a9950d0c6bf2b41a8e1 "pdflatex"
-  "thesis.out" 1738524978.9916 5868 bdc7ef539da04dda9daecf12ccb6d747 "pdflatex"
-  "thesis.tex" 1738231120.47237 3516 f096744e637bea0575a021f562f80f47 ""
-  "thesis.toc" 1738524978.99515 2974 5529c1fd45e43e477bda0e4e7baeeb1e "pdflatex"
+  "tex/05_appendix.tex" 1738588856.16282 10670 3f066860cdae7182e416570849f3fec3 ""
+  "thesis.aux" 1738610601.87916 20965 1b3d9a58f65dc8f2822f0216163b817e "pdflatex"
+  "thesis.bbl" 1738610597.97268 2019 788fb5ebf7fd07aec099600f537bb8bc "bibtex thesis"
+  "thesis.lof" 1738610601.89444 2014 ba641be88f7466cf8190a50100f85549 "pdflatex"
+  "thesis.lot" 1738610601.89447 389 e4a2a0759fb79fee78dc1ab792019c65 "pdflatex"
+  "thesis.out" 1738610601.89047 5707 f59d6aa850b62f9a4c3d31f1cfec2450 "pdflatex"
+  "thesis.tex" 1738582013.01795 3516 544bbaf7f97a5623f606fa07a33ccf2c ""
+  "thesis.toc" 1738610601.89073 2936 1fe9506115010de65f4d44954899fc94 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.lof"

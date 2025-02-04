@@ -46,9 +46,13 @@ public class ReachingDefinitionsAlgo {
                 ThreeAddressCodeInstruction currentInstruction = code.get(i);
                 if(!currentInstruction.writesValue())
                     continue;
-                if(currentGenSet.contains(i))
-                    continue;
-                currentGenSet.add(i);
+                boolean newVar = true;
+                for (int j : currentGenSet) {
+                    if(currentInstruction.getDestination().equals(code.get(j).getDestination()))
+                        newVar = false;
+                }
+                if(newVar)
+                    currentGenSet.add(i);
             }
             //kill
             Set<Integer> currentKillSet = kill.get(block);

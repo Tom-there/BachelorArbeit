@@ -45,6 +45,7 @@ public class TACtoBB implements Plugin, SimpleSteps, LoadCodeFromFile {
         for (int i = 0; i < pluginInstance.getCode().size(); i++) {
             code.setRowTo(pluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
         }
+        code.resizeColumnDisplay();
         code.highlightLine(pluginInstance.getCurrentInstructionAddress());
     }
 

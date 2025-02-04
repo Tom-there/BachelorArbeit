@@ -14,6 +14,16 @@
 \newblock München u.a. : Pearson Studium, 2008 (It, Informatik).
 \newblock \url{https://digitale-objekte.hbz-nrw.de/storage/2008/03/03/file_131/2343468.pdf}
 
+\bibitem[FR]{toolbox}
+\textsc{Fabian~Ruhland}, Isabel~W.:
+\newblock \emph{STUPSToolbox}.
+\newblock \url{https://github.com/isabelwingen/STUPS-Toolbox-2.0}
+
+\bibitem[fra]{VisOpt}
+\textsc{franzmandl}:
+\newblock \emph{VisOpt: Visual Optimizer}.
+\newblock \url{https://github.com/franzmandl/visopt}
+
 \bibitem[GTa]{GS_graphs}
 \textsc{Graphstream-Team}:
 \newblock \emph{Graph Implementations}.
@@ -37,5 +47,10 @@
 \newblock \emph{Storing, retrieving and displaying data in graphs}.
 \newblock \url{https://graphstream-project.org/doc/Tutorials/Storing-retrieving-and-displaying-data-in-graphs/}. --
 \newblock zuletzt besucht am 31.01.2025
+
+\bibitem[Kas]{dfav}
+\textsc{Kashiwa}, Shun:
+\newblock \emph{Data-Flow Analysis Visualizer}.
+\newblock \url{https://github.com/shumbo/DFAV}
 
 \end{thebibliography}
