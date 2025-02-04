@@ -103,11 +103,11 @@ public class ReachingDefinitionsAlgo {
     private void lookAtBlock(int i){
         BasicBlock currentBlock = basicBlocks.get(i);
         List<BasicBlock> ancestorBlocks = ancestors.get(currentBlock);
+
         List<String> generatedIdentifiers = gen.get(currentBlock).stream().map(j -> code.get(j).getDestination()).toList();
         List<String> killedIdentifiers = kill.get(currentBlock).stream().map(j -> code.get(j).getDestination()).toList();
 
-        Set<String> currentIn = in.get(currentIteration).getOrDefault(currentBlock, new HashSet<>());
-
+        Set<String> currentIn =  new HashSet<>();
         for (BasicBlock ancestorBlock:ancestorBlocks) {
             Set<String> lastOut = (currentIteration>0) ? out.get(currentIteration-1).get(ancestorBlock) : Set.of();
             currentIn.addAll(lastOut);

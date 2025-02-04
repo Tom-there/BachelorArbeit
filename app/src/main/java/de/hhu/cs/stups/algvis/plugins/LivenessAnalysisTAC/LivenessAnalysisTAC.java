@@ -75,22 +75,16 @@ public class LivenessAnalysisTAC implements Plugin, LoadCodeFromFile, SimpleStep
             int colIndex = (currentIteration*2)+3;
             Map<ThreeAddressCodeInstruction, Set<String>> inMap = inTable.get(currentIteration);
             Map<ThreeAddressCodeInstruction, Set<String>> outMap = outTable.get(currentIteration);
-            dataFlow.setValueAt("in[B]^"+currentIteration, 0, colIndex);
-            dataFlow.setValueAt("out[B]^"+currentIteration, 0, colIndex+1);
+            dataFlow.setValueAt("out[B]^"+currentIteration, 0, colIndex);
+            dataFlow.setValueAt("in[B]^"+currentIteration, 0, colIndex+1);
             for (int currentInstructionAddress = 0; currentInstructionAddress < instructions.size(); currentInstructionAddress++) {
-                Set<String> instructionIn = inMap.getOrDefault(instructions.get(currentInstructionAddress), Set.of("-"));
-                String inString = collectIdentifierSetToString(instructionIn);
-                if(inString.isEmpty())
-                    dataFlow.setValueAt("", currentInstructionAddress+1, colIndex);
-                else
-                    dataFlow.setValueAt(inString, currentInstructionAddress+1, colIndex);
-
                 Set<String> outBlock = outMap.getOrDefault(instructions.get(currentInstructionAddress), Set.of("-"));
                 String outString = collectIdentifierSetToString(outBlock);
-                if(outString.isEmpty())
-                    dataFlow.setValueAt("", currentInstructionAddress+1, colIndex+1);
-                else
-                    dataFlow.setValueAt(outString, currentInstructionAddress+1, colIndex+1);
+                dataFlow.setValueAt(outString, currentInstructionAddress+1, colIndex);
+
+                Set<String> instructionIn = inMap.getOrDefault(instructions.get(currentInstructionAddress), Set.of("-"));
+                String inString = collectIdentifierSetToString(instructionIn);
+                dataFlow.setValueAt(inString, currentInstructionAddress+1, colIndex+1);
             }
         }
     }

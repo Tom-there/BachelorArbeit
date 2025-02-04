@@ -47,19 +47,6 @@ public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps
     }
     public void refreshGuiElements() {
         List<BasicBlock> basicBlocks = pluginInstance.getBasicBlocks();
-        //updating Code representation
-        List<ThreeAddressCodeInstruction> code = new LinkedList<>();
-        for (int i = 0; i < basicBlocks.size(); i++) {
-            BasicBlock bb = basicBlocks.get(i);
-            for (int j = bb.firstAddress(); j <= bb.lastAddress(); j++) {
-                ThreeAddressCodeInstruction instruction = pluginInstance.getCode().get(j);
-                instruction.setComment("B_"+i);
-                code.add(instruction);
-            }
-        }
-        for (int i = 0; i < pluginInstance.getCode().size(); i++) {
-            instructionList.setRowTo(pluginInstance.getCode().get(i).getRepresentationAsStringArray(), i);
-        }
 
         //updating data flow
         List<Map<BasicBlock, Set<String>>> inTable = pluginInstance.getIn();
@@ -131,6 +118,19 @@ public class LivenessAnalysisBB implements Plugin, LoadCodeFromFile, SimpleSteps
     public void reset() {
         pluginInstance = new LivenessAnalysisBBAlgo(currentlyLoadedCode);
         instructionList.resizeTable(pluginInstance.getCode().size(), 8);
+
+        List<ThreeAddressCodeInstruction> code = new LinkedList<>();
+        for (int i = 0; i < pluginInstance.getBasicBlocks().size(); i++) {
+            BasicBlock bb = pluginInstance.getBasicBlocks().get(i);
+            for (int j = bb.firstAddress(); j <= bb.lastAddress(); j++) {
+                ThreeAddressCodeInstruction instruction = pluginInstance.getCode().get(j);
+                instruction.setComment("B_"+i);
+                code.add(instruction);
+            }
+        }
+        for (int i = 0; i < pluginInstance.getCode().size(); i++) {
+            instructionList.setRowTo(code.get(i).getRepresentationAsStringArray(), i);
+        }
 
         controlFlowGraph.purge();
         HashMap<Integer, Node> nodeMap = new HashMap<>();

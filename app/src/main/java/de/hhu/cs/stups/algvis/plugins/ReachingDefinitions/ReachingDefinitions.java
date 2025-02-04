@@ -47,21 +47,6 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
     }
     public void refreshGuiElements() {
         List<BasicBlock> basicBlocks = pluginInstance.getBasicBlocks();
-        //updating Code representation
-        List<ThreeAddressCodeInstruction> code = new LinkedList<>();
-        for (int i = 0; i < basicBlocks.size(); i++) {
-            BasicBlock bb = basicBlocks.get(i);
-            for (int j = bb.firstAddress(); j <= bb.lastAddress(); j++) {
-                ThreeAddressCodeInstruction instruction = pluginInstance.getCode().get(j);
-                instruction.setComment("B_"+i);
-                code.add(instruction);
-            }
-        }
-        for (int i = 0; i < code.size(); i++) {
-            instructionList.setRowTo(code.get(i).getRepresentationAsStringArray(), i);
-        }
-
-        //updating data flow
         List<Map<BasicBlock, Set<String>>> inTable = pluginInstance.getIn();
         List<Map<BasicBlock, Set<String>>> outTable = pluginInstance.getOut();
         int rows = pluginInstance.getIn().size()*2+3;
@@ -69,7 +54,7 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
         dataFlow.resizeTable(rows, cols);
 
         //set Headers
-        dataFlow.setValueAt("B:", 0, 0);
+        dataFlow.setValueAt("Block:", 0, 0);
         for (int col = 0; col < basicBlocks.size(); col++) {
             dataFlow.setValueAt("B_"+col,0, col+1);
         }
@@ -78,8 +63,8 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
         dataFlow.setValueAt("kill[B]", 2, 0);
         for (int col = 0; col < basicBlocks.size(); col++) {
             BasicBlock block = basicBlocks.get(col);
-            String genBlock = collectIdentifierSetToString(pluginInstance.getGen().get(block).stream().map(String::valueOf).collect(Collectors.toSet()));
-            String killBlock = collectIdentifierSetToString(pluginInstance.getKill().get(block).stream().map(String::valueOf).collect(Collectors.toSet()));
+            String genBlock = collectStringSet(pluginInstance.getGen().get(block).stream().map(String::valueOf).collect(Collectors.toSet()));
+            String killBlock = collectStringSet(pluginInstance.getKill().get(block).stream().map(String::valueOf).collect(Collectors.toSet()));
             dataFlow.setValueAt(genBlock, 1, col+1);
             dataFlow.setValueAt(killBlock, 2, col+1);
         }
@@ -93,23 +78,17 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
             dataFlow.setValueAt("out[B]^"+i, rowIndex+1, 0);
             for (int j = 0; j < basicBlocks.size(); j++) {
                 Set<String> inBlock = inMap.getOrDefault(basicBlocks.get(j), Set.of("-"));
-                String inString = collectIdentifierSetToString(inBlock);
-                if(inString.isEmpty())
-                    dataFlow.setValueAt("", rowIndex, j+1);
-                else
-                    dataFlow.setValueAt(inString, rowIndex, j+1);
+                String inString = collectStringSet(inBlock);
+                dataFlow.setValueAt(inString, rowIndex, j+1);
 
                 Set<String> outBlock = outMap.getOrDefault(basicBlocks.get(j), Set.of("-"));
-                String outString = collectIdentifierSetToString(outBlock);
-                if(outString.isEmpty())
-                    dataFlow.setValueAt("", rowIndex+1, j+1);
-                else
-                    dataFlow.setValueAt(outString, rowIndex+1, j+1);
+                String outString = collectStringSet(outBlock);
+                dataFlow.setValueAt(outString, rowIndex+1, j+1);
             }
         }
     }
 
-    private static String collectIdentifierSetToString(Set<String> identifiers) {
+    private static String collectStringSet(Set<String> identifiers) {
         StringBuilder ret = new StringBuilder();
         List<String> identifierList = identifiers.stream().toList();
         for (int k = 0; k < identifierList.size(); k++) {
@@ -131,6 +110,21 @@ public class ReachingDefinitions implements Plugin, LoadCodeFromFile, SimpleStep
     public void reset() {
         pluginInstance = new ReachingDefinitionsAlgo(currentlyLoadedCode);
         instructionList.resizeTable(pluginInstance.getCode().size(), 8);
+
+        List<ThreeAddressCodeInstruction> code = new LinkedList<>();
+        for (int i = 0; i < pluginInstance.getBasicBlocks().size(); i++) {
+            BasicBlock bb = pluginInstance.getBasicBlocks().get(i);
+            for (int j = bb.firstAddress(); j <= bb.lastAddress(); j++) {
+                ThreeAddressCodeInstruction instruction = pluginInstance.getCode().get(j);
+                instruction.setComment("B_"+i);
+                code.add(instruction);
+            }
+        }
+        for (int i = 0; i < code.size(); i++) {
+            instructionList.setRowTo(code.get(i).getRepresentationAsStringArray(), i);
+        }
+        instructionList.resizeColumnDisplay();
+
 
         controlFlowGraph.purge();
         //updating graph

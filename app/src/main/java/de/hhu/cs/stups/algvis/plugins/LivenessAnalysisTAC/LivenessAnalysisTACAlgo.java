@@ -64,7 +64,9 @@ public class LivenessAnalysisTACAlgo {
         }
 
         //in_i = use u (out - def)
-        Set<String> currentIn = new HashSet<>(usedIdentifiers);
+        Set<String> currentIn = new HashSet<>(currentOut);
+        currentIn.remove(currentInstruction.writesValue() ? currentInstruction.getDestination() : null);
+        currentIn.addAll(usedIdentifiers);
 
         if(currentIteration>0){
             if(!out.get(currentIteration-1).get(currentInstruction).equals(currentOut))

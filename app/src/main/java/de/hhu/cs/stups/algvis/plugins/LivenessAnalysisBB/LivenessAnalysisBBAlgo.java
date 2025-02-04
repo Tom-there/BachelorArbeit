@@ -55,7 +55,7 @@ public class LivenessAnalysisBBAlgo {
                 ThreeAddressCodeInstruction instruction = code.get(i);
                 for (String used:instruction.getUsedIdentifiers()) {
                     currentUseSet.add(used);
-                    for (int j = 0; j < i; j++) {
+                    for (int j = block.firstAddress(); j < i; j++) {
                         if(code.get(j).writesValue() && code.get(j).getDestination().equals(used))
                             currentUseSet.remove(used);
                     }
@@ -104,11 +104,9 @@ public class LivenessAnalysisBBAlgo {
         }
 
         //in_i = use u (out - def)
-        Set<String> usedAndNotDefined = new HashSet<>(currentOut);
-        usedAndNotDefined.removeAll(def.get(currentBlock));
-
-        Set<String> currentIn = new HashSet<>(use.get(currentBlock));
-        currentIn.addAll(usedAndNotDefined);
+        Set<String> currentIn = new HashSet<>(currentOut);
+        currentIn.removeAll(def.get(currentBlock));
+        currentIn.addAll(use.get(currentBlock));
 
         if(currentIteration>0){
             if(!out.get(currentIteration-1).get(currentBlock).equals(currentOut))
