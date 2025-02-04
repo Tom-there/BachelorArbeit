@@ -525,10 +525,11 @@ INPUT ./fig/GUI_Table_classes.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/adobe/helvetic/phvro8t.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/vf/adobe/helvetic/phvro8t.vf
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/adobe/helvetic/phvro8r.tfm
-INPUT ./fig/3AC_classes.png
-INPUT ./fig/3AC_classes.png
-INPUT ./fig/3AC_classes.png
-INPUT ./fig/3AC_classes.png
+INPUT ./fig/3AC_classes_methods.png
+INPUT ./fig/3AC_classes_methods.png
+INPUT ./fig/3AC_classes_methods.png
+INPUT ./fig/3AC_classes_methods.png
+INPUT ./fig/3AC_classes_methods.png
 INPUT ./fig/3AC_ThreeAddressCodeInstruction_methods.png
 INPUT ./fig/3AC_ThreeAddressCodeInstruction_methods.png
 INPUT ./fig/3AC_ThreeAddressCodeInstruction_methods.png

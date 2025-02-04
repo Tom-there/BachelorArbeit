@@ -1,0 +1,96 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Safari/605.1.15" version="26.0.9">
+  <diagram id="c82rN1fvJuZ8-8cghvmS" name="Page-1">
+    <mxGraphModel dx="1586" dy="889" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="node1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;record&amp;gt;&amp;gt;&lt;/i&gt;&lt;br/&gt;&lt;b&gt;BasicBlock&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ firstAddress(): int&lt;br/&gt;+ lastAddress(): int&lt;br/&gt;+ def(): Set&amp;lt;String&amp;gt;&lt;br/&gt;+ fullCode(): List&amp;lt;ThreeAddressCodeInstruction&amp;gt;&lt;br/&gt;+ kill(): Set&amp;lt;Integer&amp;gt;&lt;br/&gt;- instructions(): List&amp;lt;ThreeAddressCodeInstruction&amp;gt;&lt;br/&gt;+ toBBList(List&amp;lt;ThreeAddressCodeInstruction&amp;gt;): List&amp;lt;BasicBlock&amp;gt;&lt;br/&gt;+ gen(): Set&amp;lt;Integer&amp;gt;&lt;br/&gt;+ use(): Set&amp;lt;String&amp;gt;&lt;br/&gt;+ firstAddressesOfSuccessors(): List&amp;lt;Integer&amp;gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="352" y="172" width="524" height="281" as="geometry" />
+        </mxCell>
+        <mxCell id="node0" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ThreeAddressCode&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ get(int): ThreeAddressCodeInstruction&lt;br/&gt;+ getLast(): ThreeAddressCodeInstruction&lt;br/&gt;+ getBasicBlocks(): List&amp;lt;BasicBlock&amp;gt;&lt;br/&gt;+ size(): int&lt;br/&gt;+ getInstructions(): List&amp;lt;ThreeAddressCodeInstruction&amp;gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-175" y="172" width="452" height="161" as="geometry" />
+        </mxCell>
+        <mxCell id="node3" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ThreeAddressCodeInstruction&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ toString(): String&lt;br/&gt;+ canJump(): boolean&lt;br/&gt;+ getComment(): String&lt;br/&gt;+ writesValue(): boolean&lt;br/&gt;+ getUsedIdentifiers(): Collection&amp;lt;String&amp;gt;&lt;br/&gt;+ setComment(String): void&lt;br/&gt;+ compareTo(ThreeAddressCodeInstruction): int&lt;br/&gt;+ nextPossibleInstructionAdresses(): Set&amp;lt;Integer&amp;gt;&lt;br/&gt;+ getDestination(): String&lt;br/&gt;+ getAddress(): int&lt;br/&gt;+ getRepresentationAsStringArray(): String[]&lt;br/&gt;+ getOperation(): ThreeAddressCodeOperation&lt;br/&gt;+ getRepresentationAsStringArray(boolean): String[]&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-175" y="409" width="428" height="353" as="geometry" />
+        </mxCell>
+        <mxCell id="node2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;/i&gt;&lt;br/&gt;&lt;b&gt;ThreeAddressCodeOperation&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ values(): ThreeAddressCodeOperation[]&lt;br/&gt;+ valueOf(String): ThreeAddressCodeOperation&lt;br/&gt;+ getRepresentation(): String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="412" y="649" width="372" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=diamondThinstartSize=12;endArrow=openThin;endSize=12;strokeColor=#595959;exitX=0.000;exitY=0.869;exitDx=0;exitDy=0;entryX=1.000;entryY=0.021;entryDx=0;entryDy=0;" parent="1" source="node1" target="node3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label18" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge3" vertex="1" connectable="0">
+          <mxGeometry x="340" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="label22" value="*" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge3" vertex="1" connectable="0">
+          <mxGeometry x="270" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="label23" value="fullCode" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge3" vertex="1" connectable="0">
+          <mxGeometry x="280" y="417" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=1;startArrow=none;endArrow=openThin;endSize=12;strokeColor=#595959;exitX=0.469;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;" parent="1" source="node1" target="node2" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge0" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=diamondThinstartSize=12;endArrow=openThin;endSize=12;strokeColor=#595959;exitX=1.000;exitY=0.407;exitDx=0;exitDy=0;entryX=0.000;entryY=0.233;entryDx=0;entryDy=0;" parent="1" source="node0" target="node1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label0" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge0" vertex="1" connectable="0">
+          <mxGeometry x="284" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="label4" value="*" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge0" vertex="1" connectable="0">
+          <mxGeometry x="337" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="label5" value="basicBlocks" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge0" vertex="1" connectable="0">
+          <mxGeometry x="280" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=diamondThinstartSize=12;endArrow=openThin;endSize=12;strokeColor=#595959;exitX=0.302;exitY=1.000;exitDx=0;exitDy=0;entryX=0.319;entryY=0.000;entryDx=0;entryDy=0;" parent="1" source="node0" target="node3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-39" y="371" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label12" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge2" vertex="1" connectable="0">
+          <mxGeometry x="-51" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="label16" value="*" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge2" vertex="1" connectable="0">
+          <mxGeometry x="-49" y="386" as="geometry" />
+        </mxCell>
+        <mxCell id="label17" value="code" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge2" vertex="1" connectable="0">
+          <mxGeometry x="-38" y="374" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=1;startArrow=none;endArrow=openThin;endSize=12;strokeColor=#595959;exitX=0.658;exitY=1.000;exitDx=0;exitDy=0;entryX=0.695;entryY=0.000;entryDx=0;entryDy=0;" parent="1" source="node0" target="node3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="122" y="374" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label32" value="«create»" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge5" vertex="1" connectable="0">
+          <mxGeometry x="70" y="364" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=diamondThinstartSize=12;endArrow=openThin;endSize=12;strokeColor=#595959;exitX=0.999;exitY=0.88;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="node3" target="node2" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="260" y="720" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label6" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge1" vertex="1" connectable="0">
+          <mxGeometry x="260" y="699" as="geometry" />
+        </mxCell>
+        <mxCell id="label10" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge1" vertex="1" connectable="0">
+          <mxGeometry x="380" y="699" as="geometry" />
+        </mxCell>
+        <mxCell id="label11" value="op" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" parent="edge1" vertex="1" connectable="0">
+          <mxGeometry x="322" y="699" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

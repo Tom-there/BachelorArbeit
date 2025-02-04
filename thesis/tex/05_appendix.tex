@@ -1,0 +1,293 @@
+%!TeX root: thesis.tex
+\section{Codebeispiele}
+\begin{lstlisting}[language=Java, caption={Generieren der ID für eine Kante}, label={cde:edge-id}]
+public String getID(){
+  return "("+sourceNode.getId()+") -> ("+targetNode.getId()+")";
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Konstruktor der Klasse ThreeAddressCodeInstruction}, label={cde:graph-constructor}]
+public Graph(Location location){
+  this.location = location;
+  exportedPanel = new JPanel(new BorderLayout());
+  switch(location){...} // Groesse des exportierten JPanels festlegen
+  
+  nodes = new HashSet<>();
+  edges = new HashSet<>();
+  
+  graph = new MultiGraph("Graph");
+  graph.setAttribute("ui.stylesheet", ...); // stylesheet festlegen
+  viewer = new SwingViewer(graph, ...); // threading festlegen
+  View view = viewer.addDefaultView(false);
+
+  layout = new LinLog();
+  viewer.enableAutoLayout(layout);
+
+  exportedPanel.add((Component) view, BorderLayout.CENTER);
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java, caption={Implementierung der addNode(Node) Methode}, label={cde:graph-addNode}]
+  public void addNode(Node newNode){
+    if(nodes.contains(newNode))
+      return;
+    nodes.add(newNode);
+    graph.addNode(newNode.getId());
+    layout.shake();
+  }
+\end{lstlisting}
+\begin{lstlisting}[language=Java, caption={Implementierung der setLabelOfNode(Node, String) Methode}, label={cde:graph-labelNode}]
+  public void setLabelOfNode(Node Node, String label){
+    if(nodes.contains(newNode))
+      graph.getNode(node).setAttribute("ui.label", label);
+  }
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Implementierung der setValueAtMethode(Object, int, int) Methode}, label={cde:setValueAt}]
+  public void setValueAt(Object value, int rowIndex, int colIndex){
+    if(value == null)
+      value = "";
+    try{
+      data[rowIndex][colIndex] = value.toString();
+      TableModelEvent event = new TableModelEvent(...);
+      listeners.forEach(l->l.tableChanged(event));
+    }catch(ArrayIndexException e){
+      // Error handling
+    }
+  }
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Java, caption={Implementierung der resizeTable(int, int) Methode}, label={cde:resizeTable}]
+public void resizeTable(int rows, int cols) {
+  if(rows==tableModel.getRowCount() 
+  && cols == tableModel.getColumnCount())
+    return;
+  tableModel = new DataTableModel(rows, cols);
+  this.setModel(tableModel);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Implementierung der highlightLine(int) Methode}, label={cde:highlightLine}]
+public void highlightLine(int line) {
+  this.clearSelection();
+  if (line == 0)
+    return;
+  try {
+    this.addRowSelectionInterval(line, line);
+  }catch (IllegalArgumentException e){
+    ... //Handle wrong lines error
+  }
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Implementierung der getToolTipText(MouseEvent) Methode}, label={cde:tooltip}]
+  public String getToolTipText(MouseEvent mouseEvent) {
+    String tip = null;
+    Point p = mouseEvent.getPoint();
+
+    int rowIndex = rowAtPoint(p);
+    int colIndex = columnAtPoint(p);
+
+    try{
+      if(rowIndex<getRowCount() && rowIndex> -1
+      && colIndex<getColumnCount() && colIndex> -1)
+        tip = tableModel.getValueAt(rowIndex, colIndex).toString();
+    }catch (NullPointerException ignored){}
+    
+    return tip;
+  }
+\end{lstlisting}
+
+\begin{lstlisting}[language=java, caption={Implementierung der resizeColumnDisplay() Methode}, label={cde:resize}]
+  public void resizeColumnDisplay() {
+    TableColumnModel columnModel = this.getColumnModel();
+    for (int i = 0; i < columnModel.getColumnCount()-1; i++) {
+      int width = 0;
+      for (int j = 0; j < tableModel.getRowCount(); j++) {
+        TableCellRenderer renderer = this.getCellRenderer(j, i);
+        Component component = this.prepareRenderer(renderer, j, i);
+        width = Math.max(component.getPreferredSize().width+2, width);
+      }
+      columnModel.getColumn(i).setMinWidth(width);
+      columnModel.getColumn(i).setMaxWidth(width);
+    }
+    int width = 10;
+    for (int j = 0; j < tableModel.getRowCount(); j++) {
+      TableCellRenderer renderer = this.getCellRenderer(j, columnModel.getColumnCount()-1);
+      Component component = this.prepareRenderer(renderer, j, columnModel.getColumnCount()-1);
+      width = Math.max(component.getPreferredSize().width+2, width);
+    }
+    columnModel.getColumn(columnModel.getColumnCount()-1).setMinWidth(width);
+    columnModel.getColumn(columnModel.getColumnCount()-1).setMaxWidth(this.getMaximumSize().width);
+  }
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=java, caption={Konstruktor der Klasse ThreeAddressCodeInstruction}, label={cde:taci-constructor}]
+public ThreeAddressCodeInstruction(String rawInput, int address){
+  ...
+  String[] pieces = rawInput.split(" ");
+  switch (pieces.length) {
+    case 2 -> ... //Unbedingter Sprung goto X
+    case 3 -> ... //Kopierbefehl X = Y
+    case 4 -> { //entweder unaere Operation oder ein bedingter Sprung
+      switch(pieces[2]){
+        case "-" -> ... //Unaere Operation X = - Y
+        case "goto" -> {//ein bedingter Sprung
+          switch(pieces[0]){
+            case "if" -> ... //bedingter Sprung if Y goto X
+            case "ifFalse" -> ... //bedingter Sprung ifFalse Y goto X
+          }
+        }
+      }
+    case 5 -> ... //Binaere Operation X = Y op Z
+    case 6 -> { //bedingter Sprung
+      switch(pieces[2]){
+        case "<" -> ...//if Y < Z goto X
+        case ">" -> ...//if Y > Z goto X
+        case "<=" -> ...//if Y <= Z goto X
+        case ">=" -> ...//if Y >= Z goto X
+        case "==" -> ...//if Y == Z goto X
+        case "!=" -> ...//if Y != Z goto X
+      }
+    }
+    ...
+ }
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Der Konstruktor der ThreeAddressCode Klasse}, label={cde:tac-constructor}]
+public ThreeAddressCode(String raw){
+  List<String> inputLines = raw.lines().toList();
+  code = new ArrayList<>(inputLines.size());
+  for (int i = 0; i < inputLines.size(); i++) {
+    code.add(new ThreeAddressCodeInstruction(inputLines.get(i), i));
+  }
+  basicBlocks = toBBList(code);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Zusammenfassung der toBBList() Methode}, label={cde:bb-gen}]
+private static List<BasicBlock> toBBList(List<...> code){
+  Set<ThreeAddressCodeInstruction> leaders = new HashSet<>(1);
+  if(!code.isEmpty()) //die erste Instruktion ist immer Leader
+    leaders.add(code.get(0));
+  for (int i = 0; i < code.size(); i++) {
+    ... // Finde alle Leader 
+  }
+  List<ThreeAddressCodeInstruction> sortedLeaders = leaders.stream().sorted(Comparator.comparingInt(ThreeAddressCodeInstruction::getAddress)).toList();
+  
+  // Finde die letzte Instruktion jedes Grundblockes
+  List<Integer> firstAddresses = sortedLeaders.stream()
+                .map(ThreeAddressCodeInstruction::getAddress)
+                .toList();
+  List<Integer> lastAddresses = new ArrayList<>(leaders.size());
+  for (int i = 1; i < sortedLeaders.size(); i++) {
+    lastAddresses.add(firstAddresses.get(i)-1);
+  }
+  lastAddresses.add(code.getLast().getAddress());
+  
+  List<List<Integer>> fAOS = new ArrayList<>(leaders.size());
+  for (int lastAddress : lastAddresses) {
+    ... // Bestimme die Addressen der Nachfolger
+  }
+ 
+
+  // Setze die Listen zu einer BasicBlock Liste zusammen
+  List<BasicBlock> basicBlocks= new ArrayList<>(leaders.size());
+  for (int i = 0; i < firstAddresses.size(); i++) {
+    int firstAddress = firstAddresses.get(i);
+    int lastAddress = lastAddresses.get(i);
+    List<Integer> successors = fAOS.get(i);
+    BasicBlock basicBlock = new BasicBlock(
+      firstAddress, lastAddress, successors
+    );
+    basicBlocks.add(basicBlock);
+  }
+  return basicBlocks;
+}
+\end{lstlisting}
+\newpage
+
+\begin{lstlisting}[language=Java, caption={Ausschnitt der toBBList()-Methode zum finden aller Leader}, label={cde:bb-leader}]
+for (int i = 0; i < code.size(); i++) {
+  if(code.get(i).canJump()){
+    ThreeAddressCodeInstruction destination = code.get(
+      Integer.parseInt(code.get(i).getDestination())
+    );
+    leaders.add(destination);
+    if(i+1<code.size()) 
+      leaders.add(code.get(i+1));
+} }
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Zusammenfassung der toBBList() Methode}, label={cde:bb-successor}]
+List<List<Integer>> fAOS = new ArrayList<>(leaders.size());
+for (int lastAddress : lastAddresses) {
+  List<Integer> successors = new ArrayList<>(0);
+  fAOS.add(successors);
+  switch (code.get(lastAddress).getOperation()) {
+    case jmp -> 
+      successors.add(
+        Integer.valueOf(code.get(lastAddress).getDestination())
+      );
+    case booleanJump, negatedBooleanJump, 
+         eqJump, geJump, gtJump, leJump, ltJump, neJump -> {
+      successors.add(
+        Integer.valueOf(code.get(lastAddress).getDestination())
+      );
+      if (lastAddress+1 < code.size())
+        successors.add(lastAddress + 1);
+    }
+    default -> {
+      if (lastAddress+1 < code.size())
+        successors.add(lastAddress + 1);
+} } }
+\end{lstlisting}
+\begin{lstlisting}[language=Java, caption={Bestimmmen der gen Menge für erreichende Definitionen}, label={cde:rd_gen}]
+for(BasicBlock block:basicBlocks){
+  Set<Integer> currentGenSet = gen.get(block);
+  for (int i = block.lastAddress(); i >= block.firstAddress(); i--) {
+    ThreeAddressCodeInstruction currentInstruction = code.get(i);
+    if(!currentInstruction.writesValue())
+      continue;
+    boolean newVar = true;
+    for (int j : currentGenSet) {
+      if(currentInstruction.getDestination().equals(code.get(j).getDestination()))
+        newVar = false;
+    }
+    if(newVar)
+      currentGenSet.add(i); 
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Bestimmmen der kill Menge für erreichende Definitionen}, label={cde:rd_kill}]
+for(BasicBlock block:basicBlocks){
+  Set<Integer> currentKillSet = kill.get(block);
+  for (Integer i:currentGenSet) {
+    for (int j = 0; j < code.size(); j++) {
+      if(!code.get(j).writesValue())
+        continue;
+      if(j == i)
+        continue;
+      if(code.get(j).getDestination().equals(code.get(i).getDestination()))
+        currentKillSet.add(j);
+    }
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Bestimmmen der Menge der Vorfahren für erreichende Definitionen}, label={cde:rd_anc}]
+for (BasicBlock block:basicBlocks) {
+  List<Integer> firstAddressesOfSuccessors = block.firstAddressesOfSuccessors();
+  for (int address:firstAddressesOfSuccessors) {
+    for (BasicBlock potentialSuccessor:basicBlocks) {
+      if(potentialSuccessor.firstAddress() == address)
+        ancestors.get(potentialSuccessor).add(block);
+    }
+  }
+}
+\end{lstlisting}
