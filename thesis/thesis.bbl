@@ -48,9 +48,14 @@
 \newblock \url{https://graphstream-project.org/doc/Tutorials/Storing-retrieving-and-displaying-data-in-graphs/}. --
 \newblock zuletzt besucht am 31.01.2025
 
-\bibitem[Kas]{dfav}
+\bibitem[Kasa]{dfav}
 \textsc{Kashiwa}, Shun:
-\newblock \emph{Data-Flow Analysis Visualizer}.
+\newblock \emph{Data-Flow Analysis Visualizer Sourcecode}.
 \newblock \url{https://github.com/shumbo/DFAV}
+
+\bibitem[Kasb]{dfavpres}
+\textsc{Kashiwa}, Shun:
+\newblock \emph{Data-Flow Analysis Visualizer Vorstellung}.
+\newblock \url{https://sorensenucsc.github.io/CSE211-fa2021/projects/data-flow-analysis-visualizer/}
 
 \end{thebibliography}

@@ -8,27 +8,26 @@
 \contentsline {subsubsection}{\numberline {1.2.4}Erreichende Definitionen}{6}{subsubsection.1.2.4}%
 \contentsline {subsubsection}{\numberline {1.2.5}Lebendige Variablen}{7}{subsubsection.1.2.5}%
 \contentsline {section}{\numberline {2}Framework}{9}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Gui}{12}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Darstellen von Daten}{13}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Graphen}{13}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Tabellen}{16}{subsubsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.3}Drei Address Code}{18}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Die ThreeAddressCodeInstruction Klasse}{18}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Die BasicBlock Record-Klasse}{20}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3}Die ThreeAddressCode Klasse}{20}{subsubsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.4}Implementierung von Algorithmen}{21}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Das Plugin Interface}{22}{subsubsection.2.4.1}%
-\contentsline {section}{\numberline {3}Implementierte Algorithmen}{23}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Erstellung von Grundblöcken aus 3-Address-Code}{24}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Erstellung eines Kontrollflussgraphen aus 3-Address-Code}{27}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Analyse von erreichenden Definitionen}{30}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Analyse von lebendigen Variablen bezüglich Grundblöcken}{31}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Analyse von lebendigen Variablen bezüglich einzelnen Instruktionen}{32}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Related Work}{33}{section.4}%
-\contentsline {section}{\numberline {5}Evaluation}{33}{section.5}%
-\contentsline {section}{\numberline {6}Future Work}{33}{section.6}%
-\contentsline {section}{\numberline {7}Fazit}{33}{section.7}%
-\contentsline {section}{Anhang{}~A\hspace {1em}Codebeispiele}{34}{section*.27}%
-\contentsline {section}{Abbildungsverzeichnis}{41}{section*.28}%
-\contentsline {section}{Tabellenverzeichnis}{41}{section*.29}%
-\contentsline {section}{Literatur}{42}{section*.30}%
+\contentsline {subsection}{\numberline {2.1}Gui}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Darstellen von Daten}{11}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Graphen}{12}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Tabellen}{15}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Drei Address Code}{16}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Die ThreeAddressCodeInstruction Klasse}{16}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Die BasicBlock Record-Klasse}{18}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Die ThreeAddressCode Klasse}{19}{subsubsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}Implementierung von Algorithmen}{19}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Das Plugin Interface}{20}{subsubsection.2.4.1}%
+\contentsline {section}{\numberline {3}Implementierte Algorithmen}{22}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Erstellung von Grundblöcken aus 3-Address-Code}{23}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Erstellung eines Kontrollflussgraphen aus 3-Address-Code}{26}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Analyse von erreichenden Definitionen}{29}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Analyse von lebendigen Variablen bezüglich Grundblöcken}{33}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Analyse von lebendigen Variablen bezüglich einzelnen Instruktionen}{35}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Verwandte Arbeiten}{36}{section.4}%
+\contentsline {section}{\numberline {5}Ausblick}{36}{section.5}%
+\contentsline {section}{\numberline {6}Herausforderungen und Fazit}{38}{section.6}%
+\contentsline {section}{Anhang{}~A\hspace {1em}Codebeispiele}{39}{section*.23}%
+\contentsline {section}{Abbildungsverzeichnis}{46}{section*.24}%
+\contentsline {section}{Tabellenverzeichnis}{46}{section*.25}%
+\contentsline {section}{Literatur}{47}{section*.26}%

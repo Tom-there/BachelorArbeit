@@ -10,55 +10,57 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: references.bib
 Warning--entry type for "VisOpt" isn't style-file defined
 --line 7 of file references.bib
-Warning--entry type for "dfav" isn't style-file defined
+Warning--entry type for "dfavpres" isn't style-file defined
 --line 13 of file references.bib
+Warning--entry type for "dfav" isn't style-file defined
+--line 20 of file references.bib
 Warning--entry type for "GS_graphs" isn't style-file defined
---line 19 of file references.bib
-Warning--entry type for "GS_render" isn't style-file defined
 --line 26 of file references.bib
-Warning--entry type for "GS_data" isn't style-file defined
+Warning--entry type for "GS_render" isn't style-file defined
 --line 33 of file references.bib
-Warning--entry type for "GS" isn't style-file defined
+Warning--entry type for "GS_data" isn't style-file defined
 --line 40 of file references.bib
-You've used 8 entries,
+Warning--entry type for "GS" isn't style-file defined
+--line 47 of file references.bib
+You've used 9 entries,
             4793 wiz_defined-function locations,
-            932 strings with 7266 characters,
-and the built_in function-call counts, 3209 in all, are:
-= -- 313
-> -- 67
-< -- 54
-+ -- 57
-- -- 19
-* -- 177
-:= -- 565
-add.period$ -- 10
-call.type$ -- 8
-change.case$ -- 32
+            935 strings with 7410 characters,
+and the built_in function-call counts, 3586 in all, are:
+= -- 349
+> -- 75
+< -- 61
++ -- 65
+- -- 21
+* -- 196
+:= -- 627
+add.period$ -- 11
+call.type$ -- 9
+change.case$ -- 36
 chr.to.int$ -- 5
-cite$ -- 8
-duplicate$ -- 116
-empty$ -- 259
-format.name$ -- 46
-if$ -- 675
-int.to.chr$ -- 4
+cite$ -- 9
+duplicate$ -- 130
+empty$ -- 290
+format.name$ -- 52
+if$ -- 755
+int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 46
-newline$ -- 56
-num.names$ -- 25
-pop$ -- 66
+missing$ -- 52
+newline$ -- 61
+num.names$ -- 28
+pop$ -- 76
 preamble$ -- 1
-purify$ -- 48
+purify$ -- 54
 quote$ -- 0
-skip$ -- 157
+skip$ -- 177
 stack$ -- 0
-substring$ -- 137
-swap$ -- 17
-text.length$ -- 17
-text.prefix$ -- 3
+substring$ -- 154
+swap$ -- 19
+text.length$ -- 19
+text.prefix$ -- 4
 top$ -- 0
-type$ -- 76
+type$ -- 86
 warning$ -- 0
-while$ -- 26
+while$ -- 29
 width$ -- 11
-write$ -- 108
-(There were 6 warnings)
+write$ -- 119
+(There were 7 warnings)
