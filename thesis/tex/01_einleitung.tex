@@ -8,12 +8,12 @@ Themengebiet angewendet werden. Dabei fiel es mir
 bei einigen schwer, mir diese ohne weiteres
 vorzustellen. Ein Tool, mit dem man Schritt für Schritt 
 durch diese Algorithmen gehen kann, hätte mir das Verstehen der Algorithmen
-und vor allem das Entwickeln einer Intuition warum diese Algorithmen überhaupt
+und vor allem das Entwickeln einer Intuition, warum diese Algorithmen überhaupt
 so funktionieren wie sie es tun stark erleichtert.\\
 
 Es gibt zwar solche Tools, zum Beispiel VisOpt\cite{VisOpt} oder DFAV\cite{dfav},
 diese benutzen allerdings ein Subset von Java und JavaScript.
-Da im Modul "Compilerbau" sämtliche Algorithmen auf drei Address Code
+Da im Modul \glqq Compilerbau\grqq sämtliche Algorithmen auf drei Address Code
 erklärt werden, passen diese Tools nicht in den Usecase der Studenten.\\
 
 In dieser Bachelorarbeit wird ein Framework in Java
@@ -21,8 +21,8 @@ entwickelt, mit dem es einfach sein soll,
 Algorithmen zu visualisieren.\\
 
 Im Jahr 2016 wurde von Fabian Ruhland und Isabel Wingen bereits ein ähnliches
-Framework entwickelt\cite{toolbox}. Dieses ist leider mittlerweile nicht mehr
-mit aktuellen Java-Versionen kompatibel, daher wurde sich dazu entschieden
+Framework entwickelt \cite{toolbox}. Dieses ist leider mittlerweile nicht mehr
+mit aktuellen Java-Versionen kompatibel, daher wurde sich dazu entschieden,
 ein komplett neues Framework zu entwickeln.\\
 
 Zudem werden einige der Algorithmen, die im Compilerbau verwendet werden,
@@ -31,7 +31,7 @@ Implementierung von Interfaces einfach neue Algorithmen
 als Plugins hinzugefügt werden können. Dadurch kann gewährleistet werden,
 dass wenn etwas im Framework nicht mehr funktioniert, 
 zum Beispiel durch neue Versionen von Java oder einem Update einer Dependency, 
-dieses Modul ausgetauscht werden kann ohne die implementierten Plugins 
+dieses Modul ausgetauscht werden kann, ohne die implementierten Plugins 
 aktualisieren zu müssen.
 
 
@@ -42,15 +42,15 @@ grundlegenden Konzepte und Algorithmen erklärt, da im weiteren
 Verlauf der Arbeit nur auf die Implementierung dieser eingegangen wird.
 
 
-\subsubsection{Drei Address Code} \label{t:tac}
-Drei Address Code ist eine Art von Zwischencode
+\subsubsection{Drei Adress Code} \label{t:tac}
+Drei Adress Code ist eine Art von Zwischencode
 \footnote{Zwischencode hat viele Nutzungsgebiete in einem Compiler,
-einerseits verbindet es das Frontend (welche den Quellcode einließt) mit dem
-Backend (welche den Maschinencode ausgibt), andererseits ist Zwischencode 
+einerseits verbindet er das Frontend (welches den Quellcode einließt) mit dem
+Backend (welches den Maschinencode ausgibt), andererseits ist Zwischencode 
 plattformunabhängig, sodass maschinenunabhängige Optimierungen und Analysen auf
 diesem ausgeführt werden können.}. 
-Charakterisierend für Drei Address Code (folgend auch 3-Address-Code genannt)
-ist, dass einzelne Instruktionen auf maximal drei Addressen(oder Konstanten) 
+Charakterisierend für Drei Adress Code (folgend auch 3-Address-Code genannt)
+ist, dass einzelne Instruktionen auf maximal drei Adressen (oder Konstanten) 
 zugreifen. Die Addresse in die der resultierende Wert gespeichert wird und 
 eine oder zwei Addressen oder Konstanten aus denen sich der resultierende Wert bildet.
 Dazu ist noch die Operation, die ausgeführt wird angegeben.\\
@@ -61,17 +61,17 @@ Folgende Operationen gibt es:
 \begin{enumerate}
   \item Binäre Operationen X = Y op Z\\
     in denen das Resultat aus einer der folgenden binären Operation
-    in der Addresse X gespeichert wird. Implementiert wurden Addition, 
+    in der Adresse X gespeichert wird. Implementiert wurden Addition, 
     Subtraktion, Multiplikation und Division.
   \item Die unäre Operation X = - Y\\
     in der der invertierte Wert von Y in X gespeichert wird.
   \item Der Kopierbefehl X = Y\\
-    in der der Wert der in Addresse Y gespeichert ist in X kopiert wird.
+    in der der Wert, der in Adresse Y gespeichert ist, in X kopiert wird.
   \item Der unbedingte Sprung goto X\\
-    hier wird kein Wert gespeichert, sondern zu der Addresse die in X gespeichert ist gesprungen
+    hier wird kein Wert gespeichert, sondern zu der Adresse die in X gespeichert ist gesprungen
   \item Die bedingten Sprünge if Y goto X und ifFalse Y goto X\\
     mit denen, wenn der Wert Y entweder $wahr$ oder $falsch$ repräsentiert 
-    zur Addresse X gesprungen wird  
+    zur Adresse X gesprungen wird  
     oder die nächste Instruktion ausgeführt wird, wenn dies nicht der Fall ist.
   \item Die bedingten Sprünge if Y relOp Z goto X\\
     in denen auch zu X gesprungen wird, wenn die Relation Y relOp Z $wahr$ ist, 
@@ -87,12 +87,12 @@ Folgende Operationen gibt es:
     \end{itemize}
 \end{enumerate}
 
-Hierbei können die Addressen X, Y und Z beliebige Zeichenfolgen sein, 
+Hierbei können die Adressen X, Y und Z beliebige Zeichenfolgen sein, 
 Y und Z können außerdem Konstanten sein.
 Die einzelnen Elemente jeder Instruktion sind durch ein Leerzeichen von einander
-getrennt. Verschiedene Instruktionenen werden durch einen Zeilenumbruch getrennt.
+getrennt. Verschiedene Instruktionen werden durch einen Zeilenumbruch getrennt.
 Da sich die Algorithmen in dieser Arbeit nicht mit komplexeren Aufgaben wie
-Speichermanagement beschäftigen, wurde sich dagegen entschieden den 3AC
+Speichermanagement beschäftigen, wurde sich dagegen entschieden, den 3AC
 umfangreicher zu modellieren.\\
 
 Ein Beispiel für gültigen 3-Address-Code wäre also:
@@ -112,27 +112,27 @@ Ein Beispiel für gültigen 3-Address-Code wäre also:
 
 
 \subsubsection{Grundblöcke} \label{t:bb}
-Grundblöcke sind Instruktionsfolgen eines Zwischencodeprogrammes,
-die immer zusammen ausgeführt werden. \cite[S.619]{D}
+Grundblöcke sind Instruktionsfolgen eines Zwischencodeprogramms,
+die immer zusammen ausgeführt werden \cite[S.619]{D}.
 Dies ermöglicht es, einen Block an Instruktionen anzuschauen 
 und bestimmte Optimierungsalgorithmen auf sie anzuwenden, 
 ohne Gefahr zu laufen, die Semantik des Programmes zu verändern.
 
 \newpage
-Um ein Programm in Grundblöcke aufzuteilen, kann man wie folgt vorgehen\cite[S.643]{D}:
+Um ein Programm in Grundblöcke aufzuteilen, kann man wie folgt vorgehen \cite[S.643]{D}:
 \begin{enumerate}
   \item Markiere die erste Instruktion des Programmes als Leader, da diese immer ausgeführt wird.
   \item Markiere alle Instruktionen als Leader, die Ziel eines Sprungs sind oder auf einen Sprung folgen.
-  \item Alle Instruktionen die auf eine markierte Instruktion folgen,
-    bis zu einer neuen markierten Instruktion gelten nun als ein Grundblock.
+  \item Alle Instruktionen, die auf eine markierte Instruktion folgen
+    bis zu einer neuen markierten Instruktion, gelten nun als ein Grundblock.
 \end{enumerate}
 
 Folgend kann man für jeden Grundblock bestimmen, welche Grundblöcke auf ihn folgen, 
-daraus lässt sich ein Flussgraph, bestimmen den wir, da er den Kontrollfluss beschreibt,
+daraus lässt sich ein Flussgraph bestimmen, den wir, da er den Kontrollfluss beschreibt,
 folglich Kontrollflussgraphen nennen werden. In diesem stellt jeder Grundblock einen Knoten dar
 und jede Kante einen Sprung von einem Grundblock zum anderen.\\
 
-Aus unserem Beispielcode aus dem Letzten Kapitel können wir also folgende Instruktionen markieren:
+Aus unserem Beispielcode aus dem letzten Kapitel können wir also folgende Instruktionen markieren:
 \begin{lstlisting}[caption=Fibonacci 3-Address-Code mit markierten Leadern]
   0: n = 5 //Leader, da erste Instruktion
   1: fib = 1  
@@ -149,10 +149,10 @@ Aus unserem Beispielcode aus dem Letzten Kapitel können wir also folgende Instr
 
 Daraus folgt, dass wir folgende Grundblöcke haben:
 \begin{enumerate}
-  \item Ein Grundblock $B_0$ der die Addressen 0 bis 3 besitzt.
-  \item Der Block $B_1$ der nur die Addresse 4 hat.
-  \item Grundblock $B_2$ der die Addressen 5 bis 9 besitzt.
-  \item und Block $B_3$ der nur die Addresse 10 besitzt.
+  \item Ein Grundblock $B_0$, der die Addressen 0 bis 3 besitzt,
+  \item der Block $B_1$, der nur die Addresse 4 hat,
+  \item Grundblock $B_2$, der die Addressen 5 bis 9 besitzt
+  \item und Block $B_3$, der nur die Addresse 10 besitzt.
 \end{enumerate}
 
 
@@ -183,11 +183,11 @@ Um unser Beispiel weiterzuführen, bildet sich folgender Kontrollflussgraph:
 Auf Kontrollflussgraphen lassen sich nun sogenannte Datenflusswerte definieren.
 Diese sind Abstraktionen für die Menge aller möglichen Zustände des Programmes
 zu einem bestimmten Zeitpunkt. In Bezug zu einem Kontrollflussgraphen ist dieser
-Zeitpunkt immer entweder (direkt) bevor der Ausführung des Grundblockes, die $in[B]$ Menge,
+Zeitpunkt immer entweder (direkt) vor der Ausführung des Grundblockes, die $in[B]$ Menge
 oder nach der Ausführung dessen, die $out[b]$ Menge.
-Je nach dem was wir analysieren beziehungsweise abstrahieren wollen ändern sich
+Je nach dem, was wir analysieren beziehungsweise abstrahieren wollen, ändern sich
 die Datenflusswerte, da nur die für die jeweilige Analyse relevanten Informationen
-betrachtet wird. Ausserdem abhängig von der spezifischen Analyse ist die
+betrachtet werden. Ausserdem abhängig von der spezifischen Analyse ist die
 Flussrichtung der Datenflusswerte. Wenn der Datenfluss vorwärts gerichtet ist,
 verändert sich die $out[B]$ Menge durch Anwendung einer sogenannten Transferfunktion
 auf der $in[B]$ Menge, also gilt:
@@ -198,34 +198,34 @@ rückwärtsgerichtet ist:
 \[in[B]=f_b(out[B])\]
 \[out[B]=\bigcup_{n\in N_B}in[n]\]
 Hierbei sind $V_B$ und $N_B$ die Mengen der Vorgänger und Nachfolger
-eines Grundblockes $B$.\cite[S.732-734]{D}
+eines Grundblocks $B$.\cite[S.732-734]{D}
 
 
 
 \newpage
 \subsubsection{Erreichende Definitionen} \label{t:rd}
-Dies ist eine der gebräuchlichsten und nützlichsten Datenflussanalysen\cite[S.734]{D}.\\
+Dies ist eine der gebräuchlichsten und nützlichsten Datenflussanalysen \cite[S.734]{D}.\\
 Mit ihnen können wir herausfinden, welchen Variablen zu einem bestimmten
 Zeitpunkt ein Wert zugewiesen ist. Eine Anwendung wäre zum Beispiel zu
 kontrollieren, ob eine Variable zu einem bestimmten Zeitpunkt  überhaupt
-einen Wert hat\cite[S.734]{D}, sofern die ursprüngliche Programmiersprache dies als 
+einen Wert hat \cite[S.734]{D}, sofern die ursprüngliche Programmiersprache dies als 
 notwendig erachtet. Man kann aber auch schauen, 
 ob die Variable eine Konstante ist und somit Instruktionen gespart werden können.
 
 Für die Berechnung der erreichenden Definitionen bestimmen 
 wir folgende Datenflusswerte für jeden Grundblock:
 \begin{itemize}
-  \item Die $gen_B$ Menge:\\
-    Beschreibt die Addressen aller Instruktionen in einem Grundblock $B$ welche einer Variable einen Wert zuweisen,
+  \item Die $gen_B$ Menge\\
+    beschreibt die Adressen aller Instruktionen in einem Grundblock $B$ welche einer Variable einen Wert zuweisen,
     also einen Wert \textit{generieren}. Wenn einer Variable ein Wert mehrmals zugewiesen wurde 
     liegt nur die letzte Zuweisung dieser in der $gen_B$ Menge.
-  \item Und die $kill_B$ Menge:\\
-    Beschreibt die Addressen aller Instruktionen welche einer Addresse einen Wert zuweisen, 
+  \item Und die $kill_B$ Menge\\
+    beschreibt die Adressen aller Instruktionen welche einer Addresse einen Wert zuweisen, 
     der durch eine Instruktion in der $gen_B$ Menge überschrieben wird.
 \end{itemize}
 
-Nun können wir uns herleiten dass alle Variablen die in einem Grundblock $B$
-definiert werden, ihn auch verlassen also Teil der $out[B]$ Menge sind.
+Nun können wir uns herleiten, dass alle Variablen, die in einem Grundblock $B$
+definiert werden, ihn auch verlassen, also Teil der $out[B]$ Menge sind.
 Zudem verlassen auch alle Definitionen den Grundblock, wenn sie nicht überschrieben wurden.
 Demnach ist der Datenfluss vorwärtsgerichtet und es gilt die Transferfunktion:
 \[out[B]=gen_B \cup (in[B] \backslash kill_B)\]
@@ -259,20 +259,20 @@ Für unser Beispiel ergibt sich dann \cref{tab:fib-rd}:
 \subsubsection{Lebendige Variablen} \label{t:la}
 Bei der Analyse lebendiger Variablen (folgend auch liveness Analyse genannt)
 bringen wir in Erfahrung, ob ein bestimmter Wert zu einem bestimmten Zeitpunkt lebendig ist.
-Lebendig bedeutet in diesem Kontext, das dieser Wert definiert wurde
+Lebendig bedeutet in diesem Kontext, dass dieser Wert definiert wurde
 und zu einem späteren Zeitpunkt im Programm auch noch genutzt wird.\\
 
 Die Analyse lebendiger Variablen hat viele Anwendungsgebiete. 
 Beispielsweise bei der Registervergabe:\\
 Ein reeller Computer hat nur eine begrenzte Anzahl an Registern.
-Somit können nicht unendlich viele Variablen gleichzeitig ein Registern zur Verfügung stehen.\\
+Somit können nicht unendlich viele Variablen gleichzeitig in einem Register zur Verfügung stehen.\\
 Im worst case Szenario bedeutet das, dass alle Werte nach ihrer Berechnung
 in den Speicher geschrieben werden müssen und vor jeder Berechnung aus dem
 Speicher geladen werden müssen.\\
-Da dies viel mehr Zeit kostet als Werte welche wieder genutzt werden,
+Da dies viel mehr Zeit kostet als Werte, welche wieder genutzt werden,
 bis dahin in einem Register zu lassen
-\footnote{Wir sparen also das Speichern in einer Address und das Laden aus einer Addresse},
-ist es sinnvoll Interaktionen mit dem Speicher so gering wie möglich zu halten.\\
+\footnote{Wir sparen also das Speichern in einer Adresse und das Laden aus einer Adresse},
+ist es sinnvoll, Interaktionen mit dem Speicher so gering wie möglich zu halten.\\
 Die liveness Analyse kann hier berechnen wie viele Register wir maximal benötigen,
 da eventuell nicht alle Variablen gleichzeitig lebendig sind, also gleichzeitig benötigt werden.\\
 (Frei nach dem Drachenbuch\cite[S.743-744]{D} zitiert.)
@@ -282,22 +282,22 @@ Auch für die liveness Analyse auf Grundblöcken
 \footnote{Die liveness Analyse kann auch auf einzelnen Instruktionen ausgeführt werden.
 In Kapitel 3.5 wird dies erneut aufgegriffen und erläutert.}
 definieren wir wieder zwei Mengen, welche wir
-für die Transferfunktion benötigen\cite[S.743]{D}:
+für die Transferfunktion benötigen \cite[S.743]{D}:
 
 \begin{enumerate}
-  \item Die $def_B$ Menge:\\
-    In der $def_B$ Menge sind alle Variablen enthalten, denen im Gundblock $B$ ein Wert zugewiesen wird,
+  \item Die $def_B$ Menge\\
+    in der $def_B$ Menge sind alle Variablen enthalten, denen im Gundblock $B$ ein Wert zugewiesen wird,
     bevor diese "verwendet" wird. Das bedeutet dass wir alle Variablen in dieser Menge zu Beginn des Blockes
     als "tot" betrachten können.
-  \item die $use_B$ Menge:\\
-    Die $use_B$ Menge definiert alle Variablen, deren Werte vor ihrer Definition verwendet werden.
+  \item Die $use_B$ Menge\\
+    die $use_B$ Menge definiert alle Variablen, deren Werte vor ihrer Definition verwendet werden.
     Dementsprechen sind alle Variablen in dieser Menge zu beginn des Grundblockes "lebendig".
 \end{enumerate}
 
 Daraus bilden wir uns eine rückwärtsgerichtete Transferfunktion:
 \[in[B]=use_B\cup (out[B]\backslash def_B)\]
-Da nur die Variablen zu Beginn der Ausführung von Grundblock $B$
-leben müssen welche benutzt werden, oder in einem Nachfolger benutzt werden, 
+Da nur die Variablen zu Beginn der Ausführung von Grundblock $B$,
+leben müssen welche benutzt werden oder in einem Nachfolger benutzt werden, 
 aber nicht in diesem Block definiert werden.\\
 
 In unserem Beispiel resultiert dies in folgenden Mengen:
@@ -322,5 +322,5 @@ In unserem Beispiel resultiert dies in folgenden Mengen:
 \end{table}
 
 
-Dies sind alle Theoretischen Grundlagen die für das Verstehen der in dieser
-Arbeit implementierten Konzepte, wenden wir uns nun der Implementierung zu.
+Dies sind alle theoretischen Grundlagen, die für das Verstehen der in dieser
+Arbeit implementierten Konzepte benötigen, wenden wir uns nun der Implementierung zu.

@@ -4,25 +4,25 @@ Die folgenden Kapitel behandeln die Implementation der in Kapitel 1.2 vorgestell
 Algorithmen.
 
 Sämtliche Algorithmen wurden nach folgendem Muster implementiert:
-Es gibt eine Hauptklasse die das \textit{Plugin}-Interface, das 
-\textit{SimpleSteps}-Interface und das \textit{loadCodeFromFile}-Interface 
-implementiert und eine zweite Klasse welche den Durchlauf eines Algorithmus
+Es gibt eine Hauptklasse, die das \textit{Plugin} Interface, das 
+\textit{SimpleSteps} Interface und das \textit{loadCodeFromFile} Interface 
+implementiert und eine zweite Klasse, welche den Durchlauf eines Algorithmus
 Modelliert. Dies bedeutet, dass einige Methoden fast identisch implementiert wurden:
 
 \begin{itemize}
   \item \textit{getName()} gibt den Namen des Plugins zurück.
 
   \item Die Methode \textit{getToolBarButtons()} gibt eine Collection der Buttons zurück,
-    die in den Statischen Methoden der jeweils implementierten Interfaces 
+    die in den statischen Methoden der jeweils implementierten Interfaces 
     \textit{SimpleSteps} und \textit{loadCodeFromFile} generiert werden.
 
   \item \textit{getGuiElements()} gibt eine Collection der Gui-Elemente zurück.
-    Welche Gui-Elemente genau zurückgegeben werden, und an welcher Position diese
-    sind unterscheidet sich allerdings von Plugin zu Plugin.
+    Welche Gui-Elemente genau zurückgegeben werden und an welcher Position diese
+    sind, unterscheidet sich allerdings von Plugin zu Plugin.
 
-  \item Die \textit{onPluginLoad()}-Methode(siehe \cref{fig:PluginInterface}) 
-    setzt das Plugin zurück indem es die \textit{reset()}-Methode aufruft.
-    Da alle Plugins \textit{SimpleSteps}(siehe \cref{fig:ToolBarButtons}) implementieren,
+  \item Die \textit{onPluginLoad()}-Methode (siehe \cref{fig:PluginInterface}) 
+    setzt das Plugin zurück, indem es die \textit{reset()}-Methode aufruft.
+    Da alle Plugins \textit{SimpleSteps} (siehe \cref{fig:ToolBarButtons}) implementieren,
     ist es für den Benutzer am intuitivsten, wenn der geladene Algorithmus sich zwar
     zurücksetzt, aber trotzdem den geladenen Code behält.
 
@@ -31,7 +31,7 @@ Modelliert. Dies bedeutet, dass einige Methoden fast identisch implementiert wur
     \textit{reset()}-Methode aus.
 
   \item Die Methode \textit{step()} führt eine gleichnamige Methode in der
-    Algorithmus ausführenden Klasse auf und aktualisiert dann die Gui-Elemente 
+    Algorithmus ausführenden Klasse auf und aktualisiert dann die Gui-Elemente, 
     indem es die Methode \textit{refreshGuiElements()} ausführt.
 
   \item \textit{hasNextStep()} gibt den negierten Wahrheitswert der Methode 
@@ -43,9 +43,9 @@ Modelliert. Dies bedeutet, dass einige Methoden fast identisch implementiert wur
 \end{itemize}
 
 
-Zudem hat jede \textit{Plugin}-Klasse eine \textit{refreshGuiElements()}-Methode
+Zudem hat jede \textit{Plugin}-Klasse eine \textit{refreshGuiElements()}-Methode,
 in der das Gui aktualisiert wird. Diese ist nicht Teil des Interfaces, da
-das Framework nicht darauf zugreift. Da das Gui jedoch sowohl beim laden des Plugins, 
+das Framework nicht darauf zugreift. Da das Gui jedoch sowohl beim Laden des Plugins, 
 als auch beim Zurücksetzen und Durchschreiten des Algorithmusses aktualisiert werden muss,
 spart dies Codeduplizierungen ein.
 
@@ -62,20 +62,20 @@ spart dies Codeduplizierungen ein.
   \label{sc:TACtoBB}
 \end{figure}
 Dieses Plugin implementiert den in \cref{t:bb} eingeführten Algorithmus
-und zeigt das 3-Address-Code Programm in einer Tabelle an (\cref{cs:TACtoBB}). Nach der
-Ausführung des Programmes wird in der Kommentarspalte der Tabelle für jede
-Instruktion angezeigt zu welchem Grundblock sie gehört, zudem wird auch angezeigt
+und zeigt das 3-Address-Code Programm in einer Tabelle an (\cref{sc:TACtoBB}). Nach der
+Ausführung des Programms wird in der Kommentarspalte der Tabelle für jede
+Instruktion angezeigt zu welchem Grundblock sie gehört. Zudem wird auch angezeigt,
 welche die folgenden Grundblöcke für jeden einzelnen Grundblock sind.
 
 Dafür wird beim Erstellen eines Objektes der Algorithmusklasse 3-Address-Code
 als String übergeben, ein \textit{ThreeAddressCode}-Objekt und ein Set erstellt, 
-in welchem die gefundene Leader gespeichert werden.
+in welchem die gefundenen Leader gespeichert werden.
 
 Durch das Aufrufen der \textit{step()}-Methode wird nun zwei Mal durch die
 Instruktionen des \textit{ThreeAddressCode}-Objekts iteriert.
 
 \newpage
-Im ersten Durchlauf werden alle Leader markiert(\cref{cde:markLeaders}):
+Im ersten Durchlauf werden alle Leader markiert (\cref{cde:markLeaders}):
 \begin{lstlisting}[language=Java, caption={Markieren von Leadern}, label={cde:markLeaders}]
 ThreeAddressCodeInstruction instruction = code.get(address);
 if(instruction.canJump()) {
@@ -116,15 +116,15 @@ if(code.getLast().equals(instruction)) {
 }
 \end{lstlisting}
 Hierbei ist die Methode \textit{getSortedLeaders()} eine Hilfsmethode, welche
-das Set der erfassten Leader nach Addressen aufsteigend sortiert und als Liste wiedergibt.
+das Set der erfassten Leader nach Adressen aufsteigend sortiert und als Liste wiedergibt.
 
 \newpage
-Im Kommentar-String jeder einzelnen Instruktion ist nun angegeben in welchem
+Im Kommentar-String jeder einzelnen Instruktion ist nun angegeben, in welchem
 Block sich diese befindet, welche Instruktion Leader dieses Blockes ist und
 zu welchen Blöcken die letzte Instruktion springt.\\
-Um dies im Gui anzuzeigen wird nach jeder ausführung der \textit{step()}-Methode
+Um dies im Gui anzuzeigen, wird nach jeder Ausführung der \textit{step()}-Methode
 die Methode \textit{refreshGuiElements()}(\cref{cde:refresh1}) in der Pluginklasse ausgeführt.
-diese aktualisiert alle Daten in der Tabelle und markiert dann die in diesem
+Diese aktualisiert alle Daten in der Tabelle und markiert dann die in diesem
 Schritt betrachtete Zeile.
 \begin{lstlisting}[language=Java, caption={Aktualisieren der Tabelle}, label={cde:refresh1}]
 for (int i = 0; i < pluginInstance.getCode().size(); i++) {
@@ -153,15 +153,15 @@ code.highlightLine(pluginInstance.getCurrentInstructionAddress());
 Das Plugin zur Generierung eines Kontrollflussgraphen aus 3-Address-Code 
 ist eine Erweiterung des Plugins zur Erstellung von Grundblöcken.
 
-Es Erweitert das im letzten Abschnitt behandelte Programm indem es
+Es erweitert das im letzten Abschnitt behandelte Programm indem es
 neben der Tabelle einen Kontrollflussgraphen anzeigt.
 
-Um dies zu relalisieren wurden, neben einem Graphen, zwei Map-Objekte hinzugefügt. 
-Eines in der Plugin-Klasse, um zu verfolgen welche Grundblöcke bereits einen 
-Knoten im Graphen besitzen. Und eines in der Algorithmus-Klasse, um festzuhalten
+Um dies zu realisieren, wurden neben einem Graphen, zwei Map-Objekte hinzugefügt. 
+Eines in der Plugin-Klasse, um zu verfolgen, welche Grundblöcke bereits einen 
+Knoten im Graphen besitzen und eines in der Algorithmus-Klasse, um festzuhalten,
 welche Grundblöcke auf andere folgen.
 
-Die Methode zum Zuordnen der Instruktionen zu ihren Grundblöcken(\cref{cde:mapBlocks})
+Die Methode zum Zuordnen der Instruktionen zu ihren Grundblöcken (\cref{cde:mapBlocks})
 wurde erweitert, sodass die Nachfolger der Grundblöcke nicht nur im Kommentar,
 sondern auch in der Map erfasst werden:
 \newpage
@@ -200,10 +200,10 @@ if(code.getLast().equals(instruction)) {
 \end{lstlisting}
 In den If Statements werden die Blöcke, in denen die Instruktionen die als nächstes
 ausgeführt werden, ermittelt und an das Ende des Kommentars gehangen. Ausserdem
-werden die Addressen der nächsten Instruktionen in die \textit{successorMap}
+werden die Adressen der nächsten Instruktionen in die \textit{successorMap}
 zugefügt
-\footnote{Im Plugin \glqq 3-Address-Code to Basic Block \grqq existiert diese map nicht, 
-daher hat die Methode dort die beiden Befehle auch nicht}.
+\footnote{Im Plugin \glqq 3-Address-Code to Basic Block\grqq\ existiert diese Map nicht, 
+daher hat die Methode dort die beiden Befehle auch nicht.}.
 
 
 
@@ -239,9 +239,9 @@ for (ThreeAddressCodeInstruction source:successorList.keySet()) {
 }
 \end{lstlisting}
 In der ersten Schleife wird für jeden (bis zu diesem Schritt) 
-gefundenen Leader ein Knoten im Graphen erstellt wenn dieser 
-noch nicht hinzugefügt worden ist und das Label jedes Leaders aktualisiert,
-da nicht zu jedem Zeitpunkt jeder Leader gefunden kann nicht davon ausgegangen werden
+gefundenen Leader ein Knoten im Graphen erstellt, wenn dieser 
+noch nicht hinzugefügt worden ist. Das Label jedes Leaders aktualisiert,
+da nicht zu jedem Zeitpunkt jeder Leader gefunden kann nicht davon ausgegangen werden,
 dass die Label aus dem letzten Schritt noch aktuell sind.\\
 In der zweiten Schleife werden für alle Leader Kanten zu den erkannten Nachfolgern gezeichnet.
 
@@ -249,7 +249,7 @@ In der zweiten Schleife werden für alle Leader Kanten zu den erkannten Nachfolg
 
 \newpage
 \subsection{Analyse von erreichenden Definitionen}
-Das Plugin zur Visualisierung der Analyse der erreichenden Definitionen(\cref{fig:reachingDefinitions})
+Das Plugin zur Visualisierung der Analyse der erreichenden Definitionen (\cref{fig:reachingDefinitions})
 hat eine weitere Tabelle, in der Datenflusswerte angezeigt werden.
 \begin{figure}[h]
   \centering
@@ -261,11 +261,11 @@ hat eine weitere Tabelle, in der Datenflusswerte angezeigt werden.
 Da sich sowohl der Kontrollflussgraph, als auch der 3-Address-Code im
 Verlaufe des Programmes nicht verändern, werden diese nicht in der
 \textit{refreshGuiElements()}-Methode behandelt, sondern in der \textit{reset()}-Methode.
-da in dieser ein neues Objekt der Algorithmusklasse erstellt wird und
+Da in dieser ein neues Objekt der Algorithmusklasse erstellt wird und
 sich der Code nur dort ändern kann.
 
 In der \textit{refreshGuiElements()}-Methode verändert sich dementsprechend
-nur die Tabelle in der Datenflusswerte angezeigt werden.
+nur die Tabelle, in der Datenflusswerte angezeigt werden.
 
 Diese berechnen wir, wie in \cref{t:rd} erläuftert, in der Algorithmusklasse:
 
@@ -299,16 +299,16 @@ for (Integer i:currentGenSet) {
 }
 \end{lstlisting}
 
-Beim Durchlaufen des Algorithmus betrachten berechnen wir
+Beim Durchlaufen des Algorithmus berechnen wir
 in einem Schritt die $in[B]$ und $out[B]$ Mengen für einen Grundblock $B$.
 Wenn diese sich von der in der letzten Iteration berechneten Menge
-unterscheidet ist unser Fixpunkt noch nicht erreicht.\\
+unterscheidet, ist unser Fixpunkt noch nicht erreicht.\\
 
 Da wir nicht nur die aktuellen $in$ und $out$-Mengen darstellen wollen,
 sondern alle, werden diese in einer Liste gespeichert.
 
 Die $in_i[B]$-Menge wird als Vereinigung aller $out[B]$-Mengen der Vorgänger
-des Blocks $B$ berechnet(\cref{cde:genIn}):
+des Blocks $B$ berechnet (\cref{cde:rdIn}):
 \begin{lstlisting}[language=Java, caption={Berechnen der $in$-Menge}, label={cde:rdIn}]
 Set<String> currentIn =  new HashSet<>();
 for (BasicBlock ancestorBlock:ancestorBlocks) {
@@ -319,8 +319,8 @@ for (BasicBlock ancestorBlock:ancestorBlocks) {
 }
 \end{lstlisting}
 
-Die $gen_B$ und $kill_B$ Mengen wurden auf den Addressen der Instruktionen definiert,
-werden jedoch als Addressen benötigt, daher werden sie wie folgt konvertiert:
+Die $gen_B$ und $kill_B$ Mengen wurden auf den Adressen der Instruktionen definiert,
+werden jedoch als Adressen benötigt, daher werden sie wie folgt konvertiert:
 
 \begin{lstlisting}[language=Java, caption={Konvertierung der $gen$-Menge}, label={cde:genConv}]
 List<String> generatedIdentifiers = 
@@ -334,7 +334,7 @@ List<String> killedIdentifiers =
     .toList();
 \end{lstlisting}
 
-Um nun die $out[B]$-Menge zu berechen werden alle Elemente der $kill_B$-Menge aus
+Um nun die $out[B]$-Menge zu berechen, werden alle Elemente der $kill_B$-Menge aus
 einer Kopie der $in[B]$-Menge entfernt. Anschließend fügen wie alle Elemente der
 $gen_B$-Menge hinzu:
 \begin{lstlisting}[language=Java, caption={Berechnung der $out$-Menge}, label={cde:rdOut}]
@@ -343,8 +343,8 @@ currentOut.removeAll(killedIdentifiers);
 currentOut.addAll(generatedIdentifiers);
 \end{lstlisting}
 
-Um die berechneten Datenflusswerte anzuzeigen wird die Tabelle 
-wie im Beispiel(\cref{tab:fib-rd})befüllt:
+Um die berechneten Datenflusswerte anzuzeigen, wird die Tabelle 
+wie im Beispiel (\cref{tab:fib-rd}) befüllt:
 
 Die erste Zeile dient als Überschriftszeile für die Grundblöcke.
 Die zweite und dritte Zeile befüllen die $gen_B$ und $kill_B$ Mengen(\cref{cde:visgenkill}):
@@ -368,10 +368,10 @@ for (int col = 0; col < basicBlocks.size(); col++) {
 }
 \end{lstlisting}
 Die Methode \textit{collectStringSet} ist hier eine Helfermethode, welche ein
-Set an Strings zu einem String kombiniert in dem die einzelnen Elemente durch Kommas getrennt werden.
+Set an Strings zu einem String kombiniert, indem die einzelnen Elemente durch Kommas getrennt werden.
 
 In den folgenden Zeilen werden die $in[B]$ und $out[B]$ Mengen aufgelistet.
-da in der letzten Iteration eventuell noch nicht alle Mengen bestimmt worden sind
+Da in der letzten Iteration eventuell noch nicht alle Mengen bestimmt worden sind, 
 wird für die unbestimmten Mengen ein Platzhalter-Set mit dem Element \glqq -\grqq  eingefügt:
 
 \begin{lstlisting}[language=Java, caption={Visualisierung der $in$ und $out$-Mengen}, label={cde:visinout}]
@@ -418,9 +418,9 @@ for (BasicBlock successor:successorBlocks) {
 \end{lstlisting}
 
 \newpage
-Um den Algorithmus wie in \cref{t:la} zu implementieren müssen für alle
+Um den Algorithmus wie in \cref{t:la} zu implementieren, müssen für alle
 Grundblöcke $B$ die $def_B$ und $use_B$ Mengen definiert werden.
-Dies geschieht wie folgt(\cref{cde:laDefUse}):
+Dies geschieht wie folgt (\cref{cde:laDefUse}):
 \begin{lstlisting}[language=Java, caption={Berechnung der $def$ und $use$-Mengen}, label={cde:laDefUse}]
 //def
 Set<String> currentDefSet = def.get(block);
@@ -465,22 +465,22 @@ currentIn.addAll(use.get(currentBlock));
   \label{fig:livenessAnalysisTAC}
 \end{figure}
 Durch die im letzten Abschnitt definierte Liveness Analyse lässt sich mit wenigen
-Iterationen eine Konservative Abschätzung der benötigten Register machen.
-Da sich jedoch auch innerhalb eines Grundblockes die Werte der Liveness Analyse ändern können,
+Iterationen eine konservative Abschätzung der benötigten Register machen.
+Da sich jedoch auch innerhalb eines Grundblocks die Werte der Liveness Analyse ändern können,
 kann die liveness Analyse auch auf einzelnen Instruktionen geführt werden, 
-hierbei werden jedoch wesentlich mehr Iterationen benötigt bis der Fixpunkt erreicht ist.\\
+hierbei werden jedoch wesentlich mehr Iterationen benötigt, bis der Fixpunkt erreicht ist.\\
 
-Dieses Plugin(\cref{fig:livenessAnalysisTAC}) implementiert eben diese Analyse. Indem es alle Instruktionen
+Dieses Plugin (\cref{fig:livenessAnalysisTAC}) implementiert eben diese Analyse. Indem es alle Instruktionen
 in einem Graphen anzeigt und deren Datenflusswerte in einer Tabelle.
 
 Die Transferfunktion bleibt identisch zur liveness Analyse auf Grundblöcken.
-Jedoch müssen die $use_i$ und $def_i$-Mengen auf einzlnen Instruktionen $i$
+Jedoch müssen die $use_i$ und $def_i$-Mengen auf einzelnen Instruktionen $i$
 definiert werden:
 \begin{itemize}
-  \item Die $use_i$-Menge umfasst trivialer Weise alle Addressen die in ihrer Instruktion $i$
+  \item Die $use_i$-Menge umfasst trivialer Weise alle Adressen die in ihrer Instruktion $i$
     benötigt werden.
   \item Die $def_i$-Menge ist definiert durch: 
-    Alle Instruktionen die einen Wert definieren haben ein Element in ihrer
-    $def_i$ Menge, nämlich die Addresse in der dieser Wert gespeichert wird.
+    Alle Instruktionen, die einen Wert definieren haben ein Element in ihrer
+    $def_i$ Menge, nämlich die Adresse in der dieser Wert gespeichert wird.
     Wenn eine Instruktion keinen Wert speichert, gilt $def_i=\emptyset$.
 \end{itemize}

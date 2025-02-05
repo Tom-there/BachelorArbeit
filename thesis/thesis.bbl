@@ -12,7 +12,8 @@
 \newblock \emph{Compiler Prinzipien, Techniken und Werkzeuge}.
 \newblock 2., aktualisierte Aufl., German language ed.
 \newblock München u.a. : Pearson Studium, 2008 (It, Informatik).
-\newblock \url{https://digitale-objekte.hbz-nrw.de/storage/2008/03/03/file_131/2343468.pdf}
+\newblock
+  \url{https://digitale-objekte.hbz-nrw.de/storage/2008/03/03/file_131/2343468.pdf}
 
 \bibitem[FR]{toolbox}
 \textsc{Fabian~Ruhland}, Isabel~W.:
@@ -27,13 +28,16 @@
 \bibitem[GTa]{GS_graphs}
 \textsc{Graphstream-Team}:
 \newblock \emph{Graph Implementations}.
-\newblock \url{https://graphstream-project.org/doc/FAQ/The-Graph-Class/What-are-the-Graph-implementations/}. --
+\newblock
+  \url{https://graphstream-project.org/doc/FAQ/The-Graph-Class/What-are-the-Graph-implementations/}.
+  --
 \newblock zuletzt besucht am 30.01.2025
 
 \bibitem[GTb]{GS_render}
 \textsc{Graphstream-Team}:
 \newblock \emph{Graph Visualisation}.
-\newblock \url{https://graphstream-project.org/doc/Tutorials/Graph-Visualisation/}. --
+\newblock
+  \url{https://graphstream-project.org/doc/Tutorials/Graph-Visualisation/}. --
 \newblock zuletzt besucht am 30.01.2025
 
 \bibitem[GTc]{GS}
@@ -45,7 +49,9 @@
 \bibitem[GTd]{GS_data}
 \textsc{Graphstream-Team}:
 \newblock \emph{Storing, retrieving and displaying data in graphs}.
-\newblock \url{https://graphstream-project.org/doc/Tutorials/Storing-retrieving-and-displaying-data-in-graphs/}. --
+\newblock
+  \url{https://graphstream-project.org/doc/Tutorials/Storing-retrieving-and-displaying-data-in-graphs/}.
+  --
 \newblock zuletzt besucht am 31.01.2025
 
 \bibitem[Kasa]{dfav}
@@ -56,6 +62,7 @@
 \bibitem[Kasb]{dfavpres}
 \textsc{Kashiwa}, Shun:
 \newblock \emph{Data-Flow Analysis Visualizer Vorstellung}.
-\newblock \url{https://sorensenucsc.github.io/CSE211-fa2021/projects/data-flow-analysis-visualizer/}
+\newblock
+  \url{https://sorensenucsc.github.io/CSE211-fa2021/projects/data-flow-analysis-visualizer/}
 
 \end{thebibliography}
